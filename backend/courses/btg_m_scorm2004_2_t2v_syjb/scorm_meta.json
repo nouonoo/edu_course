@@ -1,0 +1,8 @@
+{
+  "type": "scorm",
+  "version": "2004",
+  "manifest": "imsmanifest.xml",
+  "launch_href": "scormdriver/indexAPI.html",
+  "section_count": 1,
+  "player_href": "player.html"
+}

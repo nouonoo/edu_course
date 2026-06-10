@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Рейтинг</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="app-header">
+        <nav></nav>
+    </header>
+
+    <main class="content-container">
+        <div class="rating-header">
+            <h1>Рейтинг</h1>
+            <button id="show-report-modal" class="btn-secondary" style="display: none;">
+                Отчёт
+            </button>
+        </div>
+        <p class="subtitle">Героев нужно знать в лицо</p>
+
+        <div id="rating-summary" class="rating-summary" hidden></div>
+
+        <div id="rating-list" class="rating-list-container">
+            <div class="loader">Загрузка рейтинга...</div>
+        </div>
+    </main>
+
+    <div id="report-modal" class="modal-backdrop" style="display: none;">
+        <div class="modal-content">
+            <h2>Параметры отчёта</h2>
+            <form id="report-form">
+                <p>Все параметры опциональны, но необходимо задать хотя бы один параметр.</p>
+                <div class="form-group">
+                    <label for="employee">Сотрудник:</label>
+                    <select id="employee" name="employee">
+                        <option value="">Выберите из списка</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="course">Курс:</label>
+                    <select id="course" name="course">
+                        <option value="">Выберите из списка</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="date-from">Пройти обучение с:</label>
+                        <input type="date" id="date-from" name="date_from">
+                    </div>
+                    <div class="form-group">
+                        <label for="date-to">Пройти обучение до:</label>
+                        <input type="date" id="date-to" name="date_to">
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" id="close-modal" class="btn-secondary">Отмена</button>
+                    <button type="submit" class="btn-primary">
+                        Скачать отчёт <span class="arrow">→</span>
+                    </button>
+                </div>
+                <p id="report-error" class="error-message"></p>
+            </form>
+        </div>
+    </div>
+
+    <div id="cancel-confirm-modal" class="modal-backdrop" style="display: none;">
+        <div class="modal-content confirm-modal">
+            <h2>Подтверждение</h2>
+            <p>Вы точно хотите отменить формирование отчёта?</p>
+            <div class="modal-actions">
+                <button type="button" id="confirm-cancel-yes" class="btn-primary">Да</button>
+                <button type="button" id="confirm-cancel-no" class="btn-secondary">Нет</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+    <script src="common.js"></script>
+    <script src="rating.js"></script>
+</body>
+</html>

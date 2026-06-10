@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Правила использования ИТ-ресурсов</title>
+    <link rel="stylesheet" href="assets/globals.css">
+    <link rel="stylesheet" href="assets/course-player.css">
+</head>
+<body>
+    <div id="course-app">
+        <header id="course-header" class="course-header is-hidden">
+            <button type="button" id="btn-contents" class="header-btn" title="Содержание">
+                <img src="assets/images/map.svg" alt="" width="16" height="16">
+                <span>Содержание</span>
+            </button>
+            <div class="course-progress">
+                <div class="course-progress-track">
+                    <div id="course-progress-fill" class="course-progress-fill"></div>
+                </div>
+                <span id="course-progress-text" class="course-progress-text">0%</span>
+            </div>
+        </header>
+
+        <main id="course-main">
+            <!-- 1. Сплеш -->
+            <section id="screen-splash" class="course-screen active" data-screen="splash">
+                <div class="slide-frame" data-base-width="1280" data-base-height="720">
+                    <img class="slide-image" src="assets/images/Сплеш.svg" alt="Правила использования ИТ-ресурсов — электронный курс">
+                    <button type="button" class="hotspot" data-action="start"
+                        style="left:3.91%;top:80%;width:25.31%;height:10.28%"
+                        aria-label="Начать курс"></button>
+                </div>
+            </section>
+
+            <!-- 2. Инструкция по навигации -->
+            <section id="screen-navigation" class="course-screen" data-screen="navigation">
+                <div class="slide-frame" data-base-width="1280" data-base-height="720">
+                    <img class="slide-image" src="assets/images/Инструкция по навигации.svg" alt="Навигация по курсу">
+                    <button type="button" class="hotspot" data-action="contents"
+                        style="left:22.54%;top:1.60%;width:54.61%;height:7.08%"
+                        aria-label="Содержание"></button>
+                    <button type="button" class="hotspot" data-action="back"
+                        style="left:8.63%;top:76.18%;width:26.48%;height:7.36%"
+                        aria-label="Предыдущий слайд"></button>
+                    <button type="button" class="hotspot btn-next" data-action="next"
+                        style="left:43.87%;top:76.18%;width:26.33%;height:7.36%"
+                        aria-label="Продолжить"></button>
+                </div>
+            </section>
+
+            <!-- Заглушки следующих разделов (будут заменены по шагам) -->
+            <section id="screen-intro" class="course-screen" data-screen="intro">
+                <div class="placeholder-screen">
+                    <p class="placeholder-label">Раздел 2</p>
+                    <h2>Введение</h2>
+                    <p>Раздел будет добавлен на следующем шаге сборки.</p>
+                    <div class="placeholder-nav">
+                        <button type="button" class="btn-back" data-action="back">Назад</button>
+                        <button type="button" class="btn-next" data-action="next">Далее</button>
+                    </div>
+                </div>
+            </section>
+            <section id="screen-section-1" class="course-screen" data-screen="section-1">
+                <div class="placeholder-screen">
+                    <p class="placeholder-label">Раздел 3</p>
+                    <h2>Основы безопасности</h2>
+                    <p>Раздел будет добавлен на следующем шаге сборки.</p>
+                    <div class="placeholder-nav">
+                        <button type="button" class="btn-back" data-action="back">Назад</button>
+                        <button type="button" class="btn-next" data-action="next">Далее</button>
+                    </div>
+                </div>
+            </section>
+            <section id="screen-section-2" class="course-screen" data-screen="section-2">
+                <div class="placeholder-screen">
+                    <p class="placeholder-label">Раздел 4</p>
+                    <h2>Работа с ИТ-ресурсами</h2>
+                    <p>Раздел будет добавлен на следующем шаге сборки.</p>
+                    <div class="placeholder-nav">
+                        <button type="button" class="btn-back" data-action="back">Назад</button>
+                        <button type="button" class="btn-next" data-action="next">Далее</button>
+                    </div>
+                </div>
+            </section>
+            <section id="screen-section-3" class="course-screen" data-screen="section-3">
+                <div class="placeholder-screen">
+                    <p class="placeholder-label">Раздел 5</p>
+                    <h2>Работа в офисе и удалённо</h2>
+                    <p>Раздел будет добавлен на следующем шаге сборки.</p>
+                    <div class="placeholder-nav">
+                        <button type="button" class="btn-back" data-action="back">Назад</button>
+                        <button type="button" class="btn-next" data-action="next">Далее</button>
+                    </div>
+                </div>
+            </section>
+            <section id="screen-section-4" class="course-screen" data-screen="section-4">
+                <div class="placeholder-screen">
+                    <p class="placeholder-label">Раздел 6</p>
+                    <h2>Работа в интернете</h2>
+                    <p>Раздел будет добавлен на следующем шаге сборки.</p>
+                    <div class="placeholder-nav">
+                        <button type="button" class="btn-back" data-action="back">Назад</button>
+                        <button type="button" class="btn-next" data-action="next">Далее</button>
+                    </div>
+                </div>
+            </section>
+            <section id="screen-section-5" class="course-screen" data-screen="section-5">
+                <div class="placeholder-screen">
+                    <p class="placeholder-label">Раздел 7</p>
+                    <h2>Работа с клиентами</h2>
+                    <p>Раздел будет добавлен на следующем шаге сборки.</p>
+                    <div class="placeholder-nav">
+                        <button type="button" class="btn-back" data-action="back">Назад</button>
+                        <button type="button" class="btn-next" data-action="next">Далее</button>
+                    </div>
+                </div>
+            </section>
+            <section id="screen-section-6" class="course-screen" data-screen="section-6">
+                <div class="placeholder-screen">
+                    <p class="placeholder-label">Раздел 8</p>
+                    <h2>Ответственность сотрудников</h2>
+                    <p>Раздел будет добавлен на следующем шаге сборки.</p>
+                    <div class="placeholder-nav">
+                        <button type="button" class="btn-back" data-action="back">Назад</button>
+                        <button type="button" class="btn-next" data-action="next">Далее</button>
+                    </div>
+                </div>
+            </section>
+            <section id="screen-conclusion" class="course-screen" data-screen="conclusion">
+                <div class="placeholder-screen">
+                    <p class="placeholder-label">Раздел 9</p>
+                    <h2>Заключение</h2>
+                    <p>Раздел будет добавлен на следующем шаге сборки.</p>
+                    <div class="placeholder-nav">
+                        <button type="button" class="btn-back" data-action="back">Назад</button>
+                        <button type="button" class="btn-finish" data-action="finish">Завершить курс</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <p id="gate-hint" class="gate-hint is-hidden">Просмотрите все интерактивные элементы слайда, чтобы продолжить</p>
+
+        <!-- 2.1 Содержание -->
+        <div id="contents-overlay" class="contents-overlay is-hidden" role="dialog" aria-modal="true" aria-labelledby="contents-title">
+            <div class="contents-panel">
+                <button type="button" id="btn-close-contents" class="contents-close" aria-label="Закрыть">
+                    <img src="assets/images/x.svg" alt="" width="24" height="24">
+                </button>
+                <div class="contents-header">
+                    <img src="assets/images/map.svg" alt="" width="20" height="20">
+                    <h2 id="contents-title">Содержание</h2>
+                </div>
+                <div id="contents-grid" class="contents-grid"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="lms-bridge.js"></script>
+    <script src="course-interactions.js"></script>
+    <script src="course-app.js"></script>
+</body>
+</html>

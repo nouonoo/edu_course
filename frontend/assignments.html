@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Назначения</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="app-header">
+        <nav></nav>
+    </header>
+
+    <main class="content-container">
+        <h1>Назначения</h1>
+        <p class="subtitle">Управление курсами и назначениями для сотрудников</p>
+
+        <div id="assignments-list" class="assignments-list">
+            <div class="loader">Загрузка курсов...</div>
+        </div>
+        <p id="assignments-error" class="error-message"></p>
+    </main>
+
+    <div id="assign-modal" class="modal-backdrop" style="display: none;">
+        <div class="modal-content">
+            <h2>Назначить курс</h2>
+            <form id="assign-form">
+                <div class="form-group">
+                    <label for="assign-employee">Сотрудник:</label>
+                    <select id="assign-employee" name="employee" required>
+                        <option value="">Выберите из списка</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="assign-course">Курс:</label>
+                    <select id="assign-course" name="course" required>
+                        <option value="">Выберите из списка</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="assign-date-from">Пройти обучение с:</label>
+                        <input type="date" id="assign-date-from" name="date_from" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="assign-date-to">Пройти обучение до:</label>
+                        <input type="date" id="assign-date-to" name="date_to" required>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" id="close-assign-modal" class="btn-secondary">Назад</button>
+                    <button type="submit" class="btn-primary">
+                        Назначить <span class="arrow">→</span>
+                    </button>
+                </div>
+                <p id="assign-error" class="error-message"></p>
+            </form>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+    <script src="common.js"></script>
+    <script src="assignments.js"></script>
+</body>
+</html>

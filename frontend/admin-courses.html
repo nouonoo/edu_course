@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Курсы</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet" href="admin.css">
+
+</head>
+
+<body class="admin-page">
+
+    <header class="app-header"><nav></nav></header>
+
+
+
+    <main class="content-container">
+
+        <h1 class="admin-page-title">Курсы</h1>
+
+        <input type="text" id="course-search" class="admin-search" placeholder="Поиск">
+
+        <div id="courses-list" class="admin-entries"></div>
+
+        <p id="courses-error" class="error-message"></p>
+
+
+
+        <div class="admin-toolbar-bottom">
+
+            <button type="button" id="upload-course-btn" class="btn-primary" style="width:auto;padding:12px 32px;">Загрузить курс</button>
+
+        </div>
+
+    </main>
+
+
+
+    <!-- Загрузка SCORM -->
+
+    <div id="upload-modal" class="modal-backdrop upload-modal-simple" style="display:none;">
+
+        <div class="modal-content">
+
+            <form id="upload-form">
+
+                <div id="upload-dropzone" class="scorm-dropzone">
+
+                    Загрузите с компьютера или перетащите SCORM файл, чтобы загрузить курс.
+
+                </div>
+
+                <input type="file" id="upload-file" accept=".zip" hidden>
+
+                <div class="upload-hidden-fields">
+
+                    <input type="text" id="upload-title">
+
+                    <input type="text" id="upload-description">
+
+                    <input type="text" id="upload-storage">
+
+                </div>
+
+                <div class="modal-actions" style="justify-content:center;">
+
+                    <button type="button" id="close-upload-modal" class="btn-secondary">Отмена</button>
+
+                </div>
+
+                <p id="upload-error" class="error-message"></p>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- Подтверждение удаления курса -->
+
+    <div id="delete-course-modal" class="modal-backdrop confirm-modal" style="display:none;">
+
+        <div class="modal-content">
+
+            <h2>Удалить курс</h2>
+
+            <div class="modal-actions">
+
+                <button type="button" id="cancel-delete-course" class="btn-secondary">Отмена</button>
+
+                <button type="button" id="confirm-delete-course" class="btn-danger">Удалить</button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <script src="app.js"></script>
+
+    <script src="common.js"></script>
+
+    <script src="admin-courses.js"></script>
+
+</body>
+
+</html>
+

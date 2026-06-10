@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Моё обучение</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <header class="app-header">
+
+        <nav></nav>
+
+    </header>
+
+
+
+    <main class="content-container instruction-page">
+
+        <h1>Навигация по курсу</h1>
+
+        <p class="subtitle">Для корректной работы курса настройки браузера должны соответствовать 100% масштабу окна.</p>
+
+
+
+        <div class="course-picker">
+
+            <label for="course-select" class="nav-label">Выберите курс</label>
+
+            <select id="course-select" class="course-select"></select>
+
+        </div>
+
+
+
+        <article id="course-card" class="course-card">
+
+            <div class="course-card-header">
+
+                <div>
+
+                    <p class="course-card-label">Текущий курс</p>
+
+                    <h2 id="course-title">Загрузка...</h2>
+
+                </div>
+
+                <span id="course-badge" class="course-status-badge">—</span>
+
+            </div>
+
+
+
+            <p id="course-description" class="course-card-description"></p>
+
+
+
+            <div class="course-card-stats">
+
+                <div class="course-stat">
+
+                    <span class="course-stat-label">Прогресс</span>
+
+                    <div class="course-progress-bar">
+
+                        <div id="course-progress-fill" class="course-progress-fill"></div>
+
+                    </div>
+
+                    <span id="course-progress-text" class="course-stat-value">0%</span>
+
+                </div>
+
+                <div class="course-stat">
+
+                    <span class="course-stat-label">Срок обучения</span>
+
+                    <span id="course-dates" class="course-stat-value">—</span>
+
+                </div>
+
+                <div class="course-stat">
+
+                    <span class="course-stat-label">Формат</span>
+
+                    <span id="course-format" class="course-stat-value">—</span>
+
+                </div>
+
+            </div>
+
+
+
+            <div id="course-stub" class="course-stub">
+                <span class="course-stub-icon">🚧</span>
+                <p class="course-stub-title">Курс в разработке</p>
+                <p class="course-stub-text">Обучающие материалы пока готовятся. Скоро здесь появится полноценный электронный курс.</p>
+            </div>
+
+            <p id="course-status" class="course-card-hint"></p>
+
+            <p id="course-error" class="error-message"></p>
+
+            <button type="button" id="start-course-btn" class="btn-start-course" disabled>
+                НАЧАТЬ КУРС <span class="separator">|</span> <span class="arrow">→</span>
+            </button>
+
+        </article>
+
+    </main>
+
+
+
+    <script src="app.js"></script>
+
+    <script src="common.js"></script>
+
+    <script src="instruction.js"></script>
+
+</body>
+
+</html>
+

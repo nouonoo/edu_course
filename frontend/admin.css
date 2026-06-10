@@ -1,0 +1,570 @@
+/* === Админ: авторизация (PDF) === */
+
+.admin-auth-page .auth-container h1 {
+
+    font-size: 3rem;
+
+    color: var(--color-accent-text);
+
+    font-weight: 400;
+
+    margin-bottom: 3rem;
+
+}
+
+
+
+.admin-login-form .form-group label {
+
+    font-size: 1.2rem;
+
+}
+
+
+
+.admin-login-form .btn-login {
+
+    text-transform: lowercase;
+
+    margin-top: 0.5rem;
+
+}
+
+
+
+/* === Админ: общая страница === */
+
+.admin-page .content-container {
+
+    max-width: 900px;
+
+}
+
+
+
+.admin-page-title {
+
+    font-size: 2.5rem;
+
+    color: var(--color-accent-text);
+
+    font-weight: 400;
+
+    text-align: center;
+
+    margin: 0 0 1.5rem;
+
+    letter-spacing: 0.02em;
+
+}
+
+
+
+.admin-page-title.uppercase {
+
+    text-transform: uppercase;
+
+}
+
+
+
+.admin-search {
+
+    width: 100%;
+
+    padding: 14px 18px;
+
+    border: 1px solid #e0c4b0;
+
+    border-radius: 12px;
+
+    font-size: 1rem;
+
+    background: var(--color-white);
+
+    box-shadow: var(--shadow-soft);
+
+    box-sizing: border-box;
+
+    margin-bottom: 24px;
+
+}
+
+
+
+.admin-search::placeholder {
+
+    color: var(--color-text-secondary);
+
+}
+
+
+
+.admin-entries {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 0;
+
+    background: var(--color-white);
+
+    border-radius: var(--radius-main);
+
+    box-shadow: var(--shadow-soft);
+
+    overflow: visible;
+
+}
+
+
+
+.admin-entry {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 18px 24px;
+
+    border-bottom: 1px solid #f2ebe6;
+
+    gap: 16px;
+
+}
+
+
+
+.admin-entry:last-child {
+
+    border-bottom: none;
+
+}
+
+
+
+.admin-entry-name {
+
+    font-size: 1.15rem;
+
+    font-weight: 500;
+
+    color: var(--color-text-main);
+
+}
+
+
+
+.admin-entry-course {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 16px;
+
+    flex: 1;
+
+}
+
+
+
+.admin-entry-number {
+
+    min-width: 32px;
+
+    height: 32px;
+
+    border-radius: 50%;
+
+    background: var(--color-primary);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-weight: 700;
+
+    font-size: 0.95rem;
+
+    flex-shrink: 0;
+
+}
+
+
+
+.admin-entry-actions {
+
+    position: relative;
+
+}
+
+
+
+.btn-actions {
+
+    background: var(--color-white);
+
+    border: 1px solid var(--color-primary);
+
+    color: var(--color-text-main);
+
+    padding: 8px 20px;
+
+    border-radius: 20px;
+
+    font-size: 0.95rem;
+
+    cursor: pointer;
+
+    white-space: nowrap;
+
+}
+
+
+
+.btn-actions:hover,
+
+.btn-actions.open {
+
+    background: var(--color-primary);
+
+}
+
+
+
+.actions-menu {
+
+    position: absolute;
+
+    right: 0;
+
+    top: calc(100% + 6px);
+
+    min-width: 220px;
+
+    background: var(--color-white);
+
+    border-radius: 12px;
+
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+
+    z-index: 50;
+
+    display: none;
+
+    overflow: hidden;
+
+    border: 1px solid #f0e0d6;
+
+}
+
+
+
+.actions-menu.open {
+
+    display: block;
+
+}
+
+
+
+.actions-menu button {
+
+    display: block;
+
+    width: 100%;
+
+    text-align: left;
+
+    padding: 12px 18px;
+
+    border: none;
+
+    background: none;
+
+    font-size: 0.95rem;
+
+    cursor: pointer;
+
+    color: var(--color-text-main);
+
+}
+
+
+
+.actions-menu button:hover {
+
+    background: #fff8f3;
+
+}
+
+
+
+.actions-menu button.danger {
+
+    color: #c0392b;
+
+}
+
+
+
+.admin-toolbar-bottom {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    margin-top: 24px;
+
+}
+
+
+
+.btn-add-employee {
+
+    text-transform: lowercase;
+
+}
+
+
+
+/* === Модалки админа === */
+
+.admin-modal .modal-content {
+
+    max-width: 640px;
+
+    padding: 32px 36px;
+
+}
+
+
+
+.admin-modal h2 {
+
+    text-align: center;
+
+    color: var(--color-accent-text);
+
+    font-weight: 400;
+
+    font-size: 1.75rem;
+
+    margin-bottom: 24px;
+
+}
+
+
+
+.form-section-title {
+
+    font-size: 1rem;
+
+    font-weight: 600;
+
+    color: var(--color-text-main);
+
+    margin: 20px 0 12px;
+
+    padding-bottom: 6px;
+
+    border-bottom: 1px solid #f0e0d6;
+
+}
+
+
+
+.form-row-3 {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr 1fr;
+
+    gap: 12px;
+
+}
+
+
+
+.admin-modal .modal-actions {
+
+    justify-content: space-between;
+
+    margin-top: 28px;
+
+}
+
+
+
+.admin-modal .modal-actions .btn-primary {
+
+    text-transform: lowercase;
+
+}
+
+
+
+.admin-modal .modal-actions .btn-primary.save-btn {
+
+    text-transform: none;
+
+}
+
+
+
+.confirm-modal .modal-content {
+
+    max-width: 420px;
+
+    text-align: center;
+
+}
+
+
+
+.confirm-modal h2 {
+
+    font-size: 1.5rem;
+
+    margin-bottom: 28px;
+
+}
+
+
+
+.confirm-modal .modal-actions {
+
+    justify-content: center;
+
+    gap: 20px;
+
+}
+
+
+
+.btn-danger {
+
+    background: #e8a090;
+
+    border: none;
+
+    color: var(--color-text-main);
+
+    padding: 12px 32px;
+
+    border-radius: 24px;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    cursor: pointer;
+
+    letter-spacing: 0.04em;
+
+}
+
+
+
+.btn-danger:hover {
+
+    background: #d27d58;
+
+    color: white;
+
+}
+
+
+
+/* === Загрузка SCORM === */
+
+.upload-modal-simple .modal-content {
+
+    max-width: 520px;
+
+}
+
+
+
+.upload-modal-simple h2 {
+
+    display: none;
+
+}
+
+
+
+.scorm-dropzone {
+
+    border: 2px dashed var(--color-primary-dark);
+
+    border-radius: 16px;
+
+    padding: 48px 24px;
+
+    text-align: center;
+
+    color: var(--color-text-secondary);
+
+    font-size: 1rem;
+
+    line-height: 1.6;
+
+    cursor: pointer;
+
+    background: #fffaf6;
+
+    margin-bottom: 24px;
+
+    transition: background 0.2s, border-color 0.2s;
+
+}
+
+
+
+.scorm-dropzone.dragover {
+
+    background: rgba(255, 203, 164, 0.3);
+
+    border-color: var(--color-accent-text);
+
+    color: var(--color-text-main);
+
+}
+
+
+
+.scorm-dropzone.has-file {
+
+    color: var(--color-text-main);
+
+    font-weight: 500;
+
+}
+
+
+
+.upload-hidden-fields {
+
+    display: none;
+
+}
+
+
+
+@media (max-width: 700px) {
+
+    .form-row-3 {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}
+

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Глоссарий</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="app-header">
+        <nav></nav>
+    </header>
+
+    <main class="content-container">
+        <h1>Глоссарий</h1>
+        <p class="stub-message">🚧 Раздел находится в разработке. Ожидайте обновлений! 🚧</p>
+    </main>
+
+    <script src="app.js"></script>
+    <script src="common.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (requireAuth()) {
+                initAppHeader('glossary');
+            }
+        });
+    </script>
+</body>
+</html>

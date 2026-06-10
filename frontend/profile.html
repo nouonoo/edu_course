@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный кабинет</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="app-header"><nav></nav></header>
+    <main class="content-container">
+        <div class="profile-header">
+            <button type="button" id="profile-back" class="nav-back-btn" title="Назад">←</button>
+            <h1>Личный кабинет</h1>
+        </div>
+
+        <section id="profile-view" class="profile-card">
+            <div class="photo-upload-block profile-photo-block" id="profile-photo-block">
+                <div class="photo-upload-title">Фото</div>
+                <div class="photo-upload-zone" id="profile-photo-field">
+                    <div class="photo-upload-preview-wrap">
+                        <img id="profile-photo-preview" class="photo-upload-preview" alt="" hidden>
+                        <span class="photo-upload-placeholder" aria-hidden="true">📷</span>
+                    </div>
+                    <div class="photo-upload-info">
+                        <p class="photo-upload-hint">Выберите файл до 50 МБ</p>
+                        <button type="button" class="photo-upload-btn" id="profile-photo-select-btn">Выбрать файл</button>
+                    </div>
+                    <input type="file" id="profile-photo-input" accept="image/png,image/jpeg,image/jpg,image/gif,image/webp" hidden>
+                </div>
+                <p id="profile-photo-status" class="photo-upload-status"></p>
+            </div>
+            <div class="profile-role" id="profile-role"></div>
+            <h2 id="profile-full-name" class="profile-name"></h2>
+            <p id="profile-position" class="profile-position"></p>
+            <p id="profile-birthday" class="profile-meta"></p>
+            <p id="profile-progress" class="profile-meta"></p>
+            <div id="profile-managers" class="profile-managers"></div>
+        </section>
+
+        <section id="profile-edit" class="profile-card" style="display:none;">
+            <h2>Редактировать профиль</h2>
+            <form id="edit-form">
+                <div class="photo-upload-block">
+                    <div class="photo-upload-title">Фото</div>
+                    <div class="photo-upload-zone" id="edit-photo-field">
+                        <div class="photo-upload-preview-wrap">
+                            <img id="edit-photo-preview" class="photo-upload-preview" alt="" hidden>
+                            <span class="photo-upload-placeholder" aria-hidden="true">📷</span>
+                        </div>
+                        <div class="photo-upload-info">
+                            <p class="photo-upload-hint">Выберите файл до 50 МБ</p>
+                            <button type="button" class="photo-upload-btn" id="edit-photo-select-btn">Выбрать файл</button>
+                        </div>
+                        <input type="file" id="edit-photo" accept="image/png,image/jpeg,image/jpg,image/gif,image/webp" hidden>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group"><label>Фамилия</label><input type="text" id="edit-surname" required></div>
+                    <div class="form-group"><label>Имя</label><input type="text" id="edit-name" required></div>
+                    <div class="form-group"><label>Отчество</label><input type="text" id="edit-patronymic"></div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group"><label>Телефон</label><input type="text" id="edit-phone"></div>
+                    <div class="form-group"><label>Дата рождения</label><input type="date" id="edit-birthday"></div>
+                </div>
+                <button type="submit" class="btn-primary">Сохранить</button>
+                <p id="edit-status" class="error-message"></p>
+            </form>
+        </section>
+
+        <section id="feedback-section" class="profile-card" style="display:none;">
+            <h2>Обратная связь</h2>
+            <form id="feedback-form">
+                <div class="form-group">
+                    <label for="feedback-message">Сообщение</label>
+                    <textarea id="feedback-message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="btn-primary">Отправить</button>
+                <p id="feedback-status" class="error-message"></p>
+            </form>
+        </section>
+    </main>
+    <script src="app.js"></script>
+    <script src="common.js"></script>
+    <script src="profile.js"></script>
+</body>
+</html>

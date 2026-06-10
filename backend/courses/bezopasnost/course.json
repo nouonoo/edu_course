@@ -1,0 +1,18 @@
+{
+  "title": "Безопасность",
+  "course_type": "native",
+  "version": "1.0.0",
+  "entry": "index.html",
+  "sections": [
+    { "id": "splash", "title": "Обложка", "type": "splash", "screen": "splash", "scorable": false },
+    { "id": "navigation", "title": "Инструкция по навигации", "type": "content", "screen": "navigation", "module": 1, "scorable": false },
+    { "id": "intro", "title": "Введение", "type": "intro", "screen": "intro", "module": 2, "scorable": false },
+    { "id": "section-1", "title": "Основы безопасности", "type": "content", "screen": "section-1", "module": 3 },
+    { "id": "section-2", "title": "Работа с ИТ-ресурсами", "type": "content", "screen": "section-2", "module": 4 },
+    { "id": "section-3", "title": "Работа в офисе и удаленно", "type": "content", "screen": "section-3", "module": 5 },
+    { "id": "section-4", "title": "Работа в интернете", "type": "content", "screen": "section-4", "module": 6 },
+    { "id": "section-5", "title": "Работа с клиентами", "type": "content", "screen": "section-5", "module": 7 },
+    { "id": "section-6", "title": "Ответственность сотрудников", "type": "content", "screen": "section-6", "module": 8 },
+    { "id": "conclusion", "title": "Заключение", "type": "conclusion", "screen": "conclusion", "module": 9, "scorable": false }
+  ]
+}

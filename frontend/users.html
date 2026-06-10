@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Сотрудники</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet" href="admin.css">
+
+</head>
+
+<body class="admin-page">
+
+    <header class="app-header"><nav></nav></header>
+
+
+
+    <main class="content-container">
+
+        <h1 class="admin-page-title uppercase">Сотрудники</h1>
+
+        <input type="text" id="user-search" class="admin-search" placeholder="Поиск">
+
+        <div id="users-list" class="admin-entries"></div>
+
+        <p id="users-error" class="error-message"></p>
+
+
+
+        <div class="admin-toolbar-bottom">
+
+            <button type="button" id="add-user-btn" class="btn-primary btn-add-employee" style="width:auto;padding:12px 32px;">добавить</button>
+
+        </div>
+
+    </main>
+
+
+
+    <!-- Добавление / редактирование -->
+
+    <div id="user-modal" class="modal-backdrop admin-modal" style="display:none;">
+
+        <div class="modal-content modal-wide">
+
+            <h2 id="user-modal-title">Добавление сотрудника</h2>
+
+            <form id="user-form">
+
+                <input type="hidden" id="user-id">
+
+
+
+                <div class="photo-upload-block">
+                    <div class="photo-upload-title">Фото</div>
+                    <div class="photo-upload-zone" id="photo-field">
+                        <div class="photo-upload-preview-wrap">
+                            <img id="user-photo-preview" class="photo-upload-preview" alt="" hidden>
+                            <span class="photo-upload-placeholder" id="photo-placeholder" aria-hidden="true">📷</span>
+                        </div>
+                        <div class="photo-upload-info">
+                            <p class="photo-upload-hint">Выберите файл до 50 МБ</p>
+                            <button type="button" class="photo-upload-btn" id="photo-select-btn">Выбрать файл</button>
+                        </div>
+                        <input type="file" id="user-photo" accept="image/png,image/jpeg,image/jpg,image/gif,image/webp" hidden>
+                    </div>
+                </div>
+
+
+
+                <div class="form-section-title">Личные данные</div>
+
+                <div class="form-row-3">
+
+                    <div class="form-group"><label>Имя</label><input type="text" id="user-name" required></div>
+
+                    <div class="form-group"><label>Отчество</label><input type="text" id="user-patronymic"></div>
+
+                    <div class="form-group"><label>Фамилия</label><input type="text" id="user-surname" required></div>
+
+                </div>
+
+                <div class="form-row">
+
+                    <div class="form-group"><label>Дата рождения</label><input type="date" id="user-birthday"></div>
+
+                    <div class="form-group"><label>Телефон</label><input type="text" id="user-phone"></div>
+
+                </div>
+
+
+
+                <div class="form-section-title">Учётная запись</div>
+
+                <div class="form-row">
+
+                    <div class="form-group"><label>Логин</label><input type="text" id="user-email" required></div>
+
+                    <div class="form-group"><label>Пароль</label><input type="password" id="user-password"></div>
+
+                </div>
+
+                <div class="form-row">
+
+                    <div class="form-group"><label>Тип аккаунта</label><select id="user-role" required></select></div>
+
+                    <div class="form-group"><label>Должность</label><select id="user-position"></select></div>
+
+                    <div class="form-group"><label>Статус</label><select id="user-status"><option value="active">Активен</option><option value="inactive">Неактивен</option></select></div>
+
+                </div>
+
+
+
+                <div class="modal-actions">
+
+                    <button type="button" id="close-user-modal" class="btn-secondary">Отмена</button>
+
+                    <button type="submit" id="user-submit-btn" class="btn-primary">добавить</button>
+
+                </div>
+
+                <p id="user-form-error" class="error-message"></p>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- Подтверждение удаления -->
+
+    <div id="delete-user-modal" class="modal-backdrop confirm-modal" style="display:none;">
+
+        <div class="modal-content">
+
+            <h2>Удалить пользователя</h2>
+
+            <div class="modal-actions">
+
+                <button type="button" id="cancel-delete-user" class="btn-secondary">Отмена</button>
+
+                <button type="button" id="confirm-delete-user" class="btn-danger">Удалить</button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <script src="app.js"></script>
+
+    <script src="common.js"></script>
+
+    <script src="users.js"></script>
+
+</body>
+
+</html>
+

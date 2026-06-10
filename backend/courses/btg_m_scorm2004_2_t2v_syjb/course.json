@@ -1,0 +1,13 @@
+{
+  "title": "BTG_M-scorm2004_2-t2V-syjB",
+  "course_type": "scorm",
+  "sections": [
+    {
+      "id": "sco_1",
+      "title": "Страдающая методология",
+      "type": "content",
+      "file": "scormdriver/indexAPI.html",
+      "scorm": true
+    }
+  ]
+}
