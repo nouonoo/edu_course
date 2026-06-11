@@ -8,7 +8,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const errorMessage = document.getElementById('error-message');
 
-
+    const redirectMessage = sessionStorage.getItem('authRedirectMessage');
+    if (redirectMessage) {
+        errorMessage.textContent = redirectMessage;
+        sessionStorage.removeItem('authRedirectMessage');
+    }
 
     if (getAuthToken()) {
 

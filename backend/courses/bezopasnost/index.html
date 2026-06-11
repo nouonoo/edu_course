@@ -6,6 +6,9 @@
     <title>Правила использования ИТ-ресурсов</title>
     <link rel="stylesheet" href="assets/globals.css">
     <link rel="stylesheet" href="assets/course-player.css">
+    <link rel="stylesheet" href="assets/intro.css">
+    <link rel="stylesheet" href="assets/section-1.css">
+    <link rel="stylesheet" href="assets/section-2.css">
 </head>
 <body>
     <div id="course-app">
@@ -25,72 +28,989 @@
         <main id="course-main">
             <!-- 1. Сплеш -->
             <section id="screen-splash" class="course-screen active" data-screen="splash">
-                <div class="slide-frame" data-base-width="1280" data-base-height="720">
-                    <img class="slide-image" src="assets/images/Сплеш.svg" alt="Правила использования ИТ-ресурсов — электронный курс">
-                    <button type="button" class="hotspot" data-action="start"
-                        style="left:3.91%;top:80%;width:25.31%;height:10.28%"
-                        aria-label="Начать курс"></button>
+                <div class="slide-viewport">
+                    <div class="slide-frame" data-base-width="1280" data-base-height="720">
+                        <img class="slide-image" src="assets/images/Сплеш.svg" alt="Правила использования ИТ-ресурсов — электронный курс">
+                        <button type="button" class="slide-btn slide-btn--start" data-action="start" aria-label="Начать курс">
+                            <span>НАЧАТЬ КУРС</span>
+                            <span class="slide-btn-sep">|</span>
+                            <span class="slide-btn-arrow" aria-hidden="true">→</span>
+                        </button>
+                    </div>
                 </div>
             </section>
 
             <!-- 2. Инструкция по навигации -->
             <section id="screen-navigation" class="course-screen" data-screen="navigation">
-                <div class="slide-frame" data-base-width="1280" data-base-height="720">
-                    <img class="slide-image" src="assets/images/Инструкция по навигации.svg" alt="Навигация по курсу">
-                    <button type="button" class="hotspot" data-action="contents"
-                        style="left:22.54%;top:1.60%;width:54.61%;height:7.08%"
-                        aria-label="Содержание"></button>
-                    <button type="button" class="hotspot" data-action="back"
-                        style="left:8.63%;top:76.18%;width:26.48%;height:7.36%"
-                        aria-label="Предыдущий слайд"></button>
-                    <button type="button" class="hotspot btn-next" data-action="next"
-                        style="left:43.87%;top:76.18%;width:26.33%;height:7.36%"
-                        aria-label="Продолжить"></button>
+                <div class="slide-viewport">
+                    <div class="slide-frame" data-base-width="1280" data-base-height="720">
+                        <img class="slide-image" src="assets/images/Инструкция по навигации.svg" alt="Навигация по курсу">
+                        <button type="button" class="hotspot hotspot--contents" data-action="contents"
+                            aria-label="Содержание"></button>
+                        <div class="slide-nav-bar">
+                            <button type="button" class="slide-btn slide-btn--back" data-action="back" aria-label="Предыдущий слайд">
+                                <span class="slide-btn-arrow" aria-hidden="true">←</span>
+                            </button>
+                            <button type="button" class="slide-btn slide-btn--next btn-next" data-action="next" aria-label="Продолжить">
+                                <span>ПРОДОЛЖИТЬ</span>
+                                <span class="slide-btn-sep">|</span>
+                                <span class="slide-btn-arrow" aria-hidden="true">→</span>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </section>
 
-            <!-- Заглушки следующих разделов (будут заменены по шагам) -->
-            <section id="screen-intro" class="course-screen" data-screen="intro">
-                <div class="placeholder-screen">
-                    <p class="placeholder-label">Раздел 2</p>
-                    <h2>Введение</h2>
-                    <p>Раздел будет добавлен на следующем шаге сборки.</p>
-                    <div class="placeholder-nav">
-                        <button type="button" class="btn-back" data-action="back">Назад</button>
-                        <button type="button" class="btn-next" data-action="next">Далее</button>
-                    </div>
+            <!-- 4. Введение (3 элемента) -->
+            <section id="screen-intro" class="course-screen intro-screen" data-screen="intro">
+                <div class="intro-page">
+                    <!-- Элемент 1 -->
+                    <article class="intro-part intro-part--hero" data-intro-part="1">
+                        <div class="intro-hero-inner">
+                            <h1 class="intro-title">Введение</h1>
+                            <div class="intro-card">
+                                <p>Добро пожаловать на курс «Правила допустимого использования ИТ-ресурсов». В нём вы научитесь безопасно использовать ИТ-ресурсы компании.</p>
+                            </div>
+                            <div class="intro-card intro-card--hint">
+                                <div class="intro-hint-icons" aria-hidden="true">
+                                    <img src="assets/images/mouse.png" alt="" width="48" height="48">
+                                    <img src="assets/images/тачпад.png" alt="" width="48" height="48">
+                                </div>
+                                <p class="intro-hint-text">Крутите колесико мыши или используйте тачпад</p>
+                            </div>
+                            <p class="intro-scroll-cue">Прокрутите вниз, чтобы продолжить</p>
+                        </div>
+                    </article>
+
+                    <!-- Элемент 2 -->
+                    <article class="intro-part intro-part--content" data-intro-part="2">
+                        <div class="intro-content-inner">
+                            <div>
+                                <p class="intro-lead">На устройствах компании ежедневно обрабатывается большое количество чувствительной корпоративной и клиентской информации, которая является желанной добычей для хакеров и мошенников, в том числе:</p>
+                                <div class="intro-list-block">
+                                    <div class="intro-list-nums" aria-hidden="true">
+                                        <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span>
+                                    </div>
+                                    <ol class="intro-list-items">
+                                        <li>Персональные данные и контакты сотрудников (паспортные данные, банковские реквизиты, информация о состоянии здоровья и др.).</li>
+                                        <li>Данные о клиентах.</li>
+                                        <li>Информация о зарплатах сотрудников.</li>
+                                        <li>Контактные данные сотрудников и клиентов (номера телефонов, адреса электронной почты и почтовые адреса).</li>
+                                        <li>Данные о сети компании (IP-адреса и иная информация).</li>
+                                        <li>Пароли и иные данные учётных записей компании и др.</li>
+                                    </ol>
+                                </div>
+                            </div>
+
+                            <div class="intro-callout">
+                                <h2 class="intro-callout-title">Почему важно<br>заботиться о безопасности</h2>
+                                <p class="intro-callout-text">Чтобы защитить данные компании и клиентов на рабочих устройствах, недостаточно просто установить пароль и антивирус. Важно сформировать у себя привычки кибергигиены, которые обеспечат безопасность в цифровой среде.</p>
+                            </div>
+
+                            <div>
+                                <h2 class="intro-section-title">Зачем соблюдать правила</h2>
+                                <div class="intro-two-col">
+                                    <h3 class="intro-two-col-title">Автоматическая защита — не гарант безопасности</h3>
+                                    <div class="intro-two-col-body">
+                                        <p>Мы уже привыкли к тому, что браузеры предупреждают нас о вредоносных сайтах, а сервисы электронной почты отправляют подозрительные письма в спам. Но вся эта защита не поможет, если не соблюдать правила информационной безопасности.</p>
+                                        <p>Зачастую люди сами попадают в ловушку мошенников из-за своей неосведомлённости или лени.</p>
+                                    </div>
+                                </div>
+                                <p class="intro-note">Эти ошибки на первый взгляд кажутся незначительными. Однако они могут привести к утечке конфиденциальной информации и стать серьёзной угрозой для информационной безопасности компании.</p>
+                            </div>
+
+                            <div class="intro-alert">
+                                <span class="intro-alert-mark" aria-hidden="true">!</span>
+                                <p>Чтобы исключить такие инциденты, все сотрудники должны соблюдать обязательные правила, которые содержатся в данном курсе.</p>
+                            </div>
+
+                            <div class="intro-goal">
+                                <h3>Цель курса</h3>
+                                <p>Объяснить принципы Политики допустимого использования информационно-технологических ресурсов.</p>
+                            </div>
+
+                            <div class="intro-learn">
+                                <h3>Что вы узнаете</h3>
+                                <p>Курс состоит из <strong>6 разделов</strong>. Вы будете изучать их последовательно. В конце вам предстоит пройти итоговое тестирование для закрепления знаний.</p>
+                                <div class="intro-modules">
+                                    <div class="intro-module-card">
+                                        <p class="intro-module-label">Раздел 1</p>
+                                        <h4>Основы безопасности</h4>
+                                        <p>Любая надёжная защита начинается с фундамента. В этом разделе мы заложим его основу: изучим ключевые принципы Политики безопасности; разберёмся, с какими ИТ-ресурсами вы работаете и научимся создавать пароли, которые станут вашим цифровым щитом.</p>
+                                    </div>
+                                    <div class="intro-module-card">
+                                        <p class="intro-module-label">Раздел 2</p>
+                                        <h4>Работа с ИТ-ресурсами</h4>
+                                        <p>Каждый сотрудник — ключевое звено в цепи корпоративной безопасности. Используя ИТ-ресурсы, вы принимаете на себя ответственность за их защиту. В этом разделе вам предстоит освоить правила «цифровой гигиены», которые помогут сохранить корпоративные данные в безопасности.</p>
+                                    </div>
+                                    <div class="intro-module-card intro-module-card--alt">
+                                        <p class="intro-module-label">Раздел 3</p>
+                                        <h4>Работа в офисе и удалённо</h4>
+                                        <p>Офис, дом, коворкинг — сегодня работать можно практически откуда угодно. Но в каждой среде есть свои риски. В этом разделе мы разберём, как обеспечить сохранность данных и безопасно работать в любой обстановке.</p>
+                                    </div>
+                                    <div class="intro-module-card">
+                                        <p class="intro-module-label">Раздел 4</p>
+                                        <h4>Работа в интернете</h4>
+                                        <p>Интернет и корпоративная почта — одни из главных рабочих инструментов и одновременно основные источники киберугроз. В этом разделе вы разберёте правила безопасной работы с ними.</p>
+                                    </div>
+                                    <div class="intro-module-card">
+                                        <p class="intro-module-label">Раздел 5</p>
+                                        <h4>Работа с клиентами</h4>
+                                        <p>Доверие клиента — наш самый ценный актив. В этом разделе вы узнаете о том, как правильно подключаться к сетям клиентов и при каких условиях третьи лица могут получить доступ к ИТ-ресурсам и информации компании.</p>
+                                    </div>
+                                    <div class="intro-module-card">
+                                        <p class="intro-module-label">Раздел 6</p>
+                                        <h4>Ответственность сотрудников</h4>
+                                        <p>Знать правила — это половина дела. Важно понимать последствия их нарушения и уметь действовать в критической ситуации. В этом разделе мы разберём вашу роль в обеспечении безопасности, меры ответственности и алгоритм действий при инцидентах.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="intro-footer-quote">
+                                <h3>Кибергигиена —<br>это образ жизни, а не чек-лист.</h3>
+                                <p>Чтобы защитить данные, недостаточно один раз установить надёжный пароль и антивирусное ПО. Кибергигиена должна стать частью вашей повседневной деятельности.</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Элемент 3 -->
+                    <article class="intro-part intro-part--outro" data-intro-part="3">
+                        <div class="intro-outro-inner">
+                            <h2 class="intro-outro-title">Готовы начать?</h2>
+                            <div class="intro-outro-card">
+                                <p>Нажмите «Продолжить», чтобы перейти к первому разделу.</p>
+                            </div>
+                        </div>
+                        <div class="slide-nav-bar intro-nav-bar">
+                            <button type="button" class="slide-btn slide-btn--back" data-action="back" aria-label="Предыдущий раздел">
+                                <span class="slide-btn-arrow" aria-hidden="true">←</span>
+                            </button>
+                            <button type="button" class="slide-btn slide-btn--next btn-next" data-action="next" aria-label="Продолжить">
+                                <span>ПРОДОЛЖИТЬ</span>
+                                <span class="slide-btn-sep">|</span>
+                                <span class="slide-btn-arrow" aria-hidden="true">→</span>
+                            </button>
+                        </div>
+                    </article>
                 </div>
             </section>
-            <section id="screen-section-1" class="course-screen" data-screen="section-1">
-                <div class="placeholder-screen">
-                    <p class="placeholder-label">Раздел 3</p>
-                    <h2>Основы безопасности</h2>
-                    <p>Раздел будет добавлен на следующем шаге сборки.</p>
-                    <div class="placeholder-nav">
-                        <button type="button" class="btn-back" data-action="back">Назад</button>
-                        <button type="button" class="btn-next" data-action="next">Далее</button>
-                    </div>
+            <section id="screen-section-1" class="course-screen s1-screen" data-screen="section-1">
+                <div class="s1-page">
+                    <article class="s1-part s1-part--hero">
+                        <div class="s1-hero-inner">
+                            <h1 class="s1-title">Основы безопасности</h1>
+                            <div class="s1-card">
+                                <p>Безопасность на рабочем месте — важная составляющая профессиональной деятельности. Работая в компании, вы ежедневно имеете дело с различного рода ИТ-ресурсами. В этом разделе мы подробно расскажем вам об особенностях и основах безопасности при работе с ними.</p>
+                            </div>
+                            <div class="s1-card s1-card--hint">
+                                <div class="s1-hint-icons" aria-hidden="true">
+                                    <img src="assets/images/mouse.png" alt="" width="48" height="48">
+                                    <img src="assets/images/тачпад.png" alt="" width="48" height="48">
+                                </div>
+                                <p class="s1-hint-text">Крутите колесико мыши или используйте тачпад</p>
+                            </div>
+                            <p class="s1-scroll-cue">Прокрутите вниз, чтобы продолжить</p>
+                        </div>
+                    </article>
+
+                    <article class="s1-part s1-part--content">
+                        <div class="s1-content-inner">
+                            <section>
+                                <p class="s1-label">Вы узнаете:</p>
+                                <div class="s1-learn-grid">
+                                    <div class="s1-learn-item">
+                                        <div class="s1-icon-frame">
+                                            <img src="assets/images/Frame 2131333960.png" alt="">
+                                        </div>
+                                        <p>Какой документ регламентирует правила работы с ИТ-ресурсами</p>
+                                    </div>
+                                    <div class="s1-learn-item">
+                                        <div class="s1-icon-frame">
+                                            <img src="assets/images/Frame 2131333960.png" alt="">
+                                        </div>
+                                        <p>С какими ИТ-ресурсами работают сотрудники</p>
+                                    </div>
+                                    <div class="s1-learn-item">
+                                        <div class="s1-icon-frame">
+                                            <img src="assets/images/Frame 2131333960.png" alt="">
+                                        </div>
+                                        <p>Как создать надёжный пароль</p>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <section>
+                                <h2 class="s1-section-title">Информационно-технологические ресурсы (ИТ-ресурсы)</h2>
+                                <p class="s1-subtitle">— технологические ресурсы, которые принадлежат или арендуются компанией.</p>
+                            </section>
+
+                            <section>
+                                <p class="s1-label">Основные принципы Политики</p>
+                                <div class="s1-highlight">
+                                    <h3>Политика допустимого использования ИТ-ресурсов</h3>
+                                    <p>Это внутренний документ, который устанавливает минимальные стандарты в отношении приемлемого использования информации и ИТ-ресурсов, а также содержит правила их защиты.</p>
+                                </div>
+                                <div class="s1-policy-cards" style="margin-top: 20px;">
+                                    <div class="s1-policy-card">
+                                        <img src="assets/images/люди.png" alt="">
+                                        <h4>Обязательна для всех</h4>
+                                        <p>Все сотрудники, партнёры и любые третьи лица, которым предоставлен доступ к информации или ИТ-ресурсам компании, должны соблюдать правила, указанные в Политике.</p>
+                                    </div>
+                                    <div class="s1-policy-card">
+                                        <img src="assets/images/Предусматривает ответственность.svg" alt="">
+                                        <h4>Предусматривает ответственность</h4>
+                                        <p>Несоблюдение правил Политики может привести к дисциплинарному взысканию или увольнению сотрудника. Пользователи, не являющиеся сотрудниками, могут быть привлечены к ответственности по закону и/или договору.</p>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <section>
+                                <p class="s1-label">Виды ИТ-ресурсов</p>
+                                <p class="s1-subtitle">Их можно разделить на две группы: аппаратные и программные.</p>
+                                <p class="s1-instruction">Нажимайте на кнопки, чтобы изучить информацию</p>
+                                <div class="s1-flip-cards">
+                                    <div class="s1-flip-card" data-flip tabindex="0" role="button" aria-label="Аппаратные — подробнее">
+                                        <div class="s1-flip-card-inner">
+                                            <div class="s1-flip-face s1-flip-face--front">
+                                                <img src="assets/images/ноутбук.svg" alt="">
+                                                <h4>Аппаратные</h4>
+                                                <div class="s1-flip-btn" data-flip-toggle>ПОДРОБНЕЕ</div>
+                                            </div>
+                                            <div class="s1-flip-face s1-flip-face--back">
+                                                <h4>Аппаратные</h4>
+                                                <p>Любое физическое оборудование: компьютеры, любые дополнительные или вспомогательные устройства, которые подключаются к компьютеру, электронные носители информации, телефоны, факсы и принтеры.</p>
+                                                <div class="s1-flip-btn" data-flip-toggle>СКРЫТЬ</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="s1-flip-card" data-flip tabindex="0" role="button" aria-label="Программные — подробнее">
+                                        <div class="s1-flip-card-inner">
+                                            <div class="s1-flip-face s1-flip-face--front">
+                                                <img src="assets/images/монитор.png" alt="">
+                                                <h4>Программные</h4>
+                                                <div class="s1-flip-btn" data-flip-toggle>ПОДРОБНЕЕ</div>
+                                            </div>
+                                            <div class="s1-flip-face s1-flip-face--back">
+                                                <h4>Программные</h4>
+                                                <p>Программное обеспечение, системы и приложения.</p>
+                                                <div class="s1-flip-btn" data-flip-toggle>СКРЫТЬ</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="s1-subtitle" style="margin-top: 24px;">Для работы вам выдаётся следующее оборудование: ноутбук, гарнитура, компьютерная мышь, зарядное устройство.</p>
+                            </section>
+
+                            <section class="s1-slider-block">
+                                <h2 class="s1-section-title">Основные принципы безопасной работы с ИТ-ресурсами</h2>
+                                <p class="s1-subtitle">Сотрудники обязаны придерживаться следующих принципов работы с ИТ-ресурсами:</p>
+                                <p class="s1-instruction">Нажимайте на стрелки, чтобы изучить информацию</p>
+                                <div class="s1-slider" data-slider>
+                                    <button type="button" class="s1-slider-btn s1-slider-btn--prev" data-slider-prev aria-label="Предыдущий слайд">←</button>
+                                    <div class="s1-slider-viewport">
+                                        <div class="s1-slider-slide is-active" data-slide>
+                                            <img src="assets/images/Деловая коммуникация.png" alt="">
+                                            <h4>Деловая коммуникация</h4>
+                                            <ul>
+                                                <li>беречь репутацию и имидж компании, не мешать её бизнесу и отношениям с клиентами;</li>
+                                                <li>нельзя говорить или писать от лица компании без одобрения руководства;</li>
+                                                <li>общаясь с коллегами, клиентами или партнёрами, нельзя притворяться кем-то другим лично или онлайн;</li>
+                                                <li>все пользователи ИТ-ресурсов должны соблюдать требования применимых законов, нормативных документов, профессиональных стандартов и всех соответствующих политик, руководств и правил компании.</li>
+                                            </ul>
+                                        </div>
+                                        <div class="s1-slider-slide" data-slide>
+                                            <img src="assets/images/обмен данными.png" alt="">
+                                            <h4>Обмен данными</h4>
+                                            <ul>
+                                                <li>защищать корпоративные ресурсы и клиентские данные от кражи, утраты, взлома, распространения или повреждения;</li>
+                                                <li>запрещено размещать, скачивать или передавать запрещённые материалы — незаконные или оскорбляющие кого-то.</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="s1-slider-btn s1-slider-btn--next is-active" data-slider-next aria-label="Следующий слайд">→</button>
+                                </div>
+                                <div class="s1-slider-dots" data-slider-dots></div>
+                            </section>
+
+                            <section class="s1-slider-block">
+                                <h2 class="s1-section-title">Главные ошибки пользователей</h2>
+                                <p class="s1-instruction">Нажимайте на стрелки, чтобы изучить информацию</p>
+                                <div class="s1-slider" data-slider>
+                                    <button type="button" class="s1-slider-btn s1-slider-btn--prev" data-slider-prev aria-label="Предыдущий слайд">←</button>
+                                    <div class="s1-slider-viewport">
+                                        <div class="s1-slider-slide is-active" data-slide>
+                                            <img src="assets/images/Использование одного пароля для всех своих учетных записей.png" alt="">
+                                            <h4>Использование одного пароля для всех своих учётных записей</h4>
+                                            <p class="s1-lead">Не используйте один и тот же пароль на нескольких учётных записях. Если где-то на одном из сервисов произойдёт утечка данных и пароль попадёт к злоумышленникам, то они могут попытаться получить доступ к вашим учётным записям, включая рабочие.</p>
+                                        </div>
+                                        <div class="s1-slider-slide" data-slide>
+                                            <img src="assets/images/Игнорирование обновлений ПО.svg" alt="">
+                                            <h4>Игнорирование обновлений ПО</h4>
+                                            <p class="s1-lead">Часто в обновлениях разработчики исправляют ошибки, допущенные в системе безопасности ПО. Если вы откладываете установку обновлений, устройство может подвергнуться атакам, нацеленным на известные уязвимые места в ПО.</p>
+                                        </div>
+                                        <div class="s1-slider-slide" data-slide>
+                                            <img src="assets/images/Установка несогласованного ПО.png" alt="">
+                                            <h4>Установка несогласованного ПО</h4>
+                                            <p class="s1-lead">Если для работы вам понадобится программное обеспечение, которого нет в списке разрешённых к использованию, то его установка без согласования с Руководителем службы информационной безопасности и, тем более, из неизвестного источника — запрещена.</p>
+                                        </div>
+                                        <div class="s1-slider-slide" data-slide>
+                                            <img src="assets/images/Небрежное обращение с конфиденциальной информацией.png" alt="">
+                                            <h4>Небрежное обращение с конфиденциальной информацией</h4>
+                                            <p class="s1-lead">Утечка конфиденциальной информации может произойти очень легко. Достаточно отправить данные через незашифрованные каналы связи (например, публичный Wi-Fi) или просто ошибиться при вводе адреса получателя письма.</p>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="s1-slider-btn s1-slider-btn--next is-active" data-slider-next aria-label="Следующий слайд">→</button>
+                                </div>
+                                <div class="s1-slider-dots" data-slider-dots></div>
+                            </section>
+
+                            <section>
+                                <h2 class="s1-section-title">Безопасность учётных данных</h2>
+                                <div class="s1-alert">
+                                    <span class="s1-alert-mark">!</span>
+                                    <p>Вы несёте полную ответственность за все действия, выполненные под вашей учётной записью. Контроль над доступом к вашему аккаунту — это ваша главная обязанность для обеспечения безопасности.</p>
+                                </div>
+                                <div class="s1-note-box" style="margin-top: 20px;">
+                                    <p>Передача кому-либо пароля или других данных вашей учётной записи строго запрещена. Даже если вы хорошо знаете собеседника, или он просит доступ для решения важной проблемы, вы не должны этого делать.</p>
+                                </div>
+                                <div class="s1-note-box" style="margin-top: 20px;">
+                                    <p>Ваши учётные данные являются конфиденциальной информацией и могут быть скомпрометированы злоумышленниками. Например, для получения доступа к вашему аккаунту злоумышленники могут использовать методы социальной инженерии.</p>
+                                </div>
+                            </section>
+
+                            <section>
+                                <p class="s1-label">Пароль — первый рубеж защиты информации</p>
+                                <p class="s1-subtitle">Пароль нужен для всего: разблокировки устройства, входа в учётную запись. Вместе с логином он может открыть доступ к конфиденциальным данным. Поэтому важно использовать надёжные пароли и тщательно оберегать их.</p>
+                                <div class="s1-highlight" style="margin-top: 24px;">
+                                    <h3>Инструкция по созданию надёжного пароля</h3>
+                                    <p style="margin-bottom: 16px;">Создавайте для каждой учётной записи уникальный пароль.</p>
+                                    <div class="s1-numbered-list">
+                                        <div class="s1-numbered-nums" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span></div>
+                                        <ol class="s1-numbered-items">
+                                            <li>Включайте в него буквы верхнего и нижнего регистров (а-z, A-Z).</li>
+                                            <li>Дополняйте цифрами, знаками пунктуации и служебными символами.</li>
+                                            <li>Длина пароля должна быть не менее 8 символов.</li>
+                                            <li>Используйте пароль, который вы можете легко запомнить, не записывая его куда-либо.</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                                <div class="s1-alert" style="margin-top: 20px;">
+                                    <span class="s1-alert-mark">!</span>
+                                    <p>Учитывайте эти правила при составлении пароля. Меняйте его как минимум раз в 180 дней.</p>
+                                </div>
+                                <p class="s1-label" style="margin-top: 32px;">Что сделает ваш пароль уязвимым:</p>
+                                <div class="s1-vuln-grid">
+                                    <div class="s1-vuln-item">
+                                        <div class="s1-vuln-num">01</div>
+                                        <div class="s1-vuln-body">
+                                            <h5>Простые последовательные комбинации.</h5>
+                                            <div class="s1-vuln-example">ПРИМЕР</div>
+                                            <div class="s1-vuln-tags"><span>«Qwerty1!»</span><span>«Q1W2E3r!»</span></div>
+                                        </div>
+                                    </div>
+                                    <div class="s1-vuln-item">
+                                        <div class="s1-vuln-num">02</div>
+                                        <div class="s1-vuln-body">
+                                            <h5>Очевидные и распространённые слова: название компании, сервиса.</h5>
+                                            <div class="s1-vuln-example">ПРИМЕР</div>
+                                            <div class="s1-vuln-tags"><span>«ipoleg»</span><span>«parol»</span></div>
+                                        </div>
+                                    </div>
+                                    <div class="s1-vuln-item">
+                                        <div class="s1-vuln-num">03</div>
+                                        <div class="s1-vuln-body">
+                                            <h5>Личная информация: дата рождения, имя ребёнка, номер телефона или автомобиля.</h5>
+                                            <div class="s1-vuln-example">ПРИМЕР</div>
+                                            <div class="s1-vuln-tags"><span>ivanpetrov</span><span>18&amp;03</span><span>+7 (900) *** ***</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <section class="s1-drag" data-drag-drop data-drag-task="password-sort">
+                                <p class="s1-label">Давайте проверим, насколько хорошо вы освоили характеристики надёжного пароля.</p>
+                                <p class="s1-instruction">Перетаскивайте пароли в левый или правый столбик.</p>
+                                <div class="s1-drag-columns">
+                                    <div class="s1-drag-column s1-drag-column--strong">
+                                        <h4>Надёжный пароль</h4>
+                                        <div class="s1-drag-zone" data-drop="strong"></div>
+                                    </div>
+                                    <div class="s1-drag-column s1-drag-column--weak">
+                                        <h4>Слабый пароль</h4>
+                                        <div class="s1-drag-zone" data-drop="weak"></div>
+                                    </div>
+                                </div>
+                                <div class="s1-drag-pool" data-drag-pool>
+                                    <div class="s1-drag-item" draggable="true" data-item-id="methalPh" data-correct="weak">methalPh</div>
+                                    <div class="s1-drag-item" draggable="true" data-item-id="mim0" data-correct="strong">^Mim0$holPa~uk^</div>
+                                    <div class="s1-drag-item" draggable="true" data-item-id="0ldboy" data-correct="weak">0ldboy</div>
+                                    <div class="s1-drag-item" draggable="true" data-item-id="ivanov" data-correct="weak">ivanov1994</div>
+                                    <div class="s1-drag-item" draggable="true" data-item-id="ilove" data-correct="weak">1iloveolga)</div>
+                                    <div class="s1-drag-item" draggable="true" data-item-id="et0b3" data-correct="strong">Et0B3z0p@$niyP@r0l'</div>
+                                </div>
+                                <div class="s1-drag-actions">
+                                    <button type="button" class="s1-drag-btn s1-drag-btn--confirm" data-drag-confirm>ПОДТВЕРДИТЬ</button>
+                                    <button type="button" class="s1-drag-btn s1-drag-btn--reset" data-drag-reset>СБРОСИТЬ</button>
+                                </div>
+                                <div class="s1-drag-feedback s1-drag-feedback--success is-hidden" data-drag-success>
+                                    <h4>Верно!</h4>
+                                    <p>Такие пароли, как Et0B3z0p@$niyP@r0l' и ^Mim0$holPa~uk^, являются надёжными и соответствуют требованиям Политики допустимого использования информационно-технологических ресурсов.</p>
+                                </div>
+                                <div class="s1-drag-feedback s1-drag-feedback--error is-hidden" data-drag-error>
+                                    <h4>Неверно.</h4>
+                                    <p>Обратите внимание, что надёжный пароль должен отвечать следующим требованиям:</p>
+                                    <ul>
+                                        <li>Он содержит все 4 категории символов: буквы (заглавные и строчные), цифры и спецсимволы.</li>
+                                        <li>Его легко запомнить, никуда не записывая.</li>
+                                        <li>Он основан на нетривиальной фразе.</li>
+                                    </ul>
+                                </div>
+                            </section>
+                        </div>
+                    </article>
+
+                    <article class="s1-part s1-part--outro s1-gated is-locked" data-gated-by="password-sort">
+                        <div class="s1-outro-inner">
+                            <h2 class="s1-outro-title">Запомните:</h2>
+                            <div class="s1-outro-card">
+                                <ol class="s1-outro-items">
+                                    <li>
+                                        <span class="s1-outro-num" aria-hidden="true">1</span>
+                                        <span class="s1-outro-text">Правила защиты данных и ИТ-ресурсов прописаны в Политике допустимого использования ИТ-ресурсов. Они обязательны для всех сотрудников. В случае нарушения правил безопасности сотрудник может понести наказание.</span>
+                                    </li>
+                                    <li>
+                                        <span class="s1-outro-num" aria-hidden="true">2</span>
+                                        <span class="s1-outro-text">Вы работаете в компании с двумя видами ИТ-ресурсов: аппаратные и программные. Каждый из них содержит чувствительную информацию, которую необходимо защищать.</span>
+                                    </li>
+                                    <li>
+                                        <span class="s1-outro-num" aria-hidden="true">3</span>
+                                        <span class="s1-outro-text">Используйте надёжные пароли и тщательно оберегайте их. Они должны быть разными для каждой учётной записи. Оптимальный пароль — минимум 8 знаков с цифрами, буквами и символами.</span>
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
+                        <div class="slide-nav-bar s1-nav-bar">
+                            <button type="button" class="slide-btn slide-btn--back" data-action="back" aria-label="Предыдущий раздел">
+                                <span class="slide-btn-arrow" aria-hidden="true">←</span>
+                            </button>
+                            <button type="button" class="slide-btn slide-btn--next btn-next" data-action="next" aria-label="Продолжить">
+                                <span>ПРОДОЛЖИТЬ</span>
+                                <span class="slide-btn-sep">|</span>
+                                <span class="slide-btn-arrow" aria-hidden="true">→</span>
+                            </button>
+                        </div>
+                    </article>
                 </div>
             </section>
-            <section id="screen-section-2" class="course-screen" data-screen="section-2">
-                <div class="placeholder-screen">
-                    <p class="placeholder-label">Раздел 4</p>
-                    <h2>Работа с ИТ-ресурсами</h2>
-                    <p>Раздел будет добавлен на следующем шаге сборки.</p>
-                    <div class="placeholder-nav">
-                        <button type="button" class="btn-back" data-action="back">Назад</button>
-                        <button type="button" class="btn-next" data-action="next">Далее</button>
+            <section id="screen-section-2" class="course-screen s2-screen" data-screen="section-2">
+            <div class="s2-page">
+                <article class="s2-part s2-part--hero">
+                    <div class="s2-hero-inner">
+                        <h1 class="s2-title">Работа с ИТ-ресурсами</h1>
+                        <div class="s2-card">
+                            <p>В этом разделе вы узнаете основные правила по корректному использованию аппаратных, программных и информационных ресурсов на рабочем месте. Соблюдение этих правил поможет сохранить оборудование в исправном состоянии и обеспечить защиту корпоративной информации.</p>
+                        </div>
+                        <div class="s2-card s2-card--hint">
+                            <div class="s2-hint-icons" aria-hidden="true">
+                                <img src="assets/images/mouse.png" alt="" width="48" height="48">
+                                <img src="assets/images/тачпад.png" alt="" width="48" height="48">
+                            </div>
+                            <p>Крутите колесико мыши или используйте тачпад</p>
+                        </div>
                     </div>
-                </div>
+                </article>
+
+                <article class="s2-part s2-part--content">
+                    <div class="s2-content-inner">
+
+                        <section>
+                            <p class="s2-label">Вы узнаете:</p>
+                            <div class="s2-learn-block">
+                                <h3 class="s2-learn-title">Правила работы с ресурсами</h3>
+                                <div class="s2-learn-rows">
+                                    <div class="s2-learn-row">
+                                        <span class="s2-learn-num">01</span>
+                                        <p><strong>Аппаратными:</strong> компьютерами, ноутбуками, телефонами, принтерами и внешними носителями</p>
+                                    </div>
+                                    <div class="s2-learn-row">
+                                        <span class="s2-learn-num">02</span>
+                                        <p><strong>Программными:</strong> ПО и облачными сервисами</p>
+                                    </div>
+                                    <div class="s2-learn-row">
+                                        <span class="s2-learn-num">03</span>
+                                        <p><strong>И правила работы</strong> с информацией</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section>
+                            <h2 class="s2-section-title">Аппаратные ресурсы</h2>
+                            <div class="s2-two-cards">
+                                <div class="s2-info-card">
+                                    <img src="assets/images/Ремонт оборудования.png" alt="">
+                                    <div>
+                                        <h4>Ремонт оборудования</h4>
+                                        <p>Ремонтировать и обслуживать рабочее оборудование могут только компании-партнёры.</p>
+                                    </div>
+                                </div>
+                                <div class="s2-info-card">
+                                    <img src="assets/images/утилизация.png" alt="">
+                                    <div>
+                                        <h4>Утилизация</h4>
+                                        <p>Когда техника отслужила свое, компания утилизирует ее по особой политике, чтобы данные были безопасно уничтожены.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section>
+                            <p class="s2-lead">Рассмотрим требования к работе для каждого типа устройств</p>
+                            <p class="s2-instruction">Нажимайте на маркеры, чтобы ознакомиться с правилами работы с аппаратными ресурсами</p>
+                            <div class="s2-marker-scene">
+                                <img src="assets/images/Frame 2131333772.png" alt="Рабочее место с компьютером, принтером и мобильными устройствами">
+                                <button type="button" class="s2-marker" data-marker="1" style="top:38%;left:48%" aria-label="Рабочие компьютеры и ноутбуки">
+                                    <img class="s2-marker-img s2-marker-img--default" src="assets/images/маркер_обычное.png" alt="">
+                                    <img class="s2-marker-img s2-marker-img--active" src="assets/images/макер_нажатое.png" alt="">
+                                    <img class="s2-marker-img s2-marker-img--viewed" src="assets/images/маркер_просмотрено.png" alt="">
+                                </button>
+                                <button type="button" class="s2-marker" data-marker="2" style="top:48%;left:78%" aria-label="Принтеры и сканеры">
+                                    <img class="s2-marker-img s2-marker-img--default" src="assets/images/маркер_обычное.png" alt="">
+                                    <img class="s2-marker-img s2-marker-img--active" src="assets/images/макер_нажатое.png" alt="">
+                                    <img class="s2-marker-img s2-marker-img--viewed" src="assets/images/маркер_просмотрено.png" alt="">
+                                </button>
+                                <button type="button" class="s2-marker" data-marker="3" style="top:66%;left:22%" aria-label="Внешние носители">
+                                    <img class="s2-marker-img s2-marker-img--default" src="assets/images/маркер_обычное.png" alt="">
+                                    <img class="s2-marker-img s2-marker-img--active" src="assets/images/макер_нажатое.png" alt="">
+                                    <img class="s2-marker-img s2-marker-img--viewed" src="assets/images/маркер_просмотрено.png" alt="">
+                                </button>
+                                <button type="button" class="s2-marker" data-marker="4" style="top:60%;left:35%" aria-label="Мобильные устройства">
+                                    <img class="s2-marker-img s2-marker-img--default" src="assets/images/маркер_обычное.png" alt="">
+                                    <img class="s2-marker-img s2-marker-img--active" src="assets/images/макер_нажатое.png" alt="">
+                                    <img class="s2-marker-img s2-marker-img--viewed" src="assets/images/маркер_просмотрено.png" alt="">
+                                </button>
+                            </div>
+                        </section>
+
+                        <div class="s2-modal-overlay is-hidden" data-marker-modal="1" role="dialog" aria-labelledby="s2-modal-title-1">
+                            <button type="button" class="s2-modal-close" data-modal-close aria-label="Закрыть"><img src="assets/images/x.svg" alt="Закрыть"></button>
+                            <div class="s2-modal-card">
+                                <h3 id="s2-modal-title-1">Рабочие компьютеры и ноутбуки</h3>
+                                <ol class="s2-modal-list">
+                                    <li>
+                                        <span class="s2-modal-list-num">1</span>
+                                        <span><strong>Блокируйте и выключайте компьютер.</strong> Если оставляете компьютер без присмотра больше чем на сутки — выключите его. Если что-то важное обрабатывается в фоновом режиме, просто заблокируйте экран паролем комбинацией клавиш «Win+L».</span>
+                                    </li>
+                                    <li>
+                                        <span class="s2-modal-list-num">2</span>
+                                        <span><strong>Предоставляйте доступ к оборудованию сотрудникам ИТ-отдела.</strong> Иногда специалистам требуется доступ к вашему ноутбуку для устранения неисправностей в работе программного обеспечения (так как не работать может не только антивирус, но и другое любое ПО).</span>
+                                    </li>
+                                    <li>
+                                        <span class="s2-modal-list-num">3</span>
+                                        <span><strong>Оставляйте место на диске.</strong> Для обновлений системы и программного обеспечения нужно не менее 40 ГБ свободного места.</span>
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
+
+                        <div class="s2-modal-overlay is-hidden" data-marker-modal="2" role="dialog" aria-labelledby="s2-modal-title-2">
+                            <button type="button" class="s2-modal-close" data-modal-close aria-label="Закрыть"><img src="assets/images/x.svg" alt="Закрыть"></button>
+                            <div class="s2-modal-card">
+                                <h3 id="s2-modal-title-2">Принтеры и сканеры</h3>
+                                <ol class="s2-modal-list">
+                                    <li>
+                                        <span class="s2-modal-list-num">1</span>
+                                        <span>Используйте принтеры и копировальные аппараты только для рабочих задач.</span>
+                                    </li>
+                                    <li>
+                                        <span class="s2-modal-list-num">2</span>
+                                        <span>
+                                            При работе с техникой не забывайте:
+                                            <ul class="s2-modal-sublist">
+                                                <li>сразу забирать распечатанные документы;</li>
+                                                <li>забирать оригиналы документов после сканирования;</li>
+                                                <li>удалять свои задания из очереди печати, если они больше не нужны или принтер неисправен.</li>
+                                            </ul>
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <span class="s2-modal-list-num">3</span>
+                                        <span>Если вы нашли в принтере или сканере чужие документы, не оставляйте их на виду. Уничтожьте их с помощью шредера или положите в специальный контейнер для уничтожения бумаг.</span>
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
+
+                        <div class="s2-modal-overlay is-hidden" data-marker-modal="3" role="dialog" aria-labelledby="s2-modal-title-3">
+                            <button type="button" class="s2-modal-close" data-modal-close aria-label="Закрыть"><img src="assets/images/x.svg" alt="Закрыть"></button>
+                            <div class="s2-modal-card">
+                                <h3 id="s2-modal-title-3">Внешние носители</h3>
+                                <p>Внешние носители — устройства для хранения, переноса и резервного копирования данных. Например, флешки или внешние диски.</p>
+                                <ol class="s2-modal-list">
+                                    <li>
+                                        <span class="s2-modal-list-num">1</span>
+                                        <span>Используйте только зашифрованные носители компании.</span>
+                                    </li>
+                                    <li>
+                                        <span class="s2-modal-list-num">2</span>
+                                        <span>Храните флешки и диски с рабочей информацией в запертых ящиках стола или шкафах.</span>
+                                    </li>
+                                    <li>
+                                        <span class="s2-modal-list-num">3</span>
+                                        <span>Не передавайте данные клиентам на внешних носителях. Исключение — получено письменное согласие руководителя проекта, и/или это предусмотрено договором.</span>
+                                    </li>
+                                    <li>
+                                        <span class="s2-modal-list-num">4</span>
+                                        <span>Запрещено использовать любые внешние носители для создания резервных копий данных ВРК и/или клиентов ВРК.</span>
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
+
+                        <div class="s2-modal-overlay is-hidden" data-marker-modal="4" role="dialog" aria-labelledby="s2-modal-title-4">
+                            <button type="button" class="s2-modal-close" data-modal-close aria-label="Закрыть"><img src="assets/images/x.svg" alt="Закрыть"></button>
+                            <div class="s2-modal-card">
+                                <h3 id="s2-modal-title-4">Мобильные устройства</h3>
+                                <ol class="s2-modal-list">
+                                    <li>
+                                        <span class="s2-modal-list-num">1</span>
+                                        <span>Используйте только те устройства, которые одобрены компанией.</span>
+                                    </li>
+                                    <li>
+                                        <span class="s2-modal-list-num">2</span>
+                                        <span>Устанавливайте приложения только из официальных магазинов, таких как App Store или Google Play.</span>
+                                    </li>
+                                    <li>
+                                        <span class="s2-modal-list-num">3</span>
+                                        <span>Вовремя обновляйте программное обеспечение по инструкциям IT-отдела.</span>
+                                    </li>
+                                    <li>
+                                        <span class="s2-modal-list-num">4</span>
+                                        <span>Немедленно сообщите в службу поддержки (IT Service Desk), если потеряли или у вас украли рабочий телефон.</span>
+                                    </li>
+                                    <li>
+                                        <span class="s2-modal-list-num">5</span>
+                                        <span>Не используйте для работы взломанные устройства (с джейлбрейком или root-доступом). Они слишком уязвимы.</span>
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
+
+                        <section class="s2-slider-block">
+                            <h2 class="s2-section-title">Стороннее оборудование и сервисы</h2>
+                            <p class="s2-lead">Сотрудники могут использовать личные устройства для работы только после согласования с руководством. Такие устройства подлежат таким же мерам защиты и контролю данных, как и корпоративная техника.</p>
+                            <div class="s2-slider" data-slider>
+                                <button type="button" class="s2-slider-btn s2-slider-btn--prev" data-slider-prev aria-label="Предыдущий слайд">←</button>
+                                <div class="s2-slider-viewport">
+                                    <div class="s2-slider-slide is-active" data-slide>
+                                        <img src="assets/images/Frame 2131333794.png" alt="">
+                                        <h4>Личные устройства</h4>
+                                        <p>Сотрудники могут использовать личные устройства для работы только после согласования с руководством. Такие устройства подлежат таким же мерам защиты и контролю данных, как и корпоративная техника.</p>
+                                    </div>
+                                    <div class="s2-slider-slide" data-slide>
+                                        <h4>Не подключайте к корпоративной сети стороннее оборудование</h4>
+                                        <p>Подключение личного оборудования согласуйте со службой информационной безопасности ВРК.</p>
+                                    </div>
+                                    <div class="s2-slider-slide" data-slide>
+                                        <h4>Запрещено использовать личные принтеры</h4>
+                                        <p>если вы работаете с информацией, составляющей аудиторскую тайну.</p>
+                                    </div>
+                                </div>
+                                <button type="button" class="s2-slider-btn s2-slider-btn--next is-active" data-slider-next aria-label="Следующий слайд">→</button>
+                            </div>
+                            <div class="s2-slider-dots" id="s2-slider-dots" data-slider-dots></div>
+                        </section>
+
+                        <section>
+                            <p class="s2-label">Практическое задание</p>
+                            <div class="s2-quiz" data-quiz data-quiz-id="quiz-flash" data-quiz-type="single" data-correct="2">
+                                <div class="s2-quiz-scenario">
+                                    <p>Вам нужно передать клиенту большой объем данных в 20 гигабайт, использовать для передачи данных ваш корпоративный облачный сервис он отказался. У вас есть личная флешка большого объема.</p>
+                                    <p>Как вы поступите?</p>
+                                </div>
+                                <p class="s2-instruction">Выберите верное утверждение</p>
+                                <div class="s2-quiz-options">
+                                    <button type="button" class="s2-quiz-option" data-option="1" data-quiz-type="single">
+                                        <span class="s2-quiz-check"></span>
+                                        <p>Заархивируете данные с паролем, скопируете на личную флешку и передадите клиенту, сообщив ему пароль по телефону.</p>
+                                    </button>
+                                    <button type="button" class="s2-quiz-option" data-option="2" data-quiz-type="single">
+                                        <span class="s2-quiz-check"></span>
+                                        <p>Свяжетесь с руководителем проекта, объясните ситуацию и запросите корпоративный зашифрованный носитель для передачи данных.</p>
+                                    </button>
+                                    <button type="button" class="s2-quiz-option" data-option="3" data-quiz-type="single">
+                                        <span class="s2-quiz-check"></span>
+                                        <p>Скопируете данные на личную флешку и передадите клиенту.</p>
+                                    </button>
+                                    <button type="button" class="s2-quiz-option" data-option="4" data-quiz-type="single">
+                                        <span class="s2-quiz-check"></span>
+                                        <p>Попросите клиента предоставить корпоративный носитель для передачи данных.</p>
+                                    </button>
+                                </div>
+                                <div class="s2-quiz-actions">
+                                    <button type="button" class="s2-quiz-btn s2-quiz-btn--confirm" data-quiz-confirm>ОТВЕТИТЬ</button>
+                                    <button type="button" class="s2-quiz-btn s2-quiz-btn--reset" data-quiz-reset>СБРОСИТЬ</button>
+                                </div>
+                                <div class="s2-quiz-feedback s2-quiz-feedback--success is-hidden" data-quiz-feedback-success>
+                                    <h4>Верно!</h4>
+                                    <p>Использование личных, незашифрованных носителей для передачи рабочих данных строго запрещено. Это создает огромный риск утечки, если флешка потеряется.</p>
+                                </div>
+                                <div class="s2-quiz-feedback s2-quiz-feedback--error is-hidden" data-quiz-feedback-error>
+                                    <h4>Неверно</h4>
+                                    <p>Использование личных, незашифрованных носителей для передачи рабочих данных строго запрещено. Это создает огромный риск утечки, если флешка потеряется.</p>
+                                    <button type="button" class="s2-quiz-btn s2-quiz-btn--confirm" data-quiz-retry>ПОПРОБОВАТЬ СНОВА</button>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="s2-gated is-locked" data-gated-by="quiz-flash">
+                            <h2 class="s2-section-title">Программные ресурсы</h2>
+                            <p class="s2-lead">Вы должны использовать только то программное обеспечение, которое разрешено в компании. Все необходимые для работы программы уже установлены на вашем рабочем компьютере — соблюдайте правила их использования.</p>
+
+                            <div class="s2-highlight" style="margin-top: 24px;">
+                                <p class="s2-label">Категории разрешенных программ</p>
+                                <div class="s2-alert">
+                                    <span class="s2-alert-mark" aria-hidden="true">!</span>
+                                    <div>
+                                        <p>Нельзя устанавливать программы из сторонних источников, а также запрещается менять настройки оборудования и программ, уже установленных на компьютере.</p>
+                                        <p>Если у вас не работает какая-то программа, или нужно изменить настройки — лучше сразу обратиться в IT Service Desk. Так вы избежите лишних проблем и сохраните защиту своих данных.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="margin-top: 32px;">
+                                <p class="s2-lead">Запрещено загружать, устанавливать или запускать программы, предназначенные для:</p>
+                                <div class="s2-grid-2">
+                                    <div class="s2-grid-item">
+                                        <img src="assets/images/Frame 2131329921.png" alt="">
+                                        <p>наблюдения за сетевой активностью;</p>
+                                    </div>
+                                    <div class="s2-grid-item">
+                                        <img src="assets/images/free-icon-data-leak-17794766 1.png" alt="">
+                                        <p>прослушивания сетевого трафика;</p>
+                                    </div>
+                                    <div class="s2-grid-item">
+                                        <img src="assets/images/Уязвимость.png" alt="">
+                                        <p>проведения любого технического анализа;</p>
+                                    </div>
+                                    <div class="s2-grid-item">
+                                        <img src="assets/images/другое.png" alt="">
+                                        <p>удаленного подключения к сторонним ресурсам.</p>
+                                    </div>
+                                </div>
+                                <div class="s2-alert" style="margin-top: 20px;">
+                                    <span class="s2-alert-mark" aria-hidden="true">!</span>
+                                    <p><strong>Исключение:</strong> получено согласование Руководителя службы информационной безопасности.</p>
+                                </div>
+                            </div>
+
+                            <div style="margin-top: 40px;">
+                                <h3 class="s2-label">Безопасная работа с облачными сервисами</h3>
+                                <p class="s2-lead">Запрещено использовать сторонние облачные сервисы для хранения или передачи данных компании и её клиентов</p>
+                                <div class="s2-grid-2">
+                                    <div class="s2-grid-item">
+                                        <img src="assets/images/Разрешенные сервисы.png" alt="">
+                                        <p>Яндекс Диск</p>
+                                    </div>
+                                    <div class="s2-grid-item">
+                                        <img src="assets/images/Разрешенные сервисы.png" alt="">
+                                        <p>Облако Mail</p>
+                                    </div>
+                                    <div class="s2-grid-item">
+                                        <img src="assets/images/другие опасные сайты.png" alt="">
+                                        <p>и другие</p>
+                                    </div>
+                                </div>
+                                <div class="s2-alert" style="margin-top: 20px;">
+                                    <span class="s2-alert-mark" aria-hidden="true">!</span>
+                                    <p>Исключение: получено одобрение Руководителя службы безопасности, а также письменное согласие клиента (например, в договоре).</p>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="s2-gated is-locked" data-gated-by="quiz-flash">
+                            <p class="s2-label">Практическое задание</p>
+                            <div class="s2-quiz" data-quiz data-quiz-id="quiz-software" data-quiz-type="multiple" data-correct="2,3,5">
+                                <div class="s2-quiz-scenario">
+                                    <p>Вы работаете над новым проектом, и для работы вам необходима программа, которой нет в Software Center.</p>
+                                    <p>Какие шаги вы предпримете для установки и использования этой программы на вашем корпоративном компьютере?</p>
+                                </div>
+                                <p class="s2-instruction">Выберите несколько вариантов ответа.</p>
+                                <div class="s2-quiz-options">
+                                    <button type="button" class="s2-quiz-option" data-option="1" data-quiz-type="multiple">
+                                        <span class="s2-quiz-check"></span>
+                                        <p>Установлю программу самостоятельно, скачав ее из интернета, чтобы не тратить время на бюрократию и быстрее приступить к работе.</p>
+                                    </button>
+                                    <button type="button" class="s2-quiz-option" data-option="2" data-quiz-type="multiple">
+                                        <span class="s2-quiz-check"></span>
+                                        <p>Найду и изучу «Процедуру заказа программного обеспечения» компании, чтобы понять, как получить разрешение на установку.</p>
+                                    </button>
+                                    <button type="button" class="s2-quiz-option" data-option="3" data-quiz-type="multiple">
+                                        <span class="s2-quiz-check"></span>
+                                        <p>Свяжусь со своим руководителем или руководителем проекта, чтобы узнать, есть ли уже утвержденные решения для моей задачи, или как мне действовать в данной ситуации.</p>
+                                    </button>
+                                    <button type="button" class="s2-quiz-option" data-option="4" data-quiz-type="multiple">
+                                        <span class="s2-quiz-check"></span>
+                                        <p>Поищу бесплатные аналоги программы с открытым исходным кодом, чтобы избежать проблем с лицензиями, и установлю их.</p>
+                                    </button>
+                                    <button type="button" class="s2-quiz-option" data-option="5" data-quiz-type="multiple">
+                                        <span class="s2-quiz-check"></span>
+                                        <p>Обращусь в службу поддержки или IT Service Desk с просьбой установить программу.</p>
+                                    </button>
+                                </div>
+                                <div class="s2-quiz-actions">
+                                    <button type="button" class="s2-quiz-btn s2-quiz-btn--confirm" data-quiz-confirm>ОТВЕТИТЬ</button>
+                                    <button type="button" class="s2-quiz-btn s2-quiz-btn--reset" data-quiz-reset>СБРОСИТЬ</button>
+                                </div>
+                                <div class="s2-quiz-feedback s2-quiz-feedback--success is-hidden" data-quiz-feedback-success>
+                                    <h4>Верно!</h4>
+                                    <p>Вы продемонстрировали ответственный и безопасный подход к установке ПО, следуя всем корпоративным процедурам.</p>
+                                </div>
+                                <div class="s2-quiz-feedback s2-quiz-feedback--error is-hidden" data-quiz-feedback-error>
+                                    <h4>Похоже, вы допустили ошибку</h4>
+                                    <p>Подумайте, что нужно сделать, чтобы избежать непредсказуемых последствий при самостоятельной установке программ.</p>
+                                    <button type="button" class="s2-quiz-btn s2-quiz-btn--confirm" data-quiz-retry>ПОПРОБОВАТЬ СНОВА</button>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="s2-gated is-locked" data-gated-by="quiz-software">
+                            <h2 class="s2-section-title">Онлайн-конвертеры</h2>
+                            <p class="s2-lead">Онлайн-конвертеры — это сервисы, которые позволяют преобразовывать файлы из одного формата в другой без загрузки или установки программного обеспечения.</p>
+                            <p class="s2-lead">Они могут работать с разными типами файлов: видео, документами, изображениями или аудио.</p>
+                            <h3 class="s2-label">Загрузка конфиденциальной информации в онлайн-конвертеры запрещена:</h3>
+                            <ul class="s2-outro-items">
+                                <li>
+                                    <span class="s2-outro-num" aria-hidden="true">●</span>
+                                    <span class="s2-outro-text">При загрузке файла в онлайн-конвертер всегда есть риск того, что сайт онлайн-конвертера сохранит копию вашего файла для каких-либо нужд создателя сервиса, а это значит, что данные, которые содержатся в загруженных файлах, могут оказаться в руках злоумышленников и быть использованы против вас или компании, где вы работаете.</span>
+                                </li>
+                                <li>
+                                    <span class="s2-outro-num" aria-hidden="true">●</span>
+                                    <span class="s2-outro-text">Сайт онлайн-конвертера может быть подвергнут хакерской атаке от сторонних злоумышленников, которые по итогу могут получить доступ как к истории выгруженных на сервис файлов, так и к самим файлам.</span>
+                                </li>
+                                <li>
+                                    <span class="s2-outro-num" aria-hidden="true">●</span>
+                                    <span class="s2-outro-text">Некоторые сайты-конвертеры могут изменять загруженные на них файлы или включать вредоносный код в итоговый файл. Таким образом полученные файлы могут содержать скрипты, трояны, макросы или иные вредоносные элементы.</span>
+                                </li>
+                            </ul>
+                        </section>
+
+                        <section class="s2-gated is-locked" data-gated-by="quiz-software">
+                            <p class="s2-label">Практическое задание</p>
+                            <div class="s2-quiz" data-quiz data-quiz-id="quiz-converter" data-quiz-type="multiple" data-correct="2,3">
+                                <div class="s2-quiz-scenario">
+                                    <p>Сотруднику было нужно срочно подготовить договор о предстоящем слиянии компаний, представив его в формате PDF. Как поступить?</p>
+                                </div>
+                                <p class="s2-instruction">Выберите несколько вариантов ответа.</p>
+                                <div class="s2-quiz-options">
+                                    <button type="button" class="s2-quiz-option" data-option="1" data-quiz-type="multiple">
+                                        <span class="s2-quiz-check"></span>
+                                        <p>Можно воспользоваться внешним онлайн-конвертером. Это будет быстро и аккуратно, оформление файла не исказится.</p>
+                                    </button>
+                                    <button type="button" class="s2-quiz-option" data-option="2" data-quiz-type="multiple">
+                                        <span class="s2-quiz-check"></span>
+                                        <p>Можно обратиться к сотрудникам из службы ит-безопасности, они точно подскажут, как сконвертировать файл корректно, не нарушая правила безопасности.</p>
+                                    </button>
+                                    <button type="button" class="s2-quiz-option" data-option="3" data-quiz-type="multiple">
+                                        <span class="s2-quiz-check"></span>
+                                        <p>Можно воспользоваться внутренними (согласованными компанией) конвертерами. Так я не подвергну содержимое важных договоров риску компрометации.</p>
+                                    </button>
+                                    <button type="button" class="s2-quiz-option" data-option="4" data-quiz-type="multiple">
+                                        <span class="s2-quiz-check"></span>
+                                        <p>Можно воспользоваться внешним онлайн-конвертером, но с личного компьютера. Выгружу файл сначала на свой компьютер, а уже потом на конвертер. Тем самым я не буду подвергать рабочий компьютер опасности, посещая внешние сервисы.</p>
+                                    </button>
+                                </div>
+                                <div class="s2-quiz-actions">
+                                    <button type="button" class="s2-quiz-btn s2-quiz-btn--confirm" data-quiz-confirm>ОТВЕТИТЬ</button>
+                                    <button type="button" class="s2-quiz-btn s2-quiz-btn--reset" data-quiz-reset>СБРОСИТЬ</button>
+                                </div>
+                                <div class="s2-quiz-feedback s2-quiz-feedback--success is-hidden" data-quiz-feedback-success>
+                                    <h4>Верно!</h4>
+                                    <p>Сотрудник поступил правильно, не допустив утечку конфиденциальных сведений за пределы компании.</p>
+                                </div>
+                                <div class="s2-quiz-feedback s2-quiz-feedback--error is-hidden" data-quiz-feedback-error>
+                                    <h4>Не совсем так</h4>
+                                    <p>Подумайте, что еще можно сделать для предотвращения рисков информационной безопасности.</p>
+                                    <button type="button" class="s2-quiz-btn s2-quiz-btn--confirm" data-quiz-retry>ПОПРОБОВАТЬ СНОВА</button>
+                                </div>
+                                <div class="s2-quiz-feedback s2-quiz-feedback--error is-hidden" data-quiz-feedback-severe>
+                                    <h4>Неверно</h4>
+                                    <p>Сотрудник воспользовался внешним конвертером. На следующей неделе о предстоящей сделке стало известно, в результате чего сделка сорвалась, компания понесла репутационный ущерб.</p>
+                                    <p>Оказалось, что конфиденциальные данные утекли с сервера онлайн конвертера:</p>
+                                    <ul class="s2-outro-items">
+                                        <li>
+                                            <span class="s2-outro-num" aria-hidden="true">●</span>
+                                            <span class="s2-outro-text">Либо владелец конвертера сам был злоумышленником и воспользовался информацией в корыстных целях;</span>
+                                        </li>
+                                        <li>
+                                            <span class="s2-outro-num" aria-hidden="true">●</span>
+                                            <span class="s2-outro-text">Либо онлайн-конвертер оказался уязвим ко взлому третьей стороной, получившей доступ к истории загрузок файлов на конвертер.</span>
+                                        </li>
+                                    </ul>
+                                    <button type="button" class="s2-quiz-btn s2-quiz-btn--confirm" data-quiz-retry>ПОПРОБОВАТЬ СНОВА</button>
+                                </div>
+                            </div>
+                        </section>
+
+                    </div>
+                </article>
+
+                <article class="s2-part s2-part--outro s2-gated is-locked" data-gated-by="quiz-converter">
+                    <div class="s2-outro-inner">
+                        <h2 class="s2-outro-title">Запомните:</h2>
+                        <div class="s2-outro-card">
+                            <ul class="s2-outro-items">
+                                <li>
+                                    <span class="s2-outro-num" aria-hidden="true">1</span>
+                                    <span class="s2-outro-text">Не используйте личные устройства для хранения рабочих данных. Храните рабочую информацию только на корпоративных устройствах. Все флешки и диски с рабочей информацией должны находиться в запертых ящиках стола или шкафах.</span>
+                                </li>
+                                <li>
+                                    <span class="s2-outro-num" aria-hidden="true">2</span>
+                                    <span class="s2-outro-text">Доверяйте ремонт и утилизацию корпоративного оборудования (устройств) только специалистам компании ВРК.</span>
+                                </li>
+                                <li>
+                                    <span class="s2-outro-num" aria-hidden="true">3</span>
+                                    <span class="s2-outro-text">Передавайте данные клиентам только на зашифрованных носителях, выданных компанией ВРК, и только с согласия руководителя. Для обмена большими файлами с клиентами используйте только одобренные компанией сервисы и носители.</span>
+                                </li>
+                                <li>
+                                    <span class="s2-outro-num" aria-hidden="true">4</span>
+                                    <span class="s2-outro-text">Не отключайте антивирус и не меняйте предустановленные параметры защиты на вашем рабочем компьютере.</span>
+                                </li>
+                                <li>
+                                    <span class="s2-outro-num" aria-hidden="true">5</span>
+                                    <span class="s2-outro-text">Используйте программы из официальных каталогов или те, что были одобрены руководством для вашего задания. Перед использованием программ с открытым исходным кодом нужно получить одобрение от специальной комиссии.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="slide-nav-bar s2-nav-bar">
+                        <button type="button" class="slide-btn slide-btn--back" data-action="back" aria-label="Предыдущий раздел">
+                            <span class="slide-btn-arrow" aria-hidden="true">←</span>
+                        </button>
+                        <button type="button" class="slide-btn slide-btn--next btn-next" data-action="next" aria-label="Продолжить">
+                            <span>ПРОДОЛЖИТЬ</span>
+                            <span class="slide-btn-sep">|</span>
+                            <span class="slide-btn-arrow" aria-hidden="true">→</span>
+                        </button>
+                    </div>
+                </article>
+            </div>
+
             </section>
             <section id="screen-section-3" class="course-screen" data-screen="section-3">
                 <div class="placeholder-screen">
                     <p class="placeholder-label">Раздел 5</p>
                     <h2>Работа в офисе и удалённо</h2>
                     <p>Раздел будет добавлен на следующем шаге сборки.</p>
-                    <div class="placeholder-nav">
-                        <button type="button" class="btn-back" data-action="back">Назад</button>
-                        <button type="button" class="btn-next" data-action="next">Далее</button>
+                    <div class="placeholder-nav slide-nav-bar slide-nav-bar--standalone">
+                        <button type="button" class="slide-btn slide-btn--back" data-action="back" aria-label="Назад">
+                            <span class="slide-btn-arrow" aria-hidden="true">←</span>
+                        </button>
+                        <button type="button" class="slide-btn slide-btn--next btn-next" data-action="next">
+                            <span>ПРОДОЛЖИТЬ</span>
+                            <span class="slide-btn-sep">|</span>
+                            <span class="slide-btn-arrow" aria-hidden="true">→</span>
+                        </button>
                     </div>
                 </div>
             </section>
@@ -99,9 +1019,15 @@
                     <p class="placeholder-label">Раздел 6</p>
                     <h2>Работа в интернете</h2>
                     <p>Раздел будет добавлен на следующем шаге сборки.</p>
-                    <div class="placeholder-nav">
-                        <button type="button" class="btn-back" data-action="back">Назад</button>
-                        <button type="button" class="btn-next" data-action="next">Далее</button>
+                    <div class="placeholder-nav slide-nav-bar slide-nav-bar--standalone">
+                        <button type="button" class="slide-btn slide-btn--back" data-action="back" aria-label="Назад">
+                            <span class="slide-btn-arrow" aria-hidden="true">←</span>
+                        </button>
+                        <button type="button" class="slide-btn slide-btn--next btn-next" data-action="next">
+                            <span>ПРОДОЛЖИТЬ</span>
+                            <span class="slide-btn-sep">|</span>
+                            <span class="slide-btn-arrow" aria-hidden="true">→</span>
+                        </button>
                     </div>
                 </div>
             </section>
@@ -110,9 +1036,15 @@
                     <p class="placeholder-label">Раздел 7</p>
                     <h2>Работа с клиентами</h2>
                     <p>Раздел будет добавлен на следующем шаге сборки.</p>
-                    <div class="placeholder-nav">
-                        <button type="button" class="btn-back" data-action="back">Назад</button>
-                        <button type="button" class="btn-next" data-action="next">Далее</button>
+                    <div class="placeholder-nav slide-nav-bar slide-nav-bar--standalone">
+                        <button type="button" class="slide-btn slide-btn--back" data-action="back" aria-label="Назад">
+                            <span class="slide-btn-arrow" aria-hidden="true">←</span>
+                        </button>
+                        <button type="button" class="slide-btn slide-btn--next btn-next" data-action="next">
+                            <span>ПРОДОЛЖИТЬ</span>
+                            <span class="slide-btn-sep">|</span>
+                            <span class="slide-btn-arrow" aria-hidden="true">→</span>
+                        </button>
                     </div>
                 </div>
             </section>
@@ -121,9 +1053,15 @@
                     <p class="placeholder-label">Раздел 8</p>
                     <h2>Ответственность сотрудников</h2>
                     <p>Раздел будет добавлен на следующем шаге сборки.</p>
-                    <div class="placeholder-nav">
-                        <button type="button" class="btn-back" data-action="back">Назад</button>
-                        <button type="button" class="btn-next" data-action="next">Далее</button>
+                    <div class="placeholder-nav slide-nav-bar slide-nav-bar--standalone">
+                        <button type="button" class="slide-btn slide-btn--back" data-action="back" aria-label="Назад">
+                            <span class="slide-btn-arrow" aria-hidden="true">←</span>
+                        </button>
+                        <button type="button" class="slide-btn slide-btn--next btn-next" data-action="next">
+                            <span>ПРОДОЛЖИТЬ</span>
+                            <span class="slide-btn-sep">|</span>
+                            <span class="slide-btn-arrow" aria-hidden="true">→</span>
+                        </button>
                     </div>
                 </div>
             </section>
@@ -132,15 +1070,19 @@
                     <p class="placeholder-label">Раздел 9</p>
                     <h2>Заключение</h2>
                     <p>Раздел будет добавлен на следующем шаге сборки.</p>
-                    <div class="placeholder-nav">
-                        <button type="button" class="btn-back" data-action="back">Назад</button>
-                        <button type="button" class="btn-finish" data-action="finish">Завершить курс</button>
+                    <div class="placeholder-nav slide-nav-bar slide-nav-bar--standalone">
+                        <button type="button" class="slide-btn slide-btn--back" data-action="back" aria-label="Назад">
+                            <span class="slide-btn-arrow" aria-hidden="true">←</span>
+                        </button>
+                        <button type="button" class="slide-btn slide-btn--next btn-finish" data-action="finish">
+                            <span>ЗАВЕРШИТЬ КУРС</span>
+                            <span class="slide-btn-sep">|</span>
+                            <span class="slide-btn-arrow" aria-hidden="true">→</span>
+                        </button>
                     </div>
                 </div>
             </section>
         </main>
-
-        <p id="gate-hint" class="gate-hint is-hidden">Просмотрите все интерактивные элементы слайда, чтобы продолжить</p>
 
         <!-- 2.1 Содержание -->
         <div id="contents-overlay" class="contents-overlay is-hidden" role="dialog" aria-modal="true" aria-labelledby="contents-title">

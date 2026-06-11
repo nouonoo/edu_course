@@ -75,6 +75,16 @@ const LMSBridge = (() => {
         return 'splash';
     }
 
+    function redirectToLogin(message) {
+        sessionStorage.removeItem('authToken');
+        const returnUrl = getReturnUrl();
+        const loginUrl = new URL(returnUrl);
+        loginUrl.pathname = loginUrl.pathname.replace(/[^/]+$/, 'login.html');
+        loginUrl.search = '';
+        if (message) sessionStorage.setItem('authRedirectMessage', message);
+        window.location.replace(loginUrl.toString());
+    }
+
     async function init() {
         const params = new URLSearchParams(window.location.search);
         courseId = resolveCourseId();
@@ -82,7 +92,10 @@ const LMSBridge = (() => {
         authToken = params.get('authToken') || sessionStorage.getItem('authToken');
 
         if (!courseId || !assignmentId) throw new Error('Назначение или курс не найдены');
-        if (!authToken) throw new Error('Требуется авторизация');
+        if (!authToken) {
+            redirectToLogin('Сессия истекла. Войдите снова, чтобы продолжить курс.');
+            return null;
+        }
 
         sessionStorage.setItem('authToken', authToken);
 
@@ -90,6 +103,10 @@ const LMSBridge = (() => {
             `${API_URL}/courses/${courseId}?assignment_id=${assignmentId}`,
             { headers: { Authorization: `Bearer ${authToken}` } }
         );
+        if (response.status === 401) {
+            redirectToLogin('Сессия истекла. Войдите снова, чтобы продолжить курс.');
+            return null;
+        }
         const data = await response.json();
         if (!response.ok) throw new Error(data.message || 'Курс недоступен');
 
@@ -132,6 +149,10 @@ const LMSBridge = (() => {
                 })
             }
         );
+        if (response.status === 401) {
+            redirectToLogin('Сессия истекла. Войдите снова, чтобы продолжить курс.');
+            return null;
+        }
         const data = await response.json();
         if (!response.ok) throw new Error(data.message);
 
@@ -162,6 +183,10 @@ const LMSBridge = (() => {
                 total_sections: scorableCount
             })
         });
+        if (response.status === 401) {
+            redirectToLogin('Сессия истекла. Войдите снова, чтобы продолжить курс.');
+            return null;
+        }
         const data = await response.json();
         if (!response.ok) throw new Error(data.message);
 

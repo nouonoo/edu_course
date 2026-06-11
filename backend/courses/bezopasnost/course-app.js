@@ -95,14 +95,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     const progressText = document.getElementById('course-progress-text');
     const contentsOverlay = document.getElementById('contents-overlay');
     const contentsGrid = document.getElementById('contents-grid');
-    const gateHint = document.getElementById('gate-hint');
-
     function getScreenEl(screenId) {
         return document.getElementById(`screen-${screenId}`);
     }
 
     function setHeaderVisible(visible) {
         header?.classList.toggle('is-hidden', !visible);
+        const headerHeight = visible && header ? Math.ceil(header.getBoundingClientRect().height) : 0;
+        document.documentElement.style.setProperty('--header-offset', `${headerHeight}px`);
     }
 
     function updateProgress(totalScore) {
@@ -122,17 +122,15 @@ document.addEventListener('DOMContentLoaded', async () => {
         const gateReady = CourseInteractions.isGateReady(screenId);
         const navLocked = isNavLocked();
 
-        screenEl.querySelectorAll('.btn-next, .hotspot[data-action="next"]').forEach(btn => {
+        screenEl.querySelectorAll('.btn-next, .slide-btn--next, [data-action="next"]').forEach(btn => {
             btn.classList.toggle('is-disabled', !gateReady || navLocked);
         });
 
-        screenEl.querySelectorAll('.btn-back, .hotspot[data-action="back"]').forEach(btn => {
+        screenEl.querySelectorAll('.btn-back, .slide-btn--back, [data-action="back"]').forEach(btn => {
             btn.classList.toggle('is-disabled', navLocked);
         });
 
         btnContents?.classList.toggle('is-disabled', navLocked || screenId === 'splash');
-
-        gateHint?.classList.toggle('is-hidden', gateReady || screenId === 'splash' || navLocked);
     }
 
     async function completeCurrentScreen() {
@@ -176,6 +174,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         CourseInteractions.scanScreen(target, screenId);
         updateNavButtons(screenId);
         window.scrollTo({ top: 0, behavior: 'smooth' });
+        if (screenId === 'intro') {
+            requestAnimationFrame(() => updateNavButtons(screenId));
+            setTimeout(() => updateNavButtons(screenId), 400);
+        }
         renderContentsGrid();
     }
 
@@ -319,7 +321,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const action = hotspot.dataset.action;
             if (!action) return;
 
-            if (hotspot.classList.contains('hotspot') || hotspot.matches('.btn-back, .btn-next, .btn-finish')) {
+            if (hotspot.matches('[data-action]')) {
                 event.preventDefault();
                 handleAction(action, hotspot);
             }
@@ -354,6 +356,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         bindGlobalNavigation();
         renderContentsGrid();
+
+        window.addEventListener('resize', () => {
+            if (!header?.classList.contains('is-hidden')) {
+                setHeaderVisible(true);
+            }
+        });
 
         const resume = LMSBridge.getResumeScreen();
         const hasProgress = (data.progress?.total_score || 0) > 0

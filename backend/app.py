@@ -1,6 +1,7 @@
 import os
 import io
 import shutil
+from datetime import timedelta
 import pandas as pd
 from flask import Flask, jsonify, request, send_file
 from flask_cors import CORS
@@ -24,6 +25,7 @@ app = Flask(__name__)
 CORS(app, resources={r"/api/*": {"origins": "*"}})
 app.config["JWT_SECRET_KEY"] = JWT_SECRET_KEY
 app.config["JWT_VERIFY_SUB"] = False
+app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=12)
 jwt = JWTManager(app)
 db = Database()
 db.ensure_schema()

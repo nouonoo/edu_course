@@ -8,6 +8,8 @@
   --color-text: #2f2f2f;
   --radius-main: 24px;
   --shadow-soft: 0 8px 32px rgba(47, 47, 47, 0.12);
+  --header-offset: 0px;
+  --slide-ratio: 16 / 9;
 }
 
 #course-app {
@@ -99,27 +101,143 @@
   display: block;
 }
 
-/* ── Image slides ── */
-.slide-frame {
-  position: relative;
+/* ── Adaptive slide viewport ── */
+.slide-viewport {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
-  max-width: 1280px;
-  margin: 0 auto;
-  aspect-ratio: 16 / 9;
-  background: #fff;
+  min-height: calc(100dvh - var(--header-offset));
+  min-height: calc(100svh - var(--header-offset));
+  padding: clamp(0px, 1.5vw, 16px);
+  box-sizing: border-box;
 }
 
-.slide-image {
+.slide-frame {
+  position: relative;
+  container-type: inline-size;
+  width: min(
+    100%,
+    calc((100dvh - var(--header-offset)) * 16 / 9),
+    calc((100svh - var(--header-offset)) * 16 / 9)
+  );
+  max-width: 100vw;
+  aspect-ratio: var(--slide-ratio);
+  background: #fff;
+  flex-shrink: 0;
+}
+
+.slide-frame .slide-image {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  max-width: none;
+  object-fit: fill;
   user-select: none;
   -webkit-user-drag: none;
+  pointer-events: none;
 }
 
-.hotspot {
+/* ── Slide buttons (макет: оранжевая «Продолжить», белая стрелка «Назад») ── */
+.slide-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35em;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  transition: filter 0.15s, transform 0.15s, opacity 0.15s;
+  font-size: clamp(0.62rem, 2.8cqw, 1.05rem);
+}
+
+.slide-btn:hover:not(.is-disabled) {
+  filter: brightness(1.03);
+}
+
+.slide-btn:active:not(.is-disabled) {
+  transform: scale(0.98);
+}
+
+.slide-btn.is-disabled {
+  opacity: 0.45;
+  pointer-events: none;
+  cursor: default;
+}
+
+.slide-btn:focus-visible {
+  outline: 2px solid var(--color-primary-dark);
+  outline-offset: 2px;
+}
+
+.slide-btn-sep {
+  opacity: 0.85;
+  font-weight: 400;
+}
+
+.slide-btn-arrow {
+  font-size: 1.15em;
+  line-height: 1;
+}
+
+/* Сплеш: «НАЧАТЬ КУРС» */
+.slide-btn--start {
   position: absolute;
+  left: 3.91%;
+  bottom: 9.72%;
+  width: 25.31%;
+  height: 10.28%;
+  padding: 0 0.8em;
+  border-radius: 999px;
+  background: var(--color-primary);
+  color: var(--color-text);
+  text-transform: uppercase;
+}
+
+/* Нижняя панель навигации (координаты из SVG 1280×720) */
+.slide-nav-bar {
+  position: absolute;
+  left: 8.59%;
+  right: 8.59%;
+  bottom: 0;
+  height: 7.92%;
+  display: flex;
+  align-items: stretch;
+  gap: 1.56%;
+  z-index: 3;
+}
+
+.slide-btn--back {
+  flex: 0 0 12.5%;
+  max-width: 12.5%;
+  background: #fff;
+  color: var(--color-text);
+  border-radius: 12px 12px 0 0;
+  box-shadow: 0 -1px 0 rgba(47, 47, 47, 0.06);
+}
+
+.slide-btn--back .slide-btn-arrow {
+  font-size: clamp(1rem, 4cqw, 1.6rem);
+  font-weight: 400;
+}
+
+.slide-btn--next {
+  flex: 1 1 auto;
+  background: var(--color-primary);
+  color: var(--color-text);
+  border-radius: 12px 12px 0 0;
+  text-transform: uppercase;
+}
+
+/* Кнопка «Содержание» на слайде навигации */
+.hotspot--contents {
+  position: absolute;
+  left: 22.54%;
+  top: 1.6%;
+  width: 54.61%;
+  height: 7.08%;
   padding: 0;
   margin: 0;
   border: none;
@@ -128,15 +246,44 @@
   z-index: 2;
 }
 
-.hotspot:focus-visible {
+.hotspot--contents:focus-visible {
   outline: 2px solid var(--color-primary-dark);
   outline-offset: 2px;
-  border-radius: 8px;
+  border-radius: 16px;
 }
 
 .hotspot.is-disabled {
   pointer-events: none;
   cursor: default;
+}
+
+/* Навигация в заглушках разделов */
+.slide-nav-bar--standalone {
+  position: static;
+  left: auto;
+  right: auto;
+  bottom: auto;
+  height: auto;
+  min-height: 52px;
+  max-width: 480px;
+  margin: 0 auto;
+  gap: 12px;
+}
+
+.slide-nav-bar--standalone .slide-btn--back {
+  flex: 0 0 72px;
+  max-width: 72px;
+  min-height: 52px;
+  border-radius: 12px;
+  box-shadow: none;
+  border: 1px solid var(--color-grey-tag);
+}
+
+.slide-nav-bar--standalone .slide-btn--next {
+  flex: 1 1 auto;
+  min-height: 52px;
+  border-radius: 12px;
+  font-size: 0.9rem;
 }
 
 /* ── Placeholder screens ── */
@@ -174,62 +321,7 @@
 }
 
 .placeholder-nav {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-
-.btn-back,
-.btn-next,
-.btn-finish {
-  padding: 12px 28px;
-  border-radius: 12px;
-  font-weight: 600;
-  transition: opacity 0.2s, transform 0.2s;
-}
-
-.btn-back {
-  background: #fff;
-  border: 2px solid var(--color-primary);
-  color: var(--color-text);
-}
-
-.btn-next,
-.btn-finish {
-  background: var(--color-primary);
-  color: var(--color-text);
-}
-
-.btn-next:hover,
-.btn-finish:hover,
-.btn-back:hover {
-  transform: translateY(-1px);
-}
-
-.btn-next.is-disabled,
-.btn-back.is-disabled {
-  opacity: 0.45;
-  pointer-events: none;
-}
-
-/* ── Gate hint ── */
-.gate-hint {
-  position: fixed;
-  bottom: 24px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 90;
-  padding: 12px 20px;
-  border-radius: 12px;
-  background: #2f2f2f;
-  color: #fff;
-  font-size: 0.92rem;
-  box-shadow: var(--shadow-soft);
-}
-
-.gate-hint.is-hidden {
-  display: none;
+  width: 100%;
 }
 
 /* ── Contents overlay ── */
@@ -481,6 +573,17 @@
 
 /* ── Responsive ── */
 @media (max-width: 900px) {
+  .slide-viewport {
+    padding: 0;
+  }
+
+  .slide-btn--start {
+    font-size: clamp(0.55rem, 3.2cqw, 0.95rem);
+  }
+
+  .slide-btn--next {
+    font-size: clamp(0.55rem, 2.4cqw, 0.9rem);
+  }
   .course-header {
     flex-direction: column;
     align-items: stretch;
@@ -511,9 +614,19 @@
 }
 
 @media (max-width: 480px) {
+  .slide-nav-bar--standalone .slide-btn--back {
+    flex: 0 0 56px;
+    max-width: 56px;
+    min-height: 48px;
+  }
+
+  .slide-nav-bar--standalone .slide-btn--next {
+    min-height: 48px;
+    font-size: 0.78rem;
+  }
+
   .contents-overlay {
     padding: 8px;
-  }
 
   .contents-close {
     width: 40px;

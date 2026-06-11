@@ -1,0 +1,424 @@
+/* ── Введение: 3 элемента (открытие → контент → финал) ── */
+.intro-screen {
+  background: var(--color-bg-page);
+}
+
+.intro-page {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.intro-part {
+  position: relative;
+}
+
+/* ── Элемент 1: титульный экран ── */
+.intro-part--hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100dvh - var(--header-offset));
+  min-height: calc(100svh - var(--header-offset));
+  padding: clamp(24px, 5vw, 48px) clamp(16px, 4vw, 40px);
+  background:
+    radial-gradient(ellipse 120% 80% at 50% 0%, rgba(214, 214, 214, 0.25) 0%, transparent 55%),
+    linear-gradient(180deg, #f8f8f8 0%, #efefef 100%);
+}
+
+.intro-hero-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(32px, 6vw, 60px);
+  width: min(100%, 880px);
+  text-align: center;
+}
+
+.intro-title {
+  margin: 0;
+  color: var(--color-primary);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  font-weight: 400;
+  line-height: 1.15;
+}
+
+.intro-card {
+  width: min(100%, 880px);
+  padding: clamp(20px, 4vw, 30px);
+  background: #fff;
+  border: 1px solid var(--color-grey-tag);
+  border-radius: 20px;
+  color: #2e2e2e;
+  font-size: clamp(0.95rem, 2.2vw, 1.125rem);
+  line-height: 1.4;
+}
+
+.intro-card--hint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(12px, 3vw, 20px);
+  width: min(100%, 520px);
+  text-align: left;
+}
+
+.intro-hint-icons {
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.intro-hint-icons img {
+  width: clamp(36px, 8vw, 48px);
+  height: clamp(36px, 8vw, 48px);
+}
+
+.intro-hint-text {
+  margin: 0;
+  font-size: clamp(0.875rem, 2vw, 1rem);
+  line-height: 1.4;
+  color: #222;
+}
+
+.intro-scroll-cue {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #888;
+}
+
+/* ── Элемент 2: основной контент ── */
+.intro-part--content {
+  padding: clamp(48px, 8vw, 100px) clamp(16px, 5vw, 110px);
+  background: #fff;
+  border-radius: clamp(20px, 4vw, 40px) clamp(20px, 4vw, 40px) 0 0;
+  margin-top: -1px;
+}
+
+.intro-content-inner {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(48px, 8vw, 100px);
+  max-width: 1060px;
+  margin: 0 auto;
+}
+
+.intro-lead {
+  margin: 0;
+  font-size: clamp(1rem, 2.2vw, 1.125rem);
+  line-height: 1.4;
+  color: #2e2e2e;
+}
+
+.intro-list-block {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.intro-list-nums {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex-shrink: 0;
+  padding-top: 2px;
+}
+
+.intro-list-nums span {
+  display: block;
+  width: 14px;
+  color: var(--color-primary);
+  font-size: 1.125rem;
+  line-height: 1.4;
+  font-weight: 600;
+}
+
+.intro-list-items {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.intro-list-items li {
+  font-size: clamp(1rem, 2.2vw, 1.125rem);
+  line-height: 1.4;
+  color: #2e2e2e;
+}
+
+.intro-callout {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 20px;
+  padding: 20px;
+  border-radius: 20px;
+  background: #f5f5f5;
+}
+
+.intro-callout-title {
+  margin: 0;
+  flex: 0 1 340px;
+  color: var(--color-primary);
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
+  line-height: 1.35;
+}
+
+.intro-callout-text {
+  margin: 0;
+  flex: 1 1 280px;
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  line-height: 1.4;
+  color: var(--color-text);
+}
+
+.intro-section-title {
+  margin: 0 0 40px;
+  color: var(--color-text);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1.2;
+}
+
+.intro-two-col {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 20px;
+}
+
+.intro-two-col-title {
+  margin: 0;
+  flex: 1 1 280px;
+  color: var(--color-primary);
+  font-size: clamp(1.35rem, 3.5vw, 2rem);
+  line-height: 1.35;
+}
+
+.intro-two-col-body {
+  flex: 1 1 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.intro-two-col-body p {
+  margin: 0;
+  font-size: clamp(1rem, 2.2vw, 1.125rem);
+  line-height: 1.4;
+  color: #2e2e2e;
+}
+
+.intro-note {
+  margin: 60px 0 0;
+  padding: 20px;
+  border-radius: 20px;
+  background: var(--color-beige);
+  font-size: clamp(1rem, 2.2vw, 1.125rem);
+  line-height: 1.4;
+  color: var(--color-text);
+}
+
+.intro-alert {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  border-radius: 20px;
+  background: var(--color-beige);
+}
+
+.intro-alert-mark {
+  font-size: clamp(2rem, 5vw, 3rem);
+  color: var(--color-primary);
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.intro-alert p {
+  margin: 0;
+  flex: 1;
+  font-size: clamp(1rem, 2.2vw, 1.125rem);
+  line-height: 1.4;
+}
+
+.intro-goal {
+  padding: clamp(24px, 4vw, 32px);
+  border-radius: 20px;
+  background: var(--color-beige);
+}
+
+.intro-goal h3 {
+  margin: 0 0 32px;
+  color: var(--color-primary);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1.2;
+}
+
+.intro-goal p {
+  margin: 0;
+  font-size: clamp(1rem, 2.2vw, 1.125rem);
+  line-height: 1.4;
+}
+
+.intro-learn h3 {
+  margin: 0 0 16px;
+  color: var(--color-text);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2rem, 5vw, 3rem);
+}
+
+.intro-learn > p {
+  margin: 0 0 40px;
+  font-size: clamp(1rem, 2.2vw, 1.125rem);
+  line-height: 1.4;
+}
+
+.intro-learn > p strong {
+  font-weight: 700;
+}
+
+.intro-modules {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.intro-module-card {
+  padding: 24px;
+  border: 1px solid var(--color-grey-tag);
+  border-radius: 20px;
+  background: #fff;
+}
+
+.intro-module-card--alt {
+  background: #f5f5f5;
+}
+
+.intro-module-label {
+  margin: 0 0 16px;
+  color: var(--color-primary);
+  font-size: 0.875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.intro-module-card h4 {
+  margin: 0 0 16px;
+  font-size: clamp(1.35rem, 3vw, 2rem);
+  line-height: 1.3;
+  color: var(--color-text);
+  font-weight: 400;
+}
+
+.intro-module-card p {
+  margin: 0;
+  font-size: clamp(1rem, 2.2vw, 1.125rem);
+  line-height: 1.4;
+  color: var(--color-text);
+}
+
+.intro-footer-quote {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 20px;
+  padding-top: clamp(80px, 15vw, 240px);
+}
+
+.intro-footer-quote h3 {
+  margin: 0;
+  flex: 1 1 300px;
+  color: var(--color-primary);
+  font-size: clamp(1.35rem, 3.5vw, 2rem);
+  line-height: 1.35;
+}
+
+.intro-footer-quote p {
+  margin: 0;
+  flex: 1 1 300px;
+  font-size: clamp(1rem, 2.2vw, 1.125rem);
+  line-height: 1.4;
+}
+
+/* ── Элемент 3: «Готовы начать?» ── */
+.intro-part--outro {
+  min-height: calc(100dvh - var(--header-offset));
+  min-height: calc(100svh - var(--header-offset));
+  padding: clamp(48px, 10vw, 128px) clamp(16px, 5vw, 110px) 0;
+  background: linear-gradient(180deg, #fff 0%, #efefef 100%);
+  display: flex;
+  flex-direction: column;
+}
+
+.intro-outro-inner {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(32px, 6vw, 60px);
+  max-width: 1060px;
+  margin: 0 auto;
+  width: 100%;
+  text-align: center;
+}
+
+.intro-outro-title {
+  margin: 0;
+  color: var(--color-primary);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  line-height: 1.15;
+}
+
+.intro-outro-card {
+  width: 100%;
+  padding: clamp(24px, 4vw, 32px);
+  background: #fff;
+  border: 1px solid var(--color-grey-tag);
+  border-radius: 20px;
+  font-size: clamp(1rem, 2.2vw, 1.125rem);
+  line-height: 1.4;
+  color: #2e2e2e;
+}
+
+.intro-nav-bar.slide-nav-bar {
+  position: sticky;
+  bottom: 0;
+  left: auto;
+  right: auto;
+  height: clamp(48px, 8vw, 57px);
+  margin-top: auto;
+  padding: 0;
+  max-width: 100%;
+  width: 100%;
+  z-index: 10;
+  background: linear-gradient(180deg, transparent 0%, #efefef 35%);
+}
+
+@media (max-width: 640px) {
+  .intro-card--hint {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .intro-list-block {
+    flex-direction: column;
+  }
+
+  .intro-list-nums {
+    flex-direction: row;
+    gap: 16px;
+  }
+
+  .intro-callout,
+  .intro-two-col,
+  .intro-footer-quote {
+    flex-direction: column;
+  }
+}
