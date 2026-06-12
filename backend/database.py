@@ -684,6 +684,10 @@ class Database:
         """
         return self._execute_scalar(sql, (title, description, author_id, storage))
 
+    def update_course(self, course_id, title, description):
+        sql = "UPDATE Courses SET title=?, description=? WHERE course_id=?"
+        return self._query(sql, (title, description or '', course_id), commit=True) is True
+
     def purge_course_data(self, course_id):
         """Удаляет назначения, прогресс и результаты по курсу, сам курс в справочнике сохраняется."""
         assignment_rows = self._query(

@@ -15,7 +15,7 @@
 
     <link rel="stylesheet" href="style.css">
 
-    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="admin.css?v=1">
 
 </head>
 
@@ -89,6 +89,52 @@
 
 
 
+    <!-- Редактирование курса -->
+
+    <div id="edit-course-modal" class="modal-backdrop admin-modal" style="display:none;">
+
+        <div class="modal-content">
+
+            <h2>Редактировать курс</h2>
+
+            <form id="edit-course-form">
+
+                <input type="hidden" id="edit-course-id">
+
+                <div class="form-group">
+
+                    <label for="edit-course-title">Название</label>
+
+                    <input type="text" id="edit-course-title" required>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="edit-course-description">Описание</label>
+
+                    <textarea id="edit-course-description" rows="4" placeholder="Оставьте пустым, чтобы удалить описание"></textarea>
+
+                </div>
+
+                <div class="modal-actions">
+
+                    <button type="button" id="cancel-edit-course" class="btn-secondary">Отмена</button>
+
+                    <button type="submit" class="btn-primary save-btn">Сохранить</button>
+
+                </div>
+
+                <p id="edit-course-error" class="error-message"></p>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+
     <!-- Подтверждение удаления курса -->
 
     <div id="delete-course-modal" class="modal-backdrop confirm-modal" style="display:none;">
@@ -114,7 +160,7 @@
     <script src="common.js?v=3"></script>
     <script src="app.js"></script>
 
-    <script src="admin-courses.js"></script>
+    <script src="admin-courses.js?v=1"></script>
 
 </body>
 

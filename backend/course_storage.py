@@ -61,6 +61,32 @@ def course_has_files(storage, course_id=None, title=None):
     return get_course_entry_relative_path(resolved) is not None
 
 
+def sync_course_manifest_metadata(storage, title=None, description=None):
+    base = get_course_base_path(storage)
+    if not base:
+        return
+
+    manifest_path = os.path.join(base, 'course.json')
+    if not os.path.isfile(manifest_path):
+        return
+
+    try:
+        with open(manifest_path, 'r', encoding='utf-8') as file:
+            data = json.load(file)
+        if title is not None:
+            data['title'] = title
+        if description is not None:
+            if description:
+                data['description'] = description
+            else:
+                data.pop('description', None)
+        with open(manifest_path, 'w', encoding='utf-8') as file:
+            json.dump(data, file, ensure_ascii=False, indent=2)
+            file.write('\n')
+    except (OSError, json.JSONDecodeError, TypeError):
+        return
+
+
 def get_course_base_path(storage):
     """
     Возвращает базовую папку курса по значению storage из БД.

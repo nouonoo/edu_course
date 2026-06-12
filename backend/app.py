@@ -3,15 +3,16 @@ import io
 import shutil
 from datetime import timedelta
 import pandas as pd
-from flask import Flask, jsonify, request, send_file
+from flask import Flask, jsonify, request, send_file, after_this_request
 from flask_cors import CORS
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity, JWTManager
 from werkzeug.utils import secure_filename
 from database import Database
 from course_storage import (
     get_course_entry_relative_path, resolve_course_file, get_course_base_path,
-    resolve_course_storage, course_has_files
+    resolve_course_storage, course_has_files, sync_course_manifest_metadata
 )
+from course_archive import build_course_archive
 from course_manifest import load_course_manifest
 from course_progress import PASS_THRESHOLD
 from config import JWT_SECRET_KEY, COURSES_ROOT, PHOTOS_ROOT, IMG_ROOT
@@ -541,6 +542,75 @@ def admin_upload_user_photo(user_id):
 
     delete_photo_file(PHOTOS_ROOT, old_photo)
     return jsonify({"message": "Фото обновлено", "photo_url": photo_url(filename)})
+
+
+@app.route('/api/admin/courses/<int:course_id>', methods=['PUT'])
+@jwt_required()
+def admin_update_course(course_id):
+    if not is_admin(get_jwt_identity().get('role')):
+        return jsonify({"message": "Доступ запрещен"}), 403
+
+    data = request.get_json() or {}
+    title = (data.get('title') or '').strip()
+    if not title:
+        return jsonify({"message": "Укажите название курса"}), 400
+
+    description = (data.get('description') or '').strip()
+    course = db.get_course_by_id(course_id)
+    if not course:
+        return jsonify({"message": "Курс не найден"}), 404
+
+    if not db.update_course(course_id, title, description):
+        return jsonify({"message": "Ошибка обновления курса"}), 500
+
+    if course.storage:
+        sync_course_manifest_metadata(course.storage, title=title, description=description)
+
+    return jsonify({
+        "message": "Курс обновлён",
+        "course": {
+            "course_id": course_id,
+            "title": title,
+            "description": description,
+            "storage": course.storage
+        }
+    })
+
+
+@app.route('/api/admin/courses/<int:course_id>/download', methods=['GET'])
+@jwt_required()
+def admin_download_course(course_id):
+    if not is_admin(get_jwt_identity().get('role')):
+        return jsonify({"message": "Доступ запрещен"}), 403
+
+    course = db.get_course_by_id(course_id)
+    if not course:
+        return jsonify({"message": "Курс не найден"}), 404
+
+    archive_format = (request.args.get('format') or 'zip').lower()
+    archive_path, error = build_course_archive(course.storage, archive_format)
+    if error:
+        status = 503 if archive_format == 'rar' else 400
+        return jsonify({"message": error}), status
+
+    download_name = secure_filename(course.storage or course.title or f'course_{course_id}')
+    download_name = f'{download_name}.{archive_format}'
+
+    @after_this_request
+    def cleanup_archive(response):
+        try:
+            os.remove(archive_path)
+        except OSError:
+            pass
+        return response
+
+    mimetype = 'application/zip' if archive_format == 'zip' else 'application/x-rar-compressed'
+    return send_file(
+        archive_path,
+        mimetype=mimetype,
+        as_attachment=True,
+        download_name=download_name
+    )
 
 
 @app.route('/api/admin/courses/<int:course_id>', methods=['DELETE'])
