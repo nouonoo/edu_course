@@ -147,18 +147,6 @@ def update_profile():
     return jsonify({"message": "Профиль обновлён"})
 
 
-@app.route('/api/feedback', methods=['POST'])
-@jwt_required()
-def submit_feedback():
-    user_id = get_jwt_identity().get('user_id')
-    message = (request.get_json() or {}).get('message', '').strip()
-    if not message:
-        return jsonify({"message": "Сообщение не может быть пустым"}), 400
-    if not db.save_feedback(user_id, message):
-        return jsonify({"message": "Ошибка отправки"}), 500
-    return jsonify({"message": "Обратная связь отправлена"})
-
-
 @app.route('/api/rating', methods=['GET'])
 @jwt_required()
 def get_rating():

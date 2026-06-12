@@ -366,8 +366,6 @@ function getAccountMenuHtml(role) {
 
         return `
 
-            <button type="button" class="account-link" id="feedback-link">Обратная связь</button>
-
             <a href="profile.html" class="account-link">Открыть профиль</a>
 
             <button type="button" class="account-link account-link-danger" id="logout-link">Выйти</button>
@@ -379,8 +377,6 @@ function getAccountMenuHtml(role) {
     return `
 
         <a href="profile.html" class="account-link">Личный кабинет</a>
-
-        <button type="button" class="account-link" id="feedback-link">Обратная связь</button>
 
         <a href="profile.html?edit=1" class="account-link">Редактировать профиль</a>
 
@@ -485,22 +481,6 @@ function initAppHeader(activePage) {
 
 
     document.getElementById('logout-link').onclick = logout;
-
-
-
-    const feedbackLink = document.getElementById('feedback-link');
-
-    if (feedbackLink) {
-
-        feedbackLink.onclick = () => {
-
-            dropdown.classList.remove('open');
-
-            window.location.href = 'profile.html?tab=feedback';
-
-        };
-
-    }
 
 
 

@@ -84,16 +84,6 @@ class Database:
                 )
             """, commit=True)
 
-        if not self._table_exists('Feedback'):
-            self._query("""
-                CREATE TABLE Feedback (
-                    feedback_id int IDENTITY(1,1) NOT NULL PRIMARY KEY,
-                    user_id int NOT NULL,
-                    message nvarchar(max) NOT NULL,
-                    created_at datetime2(7) NOT NULL DEFAULT (getdate())
-                )
-            """, commit=True)
-
         self._reset_schema_cache()
 
         self._query("""
@@ -417,12 +407,6 @@ class Database:
                 user_id
             )
         return self._query(sql, params, commit=True) is True
-
-    def save_feedback(self, user_id, message):
-        if not self._table_exists('Feedback'):
-            return False
-        sql = "INSERT INTO Feedback (user_id, message) VALUES (?, ?)"
-        return self._query(sql, (user_id, message), commit=True) is True
 
     def _rating_course_scores_sql(self):
         return """

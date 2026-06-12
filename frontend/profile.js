@@ -6,8 +6,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     initAppHeader(activePage);
 
     const params = new URLSearchParams(window.location.search);
+    if (params.get('tab') === 'feedback') {
+        window.location.replace('profile.html');
+        return;
+    }
     const isEdit = params.get('edit') === '1';
-    const isFeedback = params.get('tab') === 'feedback';
     const isAdmin = role === 'admin';
 
     let viewPhotoUpload = null;
@@ -19,19 +22,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 
     if (isAdmin) {
-        document.getElementById('feedback-section')?.remove();
         document.getElementById('profile-edit')?.remove();
         document.getElementById('profile-photo-block')?.remove();
-    } else if (isFeedback) {
-        document.getElementById('profile-view').style.display = 'none';
-        document.getElementById('feedback-section').style.display = 'block';
     } else if (isEdit) {
         document.getElementById('profile-view').style.display = 'none';
         document.getElementById('profile-edit').style.display = 'block';
     }
 
     if (!isAdmin) {
-        if (!isEdit && !isFeedback) {
+        if (!isEdit) {
             viewPhotoUpload = initPhotoUpload({
                 zoneId: 'profile-photo-field',
                 inputId: 'profile-photo-input',
@@ -69,20 +68,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             inputId: 'edit-photo',
             previewId: 'edit-photo-preview',
             selectBtnId: 'edit-photo-select-btn'
-        });
-
-        document.getElementById('feedback-form')?.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const status = document.getElementById('feedback-status');
-            const message = document.getElementById('feedback-message').value.trim();
-            const response = await apiFetch('/feedback', {
-                method: 'POST',
-                body: JSON.stringify({ message })
-            });
-            const data = await response.json();
-            status.style.color = response.ok ? 'green' : 'red';
-            status.textContent = data.message;
-            if (response.ok) document.getElementById('feedback-form').reset();
         });
 
         document.getElementById('edit-form')?.addEventListener('submit', async (e) => {
