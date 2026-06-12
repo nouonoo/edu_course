@@ -1,5 +1,5 @@
 {
-  "title": "BTG_M-scorm2004_2-t2V-syjB",
+  "title": "Страдающая методология",
   "course_type": "scorm",
   "sections": [
     {
@@ -9,5 +9,6 @@
       "file": "scormdriver/indexAPI.html",
       "scorm": true
     }
-  ]
+  ],
+  "description": "Курс посвященный методологии"
 }

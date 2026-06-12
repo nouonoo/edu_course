@@ -197,12 +197,17 @@ const LMSBridge = (() => {
             || 'http://127.0.0.1:8000/instruction.html';
     }
 
+    function exitCourse() {
+        window.location.href = getReturnUrl();
+    }
+
     return {
         init,
         on,
         completeSection,
         completeScreen,
         finishCourse,
+        exitCourse,
         isSectionUnlocked,
         isSectionCompleted,
         isScorableSection,

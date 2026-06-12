@@ -351,6 +351,7 @@ const CourseInteractions = (() => {
         const zones = Array.from(container.querySelectorAll('[data-drop]'));
         const confirmBtn = container.querySelector('[data-drag-confirm]');
         const resetBtn = container.querySelector('[data-drag-reset]');
+        const retryBtns = Array.from(container.querySelectorAll('[data-drag-retry]'));
         const successBox = container.querySelector('[data-drag-success]');
         const errorBox = container.querySelector('[data-drag-error]');
         const taskId = container.dataset.dragTask || 'drag-drop';
@@ -541,6 +542,12 @@ const CourseInteractions = (() => {
         resetBtn?.addEventListener('click', (e) => {
             e.preventDefault();
             reset();
+        });
+        retryBtns.forEach((btn) => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                reset();
+            });
         });
 
         return { ready: () => solved, required: 1 };

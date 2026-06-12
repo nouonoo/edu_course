@@ -18,6 +18,10 @@
 </head>
 <body>
     <div id="course-app">
+        <button type="button" id="btn-exit-floating" class="course-exit-btn course-exit-btn--floating is-hidden" data-action="exit" title="Закрыть курс">
+            <span>Закрыть курс</span>
+        </button>
+
         <header id="course-header" class="course-header is-hidden">
             <button type="button" id="btn-contents" class="header-btn" title="Содержание">
                 <img src="assets/images/map.svg" alt="" width="16" height="16">
@@ -29,6 +33,9 @@
                 </div>
                 <span id="course-progress-text" class="course-progress-text">0%</span>
             </div>
+            <button type="button" id="btn-exit-course" class="course-exit-btn" data-action="exit" title="Закрыть курс">
+                <span>Закрыть курс</span>
+            </button>
         </header>
 
         <main id="course-main">
@@ -474,6 +481,7 @@
                                         <li>Его легко запомнить, никуда не записывая.</li>
                                         <li>Он основан на нетривиальной фразе.</li>
                                     </ul>
+                                    <button type="button" class="s1-drag-btn s1-drag-btn--confirm" data-drag-retry>ПОПРОБОВАТЬ СНОВА</button>
                                 </div>
                             </section>
                             </div>

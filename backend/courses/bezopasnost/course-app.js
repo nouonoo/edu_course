@@ -87,6 +87,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     let courseStarted = false;
 
     const header = document.getElementById('course-header');
+    const btnExitFloating = document.getElementById('btn-exit-floating');
     const btnContents = document.getElementById('btn-contents');
     const progressFill = document.getElementById('course-progress-fill');
     const progressText = document.getElementById('course-progress-text');
@@ -98,8 +99,15 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     function setHeaderVisible(visible) {
         header?.classList.toggle('is-hidden', !visible);
+        btnExitFloating?.classList.toggle('is-hidden', visible);
         const headerHeight = visible && header ? Math.ceil(header.getBoundingClientRect().height) : 0;
         document.documentElement.style.setProperty('--header-offset', `${headerHeight}px`);
+    }
+
+    function exitCourse() {
+        const message = 'Выйти из курса? Прогресс по пройденным разделам сохранится.';
+        if (!window.confirm(message)) return;
+        LMSBridge.exitCourse();
     }
 
     function updateProgress(totalScore) {
@@ -306,6 +314,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                     }
                 });
                 break;
+            case 'exit':
+                exitCourse();
+                break;
             default:
                 break;
         }
@@ -370,6 +381,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             switchScreen(resume, { skipComplete: true });
         } else {
             switchScreen('splash', { skipComplete: true });
+            btnExitFloating?.classList.remove('is-hidden');
         }
     } catch (error) {
         document.body.innerHTML = `

@@ -59,6 +59,40 @@
   pointer-events: none;
 }
 
+.course-exit-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 16px;
+  background: #fff;
+  border: 1px solid #e0cfc4;
+  color: var(--color-text);
+  font-weight: 600;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  transition: border-color 0.2s, background 0.2s, color 0.2s;
+}
+
+.course-exit-btn:hover {
+  border-color: var(--color-primary-dark);
+  background: #fff8f4;
+  color: #8b4a2b;
+}
+
+.course-exit-btn--floating {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  z-index: 200;
+  box-shadow: var(--shadow-soft);
+}
+
+.course-exit-btn--floating.is-hidden {
+  display: none;
+}
+
 .course-progress {
   display: flex;
   align-items: center;
@@ -613,6 +647,17 @@ article[class*="-part--outro"]:not(.intro-part).is-locked {
     flex-direction: column;
     align-items: stretch;
     padding: 10px 16px;
+  }
+
+  .course-exit-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .course-exit-btn--floating {
+    width: auto;
+    font-size: 0.8rem;
+    padding: 8px 14px;
   }
 
   .course-progress {
