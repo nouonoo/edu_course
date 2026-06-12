@@ -430,19 +430,15 @@ function initAppHeader(activePage) {
 
 
 
-    let dropdown = document.getElementById('account-dropdown');
+    document.getElementById('account-dropdown')?.remove();
 
-    if (!dropdown) {
+    const dropdown = document.createElement('div');
 
-        dropdown = document.createElement('div');
+    dropdown.id = 'account-dropdown';
 
-        dropdown.id = 'account-dropdown';
+    dropdown.className = 'account-dropdown';
 
-        dropdown.className = 'account-dropdown';
-
-        document.body.appendChild(dropdown);
-
-    }
+    document.body.appendChild(dropdown);
 
 
 
@@ -465,6 +461,8 @@ function initAppHeader(activePage) {
         </div>
 
     `;
+
+    dropdown.querySelectorAll('#feedback-link, [href*="tab=feedback"]').forEach((el) => el.remove());
 
 
 
