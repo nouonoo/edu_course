@@ -184,7 +184,7 @@
 }
 
 .s1-highlight h3 {
-  margin: 0 0 12px;
+  margin: 0 0 20px;
   color: var(--color-primary);
   font-size: clamp(1.1rem, 2.5vw, 1.35rem);
 }
@@ -721,8 +721,9 @@
   pointer-events: none;
 }
 
-.s1-gated.is-locked {
-  display: none;
+.s1-gated.is-locked,
+.s1-part--outro.is-locked {
+  display: none !important;
 }
 
 .s1-drag-lock-hint {

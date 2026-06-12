@@ -3,6 +3,40 @@ const CourseInteractions = (() => {
     let onGateChange = null;
     const gateState = new Map();
     const screenRequirements = new Map();
+    const outroByScreen = new Map();
+
+    function isSectionOutro(el) {
+        return el.matches('article[class*="-part--outro"]:not(.intro-part)');
+    }
+
+    function queryGatedBlocks(root, gateId) {
+        return Array.from(root.querySelectorAll(`[data-gated-by="${gateId}"]`))
+            .filter((el) => !isSectionOutro(el));
+    }
+
+    function isInteractionsReady(screenId) {
+        const reqs = screenRequirements.get(screenId) || [];
+        return reqs.length === 0 || reqs.every((req) => req.ready());
+    }
+
+    function isScreenFullyReady(screenId) {
+        if (isInteractionsReady(screenId)) return true;
+        const section = typeof LMSBridge !== 'undefined' ? LMSBridge.getSectionByScreen(screenId) : null;
+        if (section && LMSBridge.isSectionCompleted(section.id)) {
+            return true;
+        }
+        return false;
+    }
+
+    function syncOutroVisibility(screenId, ready) {
+        (outroByScreen.get(screenId) || []).forEach((el) => {
+            el.classList.toggle('is-locked', !ready);
+        });
+    }
+
+    function updateOutroGate(screenId) {
+        syncOutroVisibility(screenId, isInteractionsReady(screenId));
+    }
 
     function setGate(screenId, ready) {
         const prev = gateState.get(screenId);
@@ -13,9 +47,8 @@ const CourseInteractions = (() => {
     }
 
     function updateCombinedGate(screenId) {
-        const reqs = screenRequirements.get(screenId) || [];
-        const ready = reqs.length === 0 || reqs.every(req => req.ready());
-        setGate(screenId, ready);
+        setGate(screenId, isScreenFullyReady(screenId));
+        updateOutroGate(screenId);
     }
 
     function isGateReady(screenId) {
@@ -32,11 +65,19 @@ const CourseInteractions = (() => {
 
             let index = 0;
             const visited = new Set([0]);
+            const sliderId = sliderEl.dataset.sliderId;
+            const gatedBlocks = sliderId
+                ? Array.from(root.querySelectorAll(`[data-gated-by-slider="${sliderId}"]`))
+                : [];
             const prevBtn = sliderEl.querySelector('[data-slider-prev]');
             const nextBtn = sliderEl.querySelector('[data-slider-next]');
             const dotsHost = sliderEl.parentElement?.querySelector('[data-slider-dots]');
 
             const dotClass = sliderEl.classList.contains('s2-slider') ? 's2-slider-dot' : 's1-slider-dot';
+
+            function setGatedLocked(locked) {
+                gatedBlocks.forEach((block) => block.classList.toggle('is-locked', locked));
+            }
 
             function renderDots() {
                 if (!dotsHost) return;
@@ -65,6 +106,9 @@ const CourseInteractions = (() => {
                 visited.add(index);
                 updateButtons();
                 renderDots();
+                if (gatedBlocks.length) {
+                    setGatedLocked(visited.size < slides.length);
+                }
                 updateCombinedGate(activeScreen);
             }
 
@@ -73,6 +117,9 @@ const CourseInteractions = (() => {
             });
             updateButtons();
             renderDots();
+            if (gatedBlocks.length) {
+                setGatedLocked(visited.size < slides.length);
+            }
 
             prevBtn?.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -97,6 +144,7 @@ const CourseInteractions = (() => {
 
     function initLegacySlider(root) {
         const slides = Array.from(root.querySelectorAll('[data-slide], .frame-31, .frame-23')).filter(el => {
+            if (el.closest('[data-slider]')) return false;
             return el.querySelector('.btn-back, .arrow-right-wrapper, .btn-back-2, .btn-back-3, .btn-back-4');
         });
         if (slides.length === 0) return null;
@@ -137,6 +185,36 @@ const CourseInteractions = (() => {
         };
     }
 
+    function initCourseAccordion(root) {
+        const accordion = root.querySelector('[data-accordion]');
+        if (!accordion) return null;
+
+        const items = Array.from(accordion.querySelectorAll('[data-accordion-item]'));
+        if (items.length === 0) return null;
+
+        const opened = new Set();
+
+        items.forEach((item, index) => {
+            const trigger = item.querySelector('[data-accordion-trigger]');
+            if (!trigger) return;
+
+            trigger.addEventListener('click', (event) => {
+                event.preventDefault();
+                const isOpen = item.classList.toggle('is-open');
+                trigger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+                if (isOpen) {
+                    opened.add(index);
+                    updateCombinedGate(activeScreen);
+                }
+            });
+        });
+
+        return {
+            ready: () => opened.size >= items.length,
+            required: items.length
+        };
+    }
+
     function initAccordion(root) {
         const toggles = Array.from(root.querySelectorAll('.frame-18, .frame-15 .frame-18')).filter(el => {
             const label = (el.textContent || '').trim().toUpperCase();
@@ -169,35 +247,75 @@ const CourseInteractions = (() => {
     }
 
     function initFlipCards(root) {
-        const cards = Array.from(root.querySelectorAll('[data-flip], .flip-card, .frame-8[data-flip-card]'));
-        if (cards.length === 0) return null;
+        const requirements = [];
+        const boundCards = new Set();
 
-        const flipped = new Set();
+        function bindFlipGroup(cards, gatedBlocks) {
+            const flipped = new Set();
 
-        function toggleCard(card, index) {
-            card.classList.toggle('is-flipped');
-            if (card.classList.contains('is-flipped')) flipped.add(index);
-            updateCombinedGate(activeScreen);
+            function setGatedLocked(locked) {
+                gatedBlocks.forEach((block) => block.classList.toggle('is-locked', locked));
+            }
+
+            function syncGate() {
+                if (gatedBlocks.length) {
+                    setGatedLocked(flipped.size < cards.length);
+                }
+                updateCombinedGate(activeScreen);
+            }
+
+            function toggleCard(card, index) {
+                card.classList.toggle('is-flipped');
+                if (card.classList.contains('is-flipped')) flipped.add(index);
+                syncGate();
+            }
+
+            cards.forEach((card, i) => {
+                card.addEventListener('click', (event) => {
+                    if (event.target.closest('[data-flip-toggle]') || card.hasAttribute('data-flip')) {
+                        event.preventDefault();
+                        toggleCard(card, i);
+                    }
+                });
+                card.addEventListener('keydown', (event) => {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        toggleCard(card, i);
+                    }
+                });
+            });
+
+            if (gatedBlocks.length) {
+                setGatedLocked(true);
+            }
+
+            requirements.push({
+                ready: () => flipped.size >= cards.length,
+                required: cards.length
+            });
         }
 
-        cards.forEach((card, i) => {
-            card.addEventListener('click', (event) => {
-                if (event.target.closest('[data-flip-toggle]') || card.hasAttribute('data-flip')) {
-                    event.preventDefault();
-                    toggleCard(card, i);
-                }
-            });
-            card.addEventListener('keydown', (event) => {
-                if (event.key === 'Enter' || event.key === ' ') {
-                    event.preventDefault();
-                    toggleCard(card, i);
-                }
-            });
+        Array.from(root.querySelectorAll('[data-flip-set]')).forEach((container) => {
+            const setId = container.dataset.flipSet;
+            const cards = Array.from(container.querySelectorAll('[data-flip]'));
+            cards.forEach((card) => boundCards.add(card));
+            const gatedBlocks = Array.from(root.querySelectorAll(`[data-gated-by-flip="${setId}"]`));
+            if (cards.length) bindFlipGroup(cards, gatedBlocks);
         });
 
+        const orphanCards = Array.from(
+            root.querySelectorAll('[data-flip], .flip-card, .frame-8[data-flip-card]')
+        ).filter((card) => !boundCards.has(card));
+
+        if (orphanCards.length) {
+            bindFlipGroup(orphanCards, []);
+        }
+
+        if (requirements.length === 0) return null;
+
         return {
-            ready: () => flipped.size >= cards.length,
-            required: cards.length
+            ready: () => requirements.every((req) => req.ready()),
+            required: requirements.reduce((sum, req) => sum + req.required, 0)
         };
     }
 
@@ -236,7 +354,7 @@ const CourseInteractions = (() => {
         const successBox = container.querySelector('[data-drag-success]');
         const errorBox = container.querySelector('[data-drag-error]');
         const taskId = container.dataset.dragTask || 'drag-drop';
-        const gatedBlocks = Array.from(root.querySelectorAll(`[data-gated-by="${taskId}"]`));
+        const gatedBlocks = queryGatedBlocks(root, taskId);
 
         if (!pool || zones.length === 0) return null;
 
@@ -263,6 +381,14 @@ const CourseInteractions = (() => {
             gatedBlocks.forEach((block) => block.classList.toggle('is-locked', locked));
         }
 
+        function setActionButtonsActive(active) {
+            [confirmBtn, resetBtn].forEach((btn) => {
+                if (!btn) return;
+                if (active) btn.removeAttribute('disabled');
+                else btn.setAttribute('disabled', 'disabled');
+            });
+        }
+
         function applySolvedState({ showFeedback = true } = {}) {
             solved = true;
             container.classList.add('is-solved');
@@ -276,12 +402,15 @@ const CourseInteractions = (() => {
                 item.draggable = false;
             });
 
+            setActionButtonsActive(false);
             updateCombinedGate(activeScreen);
         }
 
         function checkAnswer() {
             if (solved) return;
             hideFeedback();
+            setActionButtonsActive(false);
+
             if (!allPlaced()) {
                 errorBox?.classList.remove('is-hidden');
                 return;
@@ -308,6 +437,7 @@ const CourseInteractions = (() => {
                 item.classList.remove('is-dragging');
                 pool.appendChild(item);
             });
+            setActionButtonsActive(true);
         }
 
         if (isDragTaskPersisted(activeScreen, taskId)) {
@@ -433,7 +563,7 @@ const CourseInteractions = (() => {
             const successBox = quizEl.querySelector('[data-quiz-feedback-success]');
             const errorBox = quizEl.querySelector('[data-quiz-feedback-error]');
             const severeBox = quizEl.querySelector('[data-quiz-feedback-severe]');
-            const gatedBlocks = Array.from(root.querySelectorAll(`[data-gated-by="${quizId}"]`));
+            const gatedBlocks = queryGatedBlocks(root, quizId);
 
             let solved = false;
 
@@ -463,6 +593,14 @@ const CourseInteractions = (() => {
                 return true;
             }
 
+            function setActionButtonsActive(active) {
+                [confirmBtn, resetBtn].forEach((btn) => {
+                    if (!btn) return;
+                    if (active) btn.removeAttribute('disabled');
+                    else btn.setAttribute('disabled', 'disabled');
+                });
+            }
+
             function applySolved({ showFeedback = true } = {}) {
                 solved = true;
                 quizEl.classList.add('is-solved');
@@ -475,8 +613,7 @@ const CourseInteractions = (() => {
                         opt.classList.add('is-selected');
                     }
                 });
-                confirmBtn?.setAttribute('disabled', 'disabled');
-                resetBtn?.setAttribute('disabled', 'disabled');
+                setActionButtonsActive(false);
                 persistDragTaskSolved(activeScreen, quizId);
                 updateCombinedGate(activeScreen);
             }
@@ -486,6 +623,8 @@ const CourseInteractions = (() => {
                 hideFeedback();
                 const selected = getSelectedSet();
                 if (selected.size === 0) return;
+
+                setActionButtonsActive(false);
 
                 if (setsEqual(selected, correctSet)) {
                     applySolved();
@@ -503,6 +642,7 @@ const CourseInteractions = (() => {
                 if (solved) return;
                 hideFeedback();
                 options.forEach((opt) => opt.classList.remove('is-selected', 'is-disabled'));
+                setActionButtonsActive(true);
             }
 
             options.forEach((opt) => {
@@ -622,7 +762,7 @@ const CourseInteractions = (() => {
     }
 
     function initMarkerModals(root) {
-        const markers = Array.from(root.querySelectorAll('.s2-marker[data-marker]'));
+        const markers = Array.from(root.querySelectorAll('[data-marker]'));
         if (markers.length === 0) return null;
 
         const viewed = new Set();
@@ -631,7 +771,7 @@ const CourseInteractions = (() => {
             if (!modal) return;
             const id = modal.dataset.markerModal;
             modal.classList.add('is-hidden');
-            const marker = root.querySelector(`.s2-marker[data-marker="${id}"]`);
+            const marker = root.querySelector(`[data-marker="${id}"]`);
             if (marker) {
                 marker.classList.remove('is-active');
                 marker.classList.add('is-viewed');
@@ -681,16 +821,19 @@ const CourseInteractions = (() => {
 
         if (screenEl.dataset.interactionsBound === 'true') {
             const existing = screenRequirements.get(screenId) || [];
-            let ready = existing.length === 0 || existing.every(req => req.ready());
-            const section = typeof LMSBridge !== 'undefined' ? LMSBridge.getSectionByScreen(screenId) : null;
-            if (section && LMSBridge.isSectionCompleted(section.id)) ready = true;
+            const ready = isScreenFullyReady(screenId);
             setGate(screenId, ready);
+            updateOutroGate(screenId);
             return {
                 required: existing.reduce((sum, req) => sum + (req.required || 1), 0),
                 ready
             };
         }
         screenEl.dataset.interactionsBound = 'true';
+
+        const outros = Array.from(screenEl.querySelectorAll('article[class*="-part--outro"]:not(.intro-part)'));
+        outroByScreen.set(screenId, outros);
+        outros.forEach((el) => el.classList.add('is-locked'));
 
         const requirements = [];
 
@@ -699,6 +842,9 @@ const CourseInteractions = (() => {
 
         const legacySlider = initLegacySlider(screenEl);
         if (legacySlider) requirements.push(legacySlider);
+
+        const courseAccordion = initCourseAccordion(screenEl);
+        if (courseAccordion) requirements.push(courseAccordion);
 
         const accordion = initAccordion(screenEl);
         if (accordion) requirements.push(accordion);
@@ -722,15 +868,13 @@ const CourseInteractions = (() => {
 
         if (requirements.length === 0) {
             setGate(screenId, true);
+            updateOutroGate(screenId);
             return { required: 0, ready: true };
         }
 
-        let ready = requirements.every(req => req.ready());
-        const section = typeof LMSBridge !== 'undefined' ? LMSBridge.getSectionByScreen(screenId) : null;
-        if (section && LMSBridge.isSectionCompleted(section.id)) {
-            ready = true;
-        }
+        const ready = isScreenFullyReady(screenId);
         setGate(screenId, ready);
+        updateOutroGate(screenId);
         return {
             required: requirements.reduce((sum, req) => sum + (req.required || 1), 0),
             ready

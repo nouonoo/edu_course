@@ -20,21 +20,25 @@
 
             <section>
                 <p class="s2-label">Вы узнаете:</p>
-                <div class="s2-learn-block">
-                    <h3 class="s2-learn-title">Правила работы с ресурсами</h3>
-                    <div class="s2-learn-rows">
-                        <div class="s2-learn-row">
-                            <span class="s2-learn-num">01</span>
-                            <p><strong>Аппаратными:</strong> компьютерами, ноутбуками, телефонами, принтерами и внешними носителями</p>
+                <p class="s2-learn-subtitle">Правила работы с ресурсами</p>
+                <div class="s2-learn-grid">
+                    <div class="s2-learn-item">
+                        <div class="s2-icon-frame">
+                            <img src="assets/images/Frame 2131333960.png" alt="">
                         </div>
-                        <div class="s2-learn-row">
-                            <span class="s2-learn-num">02</span>
-                            <p><strong>Программными:</strong> ПО и облачными сервисами</p>
+                        <p><strong>Аппаратными:</strong> компьютерами, ноутбуками, телефонами, принтерами и внешними носителями</p>
+                    </div>
+                    <div class="s2-learn-item">
+                        <div class="s2-icon-frame">
+                            <img src="assets/images/Frame 2131333960.png" alt="">
                         </div>
-                        <div class="s2-learn-row">
-                            <span class="s2-learn-num">03</span>
-                            <p><strong>И правила работы</strong> с информацией</p>
+                        <p><strong>Программными:</strong> ПО и облачными сервисами</p>
+                    </div>
+                    <div class="s2-learn-item">
+                        <div class="s2-icon-frame">
+                            <img src="assets/images/Frame 2131333960.png" alt="">
                         </div>
+                        <p><strong>И правила работы</strong> с информацией</p>
                     </div>
                 </div>
             </section>
@@ -59,27 +63,27 @@
                 </div>
             </section>
 
-            <section>
+            <section class="s2-marker-section">
                 <p class="s2-lead">Рассмотрим требования к работе для каждого типа устройств</p>
                 <p class="s2-instruction">Нажимайте на маркеры, чтобы ознакомиться с правилами работы с аппаратными ресурсами</p>
-                <div class="s2-marker-scene">
-                    <img src="assets/images/Frame 2131333772.png" alt="Рабочее место с компьютером, принтером и мобильными устройствами">
-                    <button type="button" class="s2-marker" data-marker="1" style="top:38%;left:48%" aria-label="Рабочие компьютеры и ноутбуки">
+                <div class="s2-marker-scene" data-marker-scene>
+                    <img src="assets/images/маркеры без маркеров.svg" alt="Рабочее место с компьютером, принтером и мобильными устройствами">
+                    <button type="button" class="s2-marker" data-marker="1" style="--mx:38.11%;--my:47.30%" aria-label="Рабочие компьютеры и ноутбуки">
                         <img class="s2-marker-img s2-marker-img--default" src="assets/images/маркер_обычное.png" alt="">
                         <img class="s2-marker-img s2-marker-img--active" src="assets/images/макер_нажатое.png" alt="">
                         <img class="s2-marker-img s2-marker-img--viewed" src="assets/images/маркер_просмотрено.png" alt="">
                     </button>
-                    <button type="button" class="s2-marker" data-marker="2" style="top:48%;left:78%" aria-label="Принтеры и сканеры">
+                    <button type="button" class="s2-marker" data-marker="2" style="--mx:84.72%;--my:76.83%" aria-label="Принтеры и сканеры">
                         <img class="s2-marker-img s2-marker-img--default" src="assets/images/маркер_обычное.png" alt="">
                         <img class="s2-marker-img s2-marker-img--active" src="assets/images/макер_нажатое.png" alt="">
                         <img class="s2-marker-img s2-marker-img--viewed" src="assets/images/маркер_просмотрено.png" alt="">
                     </button>
-                    <button type="button" class="s2-marker" data-marker="3" style="top:66%;left:22%" aria-label="Внешние носители">
+                    <button type="button" class="s2-marker" data-marker="3" style="--mx:11.79%;--my:88.41%" aria-label="Внешние носители">
                         <img class="s2-marker-img s2-marker-img--default" src="assets/images/маркер_обычное.png" alt="">
                         <img class="s2-marker-img s2-marker-img--active" src="assets/images/макер_нажатое.png" alt="">
                         <img class="s2-marker-img s2-marker-img--viewed" src="assets/images/маркер_просмотрено.png" alt="">
                     </button>
-                    <button type="button" class="s2-marker" data-marker="4" style="top:60%;left:35%" aria-label="Мобильные устройства">
+                    <button type="button" class="s2-marker" data-marker="4" style="--mx:26.04%;--my:90.63%" aria-label="Мобильные устройства">
                         <img class="s2-marker-img s2-marker-img--default" src="assets/images/маркер_обычное.png" alt="">
                         <img class="s2-marker-img s2-marker-img--active" src="assets/images/макер_нажатое.png" alt="">
                         <img class="s2-marker-img s2-marker-img--viewed" src="assets/images/маркер_просмотрено.png" alt="">
@@ -88,6 +92,7 @@
             </section>
 
             <div class="s2-modal-overlay is-hidden" data-marker-modal="1" role="dialog" aria-labelledby="s2-modal-title-1">
+                <div class="s2-modal-dialog">
                 <button type="button" class="s2-modal-close" data-modal-close aria-label="Закрыть"><img src="assets/images/x.svg" alt="Закрыть"></button>
                 <div class="s2-modal-card">
                     <h3 id="s2-modal-title-1">Рабочие компьютеры и ноутбуки</h3>
@@ -106,9 +111,11 @@
                         </li>
                     </ol>
                 </div>
+                </div>
             </div>
 
             <div class="s2-modal-overlay is-hidden" data-marker-modal="2" role="dialog" aria-labelledby="s2-modal-title-2">
+                <div class="s2-modal-dialog">
                 <button type="button" class="s2-modal-close" data-modal-close aria-label="Закрыть"><img src="assets/images/x.svg" alt="Закрыть"></button>
                 <div class="s2-modal-card">
                     <h3 id="s2-modal-title-2">Принтеры и сканеры</h3>
@@ -134,9 +141,11 @@
                         </li>
                     </ol>
                 </div>
+                </div>
             </div>
 
             <div class="s2-modal-overlay is-hidden" data-marker-modal="3" role="dialog" aria-labelledby="s2-modal-title-3">
+                <div class="s2-modal-dialog">
                 <button type="button" class="s2-modal-close" data-modal-close aria-label="Закрыть"><img src="assets/images/x.svg" alt="Закрыть"></button>
                 <div class="s2-modal-card">
                     <h3 id="s2-modal-title-3">Внешние носители</h3>
@@ -160,9 +169,11 @@
                         </li>
                     </ol>
                 </div>
+                </div>
             </div>
 
             <div class="s2-modal-overlay is-hidden" data-marker-modal="4" role="dialog" aria-labelledby="s2-modal-title-4">
+                <div class="s2-modal-dialog">
                 <button type="button" class="s2-modal-close" data-modal-close aria-label="Закрыть"><img src="assets/images/x.svg" alt="Закрыть"></button>
                 <div class="s2-modal-card">
                     <h3 id="s2-modal-title-4">Мобильные устройства</h3>
@@ -189,31 +200,35 @@
                         </li>
                     </ol>
                 </div>
+                </div>
             </div>
 
-            <section class="s2-slider-block">
+            <section class="s2-ladder-block">
                 <h2 class="s2-section-title">Стороннее оборудование и сервисы</h2>
                 <p class="s2-lead">Сотрудники могут использовать личные устройства для работы только после согласования с руководством. Такие устройства подлежат таким же мерам защиты и контролю данных, как и корпоративная техника.</p>
-                <div class="s2-slider" data-slider>
-                    <button type="button" class="s2-slider-btn s2-slider-btn--prev" data-slider-prev aria-label="Предыдущий слайд">←</button>
-                    <div class="s2-slider-viewport">
-                        <div class="s2-slider-slide is-active" data-slide>
-                            <img src="assets/images/Frame 2131333794.png" alt="">
-                            <h4>Личные устройства</h4>
-                            <p>Сотрудники могут использовать личные устройства для работы только после согласования с руководством. Такие устройства подлежат таким же мерам защиты и контролю данных, как и корпоративная техника.</p>
+                <div class="s2-ladder">
+                    <div class="s2-ladder-step s2-ladder-step--right">
+                        <span class="s2-ladder-num">01</span>
+                        <div class="s2-ladder-card">
+                            <h4>Не храните данные на личных устройствах</h4>
+                            <p>Никто не должен копировать или передавать конфиденциальную информацию с личных устройств.</p>
                         </div>
-                        <div class="s2-slider-slide" data-slide>
+                    </div>
+                    <div class="s2-ladder-step s2-ladder-step--left">
+                        <div class="s2-ladder-card">
                             <h4>Не подключайте к корпоративной сети стороннее оборудование</h4>
                             <p>Подключение личного оборудования согласуйте со службой информационной безопасности ВРК.</p>
                         </div>
-                        <div class="s2-slider-slide" data-slide>
+                        <span class="s2-ladder-num">02</span>
+                    </div>
+                    <div class="s2-ladder-step s2-ladder-step--right">
+                        <span class="s2-ladder-num">03</span>
+                        <div class="s2-ladder-card">
                             <h4>Запрещено использовать личные принтеры</h4>
                             <p>если вы работаете с информацией, составляющей аудиторскую тайну.</p>
                         </div>
                     </div>
-                    <button type="button" class="s2-slider-btn s2-slider-btn--next is-active" data-slider-next aria-label="Следующий слайд">→</button>
                 </div>
-                <div class="s2-slider-dots" id="s2-slider-dots" data-slider-dots></div>
             </section>
 
             <section>
@@ -262,7 +277,7 @@
                 <h2 class="s2-section-title">Программные ресурсы</h2>
                 <p class="s2-lead">Вы должны использовать только то программное обеспечение, которое разрешено в компании. Все необходимые для работы программы уже установлены на вашем рабочем компьютере — соблюдайте правила их использования.</p>
 
-                <div class="s2-highlight" style="margin-top: 24px;">
+                <div class="s2-highlight">
                     <p class="s2-label">Категории разрешенных программ</p>
                     <div class="s2-alert">
                         <span class="s2-alert-mark" aria-hidden="true">!</span>
@@ -273,54 +288,51 @@
                     </div>
                 </div>
 
-                <div style="margin-top: 32px;">
+                <div class="s2-forbidden-block">
                     <p class="s2-lead">Запрещено загружать, устанавливать или запускать программы, предназначенные для:</p>
                     <div class="s2-grid-2">
                         <div class="s2-grid-item">
-                            <img src="assets/images/Frame 2131329921.png" alt="">
+                            <div class="s2-grid-icon">
+                                <img src="assets/images/Frame 2131329921.png" alt="">
+                            </div>
                             <p>наблюдения за сетевой активностью;</p>
                         </div>
                         <div class="s2-grid-item">
-                            <img src="assets/images/free-icon-data-leak-17794766 1.png" alt="">
+                            <div class="s2-grid-icon">
+                                <img src="assets/images/Frame 2131329921.png" alt="">
+                            </div>
                             <p>прослушивания сетевого трафика;</p>
                         </div>
                         <div class="s2-grid-item">
-                            <img src="assets/images/Уязвимость.png" alt="">
+                            <div class="s2-grid-icon">
+                                <img src="assets/images/Frame 2131329921.png" alt="">
+                            </div>
                             <p>проведения любого технического анализа;</p>
                         </div>
                         <div class="s2-grid-item">
-                            <img src="assets/images/другое.png" alt="">
+                            <div class="s2-grid-icon">
+                                <img src="assets/images/Frame 2131329921.png" alt="">
+                            </div>
                             <p>удаленного подключения к сторонним ресурсам.</p>
                         </div>
                     </div>
-                    <div class="s2-alert" style="margin-top: 20px;">
+                    <div class="s2-alert s2-alert--compact">
                         <span class="s2-alert-mark" aria-hidden="true">!</span>
                         <p><strong>Исключение:</strong> получено согласование Руководителя службы информационной безопасности.</p>
                     </div>
                 </div>
 
-                <div style="margin-top: 40px;">
+                <section class="s2-cloud-block">
                     <h3 class="s2-label">Безопасная работа с облачными сервисами</h3>
-                    <p class="s2-lead">Запрещено использовать сторонние облачные сервисы для хранения или передачи данных компании и её клиентов</p>
-                    <div class="s2-grid-2">
-                        <div class="s2-grid-item">
-                            <img src="assets/images/Разрешенные сервисы.png" alt="">
-                            <p>Яндекс Диск</p>
-                        </div>
-                        <div class="s2-grid-item">
-                            <img src="assets/images/Разрешенные сервисы.png" alt="">
-                            <p>Облако Mail</p>
-                        </div>
-                        <div class="s2-grid-item">
-                            <img src="assets/images/другие опасные сайты.png" alt="">
-                            <p>и другие</p>
-                        </div>
+                    <div class="s2-cloud-layout">
+                        <p class="s2-cloud-warning">Запрещено использовать сторонние облачные сервисы для хранения или передачи данных компании и её клиентов</p>
+                        <img class="s2-cloud-figure" src="assets/images/Frame 2131330205.png" alt="Яндекс Диск, Облако Mail и другие сторонние облачные сервисы">
                     </div>
-                    <div class="s2-alert" style="margin-top: 20px;">
+                    <div class="s2-alert s2-alert--compact">
                         <span class="s2-alert-mark" aria-hidden="true">!</span>
                         <p>Исключение: получено одобрение Руководителя службы безопасности, а также письменное согласие клиента (например, в договоре).</p>
                     </div>
-                </div>
+                </section>
             </section>
 
             <section class="s2-gated is-locked" data-gated-by="quiz-flash">
@@ -450,7 +462,7 @@
         </div>
     </article>
 
-    <article class="s2-part s2-part--outro s2-gated is-locked" data-gated-by="quiz-converter">
+    <article class="s2-part s2-part--outro s2-gated is-locked">
         <div class="s2-outro-inner">
             <h2 class="s2-outro-title">Запомните:</h2>
             <div class="s2-outro-card">

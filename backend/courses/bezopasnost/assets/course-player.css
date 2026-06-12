@@ -101,6 +101,10 @@
   display: block;
 }
 
+article[class*="-part--outro"]:not(.intro-part).is-locked {
+  display: none !important;
+}
+
 /* ── Adaptive slide viewport ── */
 .slide-viewport {
   display: flex;
@@ -255,6 +259,17 @@
 .hotspot.is-disabled {
   pointer-events: none;
   cursor: default;
+}
+
+#course-app :is(
+  [class*="-quiz-btn--confirm"],
+  [class*="-quiz-btn--reset"],
+  [class*="-drag-btn--confirm"],
+  [class*="-drag-btn--reset"]
+):disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
 /* Навигация в заглушках разделов */
@@ -446,11 +461,21 @@
   z-index: 1;
 }
 
-.module-card.is-completed .module-card-body,
-.module-card.is-locked .module-card-body {
+.module-card:not(.is-current) .module-card-body {
   filter: blur(4px);
   opacity: 0.55;
   user-select: none;
+}
+
+.module-card.is-current {
+  box-shadow: 0 4px 24px rgba(228, 132, 78, 0.18);
+  outline: 2px solid var(--color-primary);
+  outline-offset: -2px;
+}
+
+.module-card.is-current .module-card-index {
+  background: var(--color-primary);
+  color: #fff;
 }
 
 .module-card-watermark {
@@ -540,8 +565,8 @@
   pointer-events: none;
 }
 
-.module-card.is-completed .module-card-overlay--done,
-.module-card.is-locked .module-card-overlay--lock {
+.module-card.is-completed:not(.is-current) .module-card-overlay--done,
+.module-card.is-locked:not(.is-current) .module-card-overlay--lock {
   display: flex;
 }
 

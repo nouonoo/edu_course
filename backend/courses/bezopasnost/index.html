@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -9,6 +9,12 @@
     <link rel="stylesheet" href="assets/intro.css">
     <link rel="stylesheet" href="assets/section-1.css">
     <link rel="stylesheet" href="assets/section-2.css">
+    <link rel="stylesheet" href="assets/section-3.css">
+    <link rel="stylesheet" href="assets/section-4.css">
+    <link rel="stylesheet" href="assets/section-5.css">
+    <link rel="stylesheet" href="assets/section-6.css">
+    <link rel="stylesheet" href="assets/conclusion.css">
+    <link rel="stylesheet" href="assets/course-spacing.css">
 </head>
 <body>
     <div id="course-app">
@@ -250,7 +256,7 @@
                                     <h3>Политика допустимого использования ИТ-ресурсов</h3>
                                     <p>Это внутренний документ, который устанавливает минимальные стандарты в отношении приемлемого использования информации и ИТ-ресурсов, а также содержит правила их защиты.</p>
                                 </div>
-                                <div class="s1-policy-cards" style="margin-top: 20px;">
+                                <div class="s1-policy-cards">
                                     <div class="s1-policy-card">
                                         <img src="assets/images/люди.png" alt="">
                                         <h4>Обязательна для всех</h4>
@@ -268,7 +274,7 @@
                                 <p class="s1-label">Виды ИТ-ресурсов</p>
                                 <p class="s1-subtitle">Их можно разделить на две группы: аппаратные и программные.</p>
                                 <p class="s1-instruction">Нажимайте на кнопки, чтобы изучить информацию</p>
-                                <div class="s1-flip-cards">
+                                <div class="s1-flip-cards" data-flip-set="s1-it-types">
                                     <div class="s1-flip-card" data-flip tabindex="0" role="button" aria-label="Аппаратные — подробнее">
                                         <div class="s1-flip-card-inner">
                                             <div class="s1-flip-face s1-flip-face--front">
@@ -298,14 +304,16 @@
                                         </div>
                                     </div>
                                 </div>
-                                <p class="s1-subtitle" style="margin-top: 24px;">Для работы вам выдаётся следующее оборудование: ноутбук, гарнитура, компьютерная мышь, зарядное устройство.</p>
                             </section>
+
+                            <div class="s1-gated is-locked" data-gated-by-flip="s1-it-types">
+                                <p class="s1-subtitle">Для работы вам выдаётся следующее оборудование: ноутбук, гарнитура, компьютерная мышь, зарядное устройство.</p>
 
                             <section class="s1-slider-block">
                                 <h2 class="s1-section-title">Основные принципы безопасной работы с ИТ-ресурсами</h2>
                                 <p class="s1-subtitle">Сотрудники обязаны придерживаться следующих принципов работы с ИТ-ресурсами:</p>
                                 <p class="s1-instruction">Нажимайте на стрелки, чтобы изучить информацию</p>
-                                <div class="s1-slider" data-slider>
+                                <div class="s1-slider" data-slider data-slider-id="slider-principles">
                                     <button type="button" class="s1-slider-btn s1-slider-btn--prev" data-slider-prev aria-label="Предыдущий слайд">←</button>
                                     <div class="s1-slider-viewport">
                                         <div class="s1-slider-slide is-active" data-slide>
@@ -332,10 +340,11 @@
                                 <div class="s1-slider-dots" data-slider-dots></div>
                             </section>
 
+                            <div class="s1-gated is-locked" data-gated-by-slider="slider-principles">
                             <section class="s1-slider-block">
                                 <h2 class="s1-section-title">Главные ошибки пользователей</h2>
                                 <p class="s1-instruction">Нажимайте на стрелки, чтобы изучить информацию</p>
-                                <div class="s1-slider" data-slider>
+                                <div class="s1-slider" data-slider data-slider-id="slider-mistakes">
                                     <button type="button" class="s1-slider-btn s1-slider-btn--prev" data-slider-prev aria-label="Предыдущий слайд">←</button>
                                     <div class="s1-slider-viewport">
                                         <div class="s1-slider-slide is-active" data-slide>
@@ -364,16 +373,17 @@
                                 <div class="s1-slider-dots" data-slider-dots></div>
                             </section>
 
+                            <div class="s1-gated is-locked" data-gated-by-slider="slider-mistakes">
                             <section>
                                 <h2 class="s1-section-title">Безопасность учётных данных</h2>
                                 <div class="s1-alert">
                                     <span class="s1-alert-mark">!</span>
                                     <p>Вы несёте полную ответственность за все действия, выполненные под вашей учётной записью. Контроль над доступом к вашему аккаунту — это ваша главная обязанность для обеспечения безопасности.</p>
                                 </div>
-                                <div class="s1-note-box" style="margin-top: 20px;">
+                                <div class="s1-note-box">
                                     <p>Передача кому-либо пароля или других данных вашей учётной записи строго запрещена. Даже если вы хорошо знаете собеседника, или он просит доступ для решения важной проблемы, вы не должны этого делать.</p>
                                 </div>
-                                <div class="s1-note-box" style="margin-top: 20px;">
+                                <div class="s1-note-box">
                                     <p>Ваши учётные данные являются конфиденциальной информацией и могут быть скомпрометированы злоумышленниками. Например, для получения доступа к вашему аккаунту злоумышленники могут использовать методы социальной инженерии.</p>
                                 </div>
                             </section>
@@ -381,9 +391,9 @@
                             <section>
                                 <p class="s1-label">Пароль — первый рубеж защиты информации</p>
                                 <p class="s1-subtitle">Пароль нужен для всего: разблокировки устройства, входа в учётную запись. Вместе с логином он может открыть доступ к конфиденциальным данным. Поэтому важно использовать надёжные пароли и тщательно оберегать их.</p>
-                                <div class="s1-highlight" style="margin-top: 24px;">
+                                <div class="s1-highlight">
                                     <h3>Инструкция по созданию надёжного пароля</h3>
-                                    <p style="margin-bottom: 16px;">Создавайте для каждой учётной записи уникальный пароль.</p>
+                                    <p>Создавайте для каждой учётной записи уникальный пароль.</p>
                                     <div class="s1-numbered-list">
                                         <div class="s1-numbered-nums" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span></div>
                                         <ol class="s1-numbered-items">
@@ -394,11 +404,11 @@
                                         </ol>
                                     </div>
                                 </div>
-                                <div class="s1-alert" style="margin-top: 20px;">
+                                <div class="s1-alert">
                                     <span class="s1-alert-mark">!</span>
                                     <p>Учитывайте эти правила при составлении пароля. Меняйте его как минимум раз в 180 дней.</p>
                                 </div>
-                                <p class="s1-label" style="margin-top: 32px;">Что сделает ваш пароль уязвимым:</p>
+                                <p class="s1-label">Что сделает ваш пароль уязвимым:</p>
                                 <div class="s1-vuln-grid">
                                     <div class="s1-vuln-item">
                                         <div class="s1-vuln-num">01</div>
@@ -466,10 +476,13 @@
                                     </ul>
                                 </div>
                             </section>
+                            </div>
+                            </div>
+                            </div>
                         </div>
                     </article>
 
-                    <article class="s1-part s1-part--outro s1-gated is-locked" data-gated-by="password-sort">
+                    <article class="s1-part s1-part--outro s1-gated is-locked">
                         <div class="s1-outro-inner">
                             <h2 class="s1-outro-title">Запомните:</h2>
                             <div class="s1-outro-card">
@@ -525,21 +538,25 @@
 
                         <section>
                             <p class="s2-label">Вы узнаете:</p>
-                            <div class="s2-learn-block">
-                                <h3 class="s2-learn-title">Правила работы с ресурсами</h3>
-                                <div class="s2-learn-rows">
-                                    <div class="s2-learn-row">
-                                        <span class="s2-learn-num">01</span>
-                                        <p><strong>Аппаратными:</strong> компьютерами, ноутбуками, телефонами, принтерами и внешними носителями</p>
+                            <p class="s2-learn-subtitle">Правила работы с ресурсами</p>
+                            <div class="s2-learn-grid">
+                                <div class="s2-learn-item">
+                                    <div class="s2-icon-frame">
+                                        <img src="assets/images/Frame 2131333960.png" alt="">
                                     </div>
-                                    <div class="s2-learn-row">
-                                        <span class="s2-learn-num">02</span>
-                                        <p><strong>Программными:</strong> ПО и облачными сервисами</p>
+                                    <p><strong>Аппаратными:</strong> компьютерами, ноутбуками, телефонами, принтерами и внешними носителями</p>
+                                </div>
+                                <div class="s2-learn-item">
+                                    <div class="s2-icon-frame">
+                                        <img src="assets/images/Frame 2131333960.png" alt="">
                                     </div>
-                                    <div class="s2-learn-row">
-                                        <span class="s2-learn-num">03</span>
-                                        <p><strong>И правила работы</strong> с информацией</p>
+                                    <p><strong>Программными:</strong> ПО и облачными сервисами</p>
+                                </div>
+                                <div class="s2-learn-item">
+                                    <div class="s2-icon-frame">
+                                        <img src="assets/images/Frame 2131333960.png" alt="">
                                     </div>
+                                    <p><strong>И правила работы</strong> с информацией</p>
                                 </div>
                             </div>
                         </section>
@@ -564,27 +581,27 @@
                             </div>
                         </section>
 
-                        <section>
+                        <section class="s2-marker-section">
                             <p class="s2-lead">Рассмотрим требования к работе для каждого типа устройств</p>
                             <p class="s2-instruction">Нажимайте на маркеры, чтобы ознакомиться с правилами работы с аппаратными ресурсами</p>
-                            <div class="s2-marker-scene">
-                                <img src="assets/images/Frame 2131333772.png" alt="Рабочее место с компьютером, принтером и мобильными устройствами">
-                                <button type="button" class="s2-marker" data-marker="1" style="top:38%;left:48%" aria-label="Рабочие компьютеры и ноутбуки">
+                            <div class="s2-marker-scene" data-marker-scene>
+                                <img src="assets/images/маркеры без маркеров.svg" alt="Рабочее место с компьютером, принтером и мобильными устройствами">
+                                <button type="button" class="s2-marker" data-marker="1" style="--mx:38.11%;--my:47.30%" aria-label="Рабочие компьютеры и ноутбуки">
                                     <img class="s2-marker-img s2-marker-img--default" src="assets/images/маркер_обычное.png" alt="">
                                     <img class="s2-marker-img s2-marker-img--active" src="assets/images/макер_нажатое.png" alt="">
                                     <img class="s2-marker-img s2-marker-img--viewed" src="assets/images/маркер_просмотрено.png" alt="">
                                 </button>
-                                <button type="button" class="s2-marker" data-marker="2" style="top:48%;left:78%" aria-label="Принтеры и сканеры">
+                                <button type="button" class="s2-marker" data-marker="2" style="--mx:84.72%;--my:76.83%" aria-label="Принтеры и сканеры">
                                     <img class="s2-marker-img s2-marker-img--default" src="assets/images/маркер_обычное.png" alt="">
                                     <img class="s2-marker-img s2-marker-img--active" src="assets/images/макер_нажатое.png" alt="">
                                     <img class="s2-marker-img s2-marker-img--viewed" src="assets/images/маркер_просмотрено.png" alt="">
                                 </button>
-                                <button type="button" class="s2-marker" data-marker="3" style="top:66%;left:22%" aria-label="Внешние носители">
+                                <button type="button" class="s2-marker" data-marker="3" style="--mx:11.79%;--my:88.41%" aria-label="Внешние носители">
                                     <img class="s2-marker-img s2-marker-img--default" src="assets/images/маркер_обычное.png" alt="">
                                     <img class="s2-marker-img s2-marker-img--active" src="assets/images/макер_нажатое.png" alt="">
                                     <img class="s2-marker-img s2-marker-img--viewed" src="assets/images/маркер_просмотрено.png" alt="">
                                 </button>
-                                <button type="button" class="s2-marker" data-marker="4" style="top:60%;left:35%" aria-label="Мобильные устройства">
+                                <button type="button" class="s2-marker" data-marker="4" style="--mx:26.04%;--my:90.63%" aria-label="Мобильные устройства">
                                     <img class="s2-marker-img s2-marker-img--default" src="assets/images/маркер_обычное.png" alt="">
                                     <img class="s2-marker-img s2-marker-img--active" src="assets/images/макер_нажатое.png" alt="">
                                     <img class="s2-marker-img s2-marker-img--viewed" src="assets/images/маркер_просмотрено.png" alt="">
@@ -593,6 +610,7 @@
                         </section>
 
                         <div class="s2-modal-overlay is-hidden" data-marker-modal="1" role="dialog" aria-labelledby="s2-modal-title-1">
+                            <div class="s2-modal-dialog">
                             <button type="button" class="s2-modal-close" data-modal-close aria-label="Закрыть"><img src="assets/images/x.svg" alt="Закрыть"></button>
                             <div class="s2-modal-card">
                                 <h3 id="s2-modal-title-1">Рабочие компьютеры и ноутбуки</h3>
@@ -611,9 +629,11 @@
                                     </li>
                                 </ol>
                             </div>
+                            </div>
                         </div>
 
                         <div class="s2-modal-overlay is-hidden" data-marker-modal="2" role="dialog" aria-labelledby="s2-modal-title-2">
+                            <div class="s2-modal-dialog">
                             <button type="button" class="s2-modal-close" data-modal-close aria-label="Закрыть"><img src="assets/images/x.svg" alt="Закрыть"></button>
                             <div class="s2-modal-card">
                                 <h3 id="s2-modal-title-2">Принтеры и сканеры</h3>
@@ -639,9 +659,11 @@
                                     </li>
                                 </ol>
                             </div>
+                            </div>
                         </div>
 
                         <div class="s2-modal-overlay is-hidden" data-marker-modal="3" role="dialog" aria-labelledby="s2-modal-title-3">
+                            <div class="s2-modal-dialog">
                             <button type="button" class="s2-modal-close" data-modal-close aria-label="Закрыть"><img src="assets/images/x.svg" alt="Закрыть"></button>
                             <div class="s2-modal-card">
                                 <h3 id="s2-modal-title-3">Внешние носители</h3>
@@ -665,9 +687,11 @@
                                     </li>
                                 </ol>
                             </div>
+                            </div>
                         </div>
 
                         <div class="s2-modal-overlay is-hidden" data-marker-modal="4" role="dialog" aria-labelledby="s2-modal-title-4">
+                            <div class="s2-modal-dialog">
                             <button type="button" class="s2-modal-close" data-modal-close aria-label="Закрыть"><img src="assets/images/x.svg" alt="Закрыть"></button>
                             <div class="s2-modal-card">
                                 <h3 id="s2-modal-title-4">Мобильные устройства</h3>
@@ -694,31 +718,35 @@
                                     </li>
                                 </ol>
                             </div>
+                            </div>
                         </div>
 
-                        <section class="s2-slider-block">
+                        <section class="s2-ladder-block">
                             <h2 class="s2-section-title">Стороннее оборудование и сервисы</h2>
                             <p class="s2-lead">Сотрудники могут использовать личные устройства для работы только после согласования с руководством. Такие устройства подлежат таким же мерам защиты и контролю данных, как и корпоративная техника.</p>
-                            <div class="s2-slider" data-slider>
-                                <button type="button" class="s2-slider-btn s2-slider-btn--prev" data-slider-prev aria-label="Предыдущий слайд">←</button>
-                                <div class="s2-slider-viewport">
-                                    <div class="s2-slider-slide is-active" data-slide>
-                                        <img src="assets/images/Frame 2131333794.png" alt="">
-                                        <h4>Личные устройства</h4>
-                                        <p>Сотрудники могут использовать личные устройства для работы только после согласования с руководством. Такие устройства подлежат таким же мерам защиты и контролю данных, как и корпоративная техника.</p>
+                            <div class="s2-ladder">
+                                <div class="s2-ladder-step s2-ladder-step--right">
+                                    <span class="s2-ladder-num">01</span>
+                                    <div class="s2-ladder-card">
+                                        <h4>Не храните данные на личных устройствах</h4>
+                                        <p>Никто не должен копировать или передавать конфиденциальную информацию с личных устройств.</p>
                                     </div>
-                                    <div class="s2-slider-slide" data-slide>
+                                </div>
+                                <div class="s2-ladder-step s2-ladder-step--left">
+                                    <div class="s2-ladder-card">
                                         <h4>Не подключайте к корпоративной сети стороннее оборудование</h4>
                                         <p>Подключение личного оборудования согласуйте со службой информационной безопасности ВРК.</p>
                                     </div>
-                                    <div class="s2-slider-slide" data-slide>
+                                    <span class="s2-ladder-num">02</span>
+                                </div>
+                                <div class="s2-ladder-step s2-ladder-step--right">
+                                    <span class="s2-ladder-num">03</span>
+                                    <div class="s2-ladder-card">
                                         <h4>Запрещено использовать личные принтеры</h4>
                                         <p>если вы работаете с информацией, составляющей аудиторскую тайну.</p>
                                     </div>
                                 </div>
-                                <button type="button" class="s2-slider-btn s2-slider-btn--next is-active" data-slider-next aria-label="Следующий слайд">→</button>
                             </div>
-                            <div class="s2-slider-dots" id="s2-slider-dots" data-slider-dots></div>
                         </section>
 
                         <section>
@@ -767,7 +795,7 @@
                             <h2 class="s2-section-title">Программные ресурсы</h2>
                             <p class="s2-lead">Вы должны использовать только то программное обеспечение, которое разрешено в компании. Все необходимые для работы программы уже установлены на вашем рабочем компьютере — соблюдайте правила их использования.</p>
 
-                            <div class="s2-highlight" style="margin-top: 24px;">
+                            <div class="s2-highlight">
                                 <p class="s2-label">Категории разрешенных программ</p>
                                 <div class="s2-alert">
                                     <span class="s2-alert-mark" aria-hidden="true">!</span>
@@ -778,54 +806,51 @@
                                 </div>
                             </div>
 
-                            <div style="margin-top: 32px;">
+                            <div class="s2-forbidden-block">
                                 <p class="s2-lead">Запрещено загружать, устанавливать или запускать программы, предназначенные для:</p>
                                 <div class="s2-grid-2">
                                     <div class="s2-grid-item">
-                                        <img src="assets/images/Frame 2131329921.png" alt="">
+                                        <div class="s2-grid-icon">
+                                            <img src="assets/images/Frame 2131329921.png" alt="">
+                                        </div>
                                         <p>наблюдения за сетевой активностью;</p>
                                     </div>
                                     <div class="s2-grid-item">
-                                        <img src="assets/images/free-icon-data-leak-17794766 1.png" alt="">
+                                        <div class="s2-grid-icon">
+                                            <img src="assets/images/Frame 2131329921.png" alt="">
+                                        </div>
                                         <p>прослушивания сетевого трафика;</p>
                                     </div>
                                     <div class="s2-grid-item">
-                                        <img src="assets/images/Уязвимость.png" alt="">
+                                        <div class="s2-grid-icon">
+                                            <img src="assets/images/Frame 2131329921.png" alt="">
+                                        </div>
                                         <p>проведения любого технического анализа;</p>
                                     </div>
                                     <div class="s2-grid-item">
-                                        <img src="assets/images/другое.png" alt="">
+                                        <div class="s2-grid-icon">
+                                            <img src="assets/images/Frame 2131329921.png" alt="">
+                                        </div>
                                         <p>удаленного подключения к сторонним ресурсам.</p>
                                     </div>
                                 </div>
-                                <div class="s2-alert" style="margin-top: 20px;">
+                                <div class="s2-alert s2-alert--compact">
                                     <span class="s2-alert-mark" aria-hidden="true">!</span>
                                     <p><strong>Исключение:</strong> получено согласование Руководителя службы информационной безопасности.</p>
                                 </div>
                             </div>
 
-                            <div style="margin-top: 40px;">
+                            <section class="s2-cloud-block">
                                 <h3 class="s2-label">Безопасная работа с облачными сервисами</h3>
-                                <p class="s2-lead">Запрещено использовать сторонние облачные сервисы для хранения или передачи данных компании и её клиентов</p>
-                                <div class="s2-grid-2">
-                                    <div class="s2-grid-item">
-                                        <img src="assets/images/Разрешенные сервисы.png" alt="">
-                                        <p>Яндекс Диск</p>
-                                    </div>
-                                    <div class="s2-grid-item">
-                                        <img src="assets/images/Разрешенные сервисы.png" alt="">
-                                        <p>Облако Mail</p>
-                                    </div>
-                                    <div class="s2-grid-item">
-                                        <img src="assets/images/другие опасные сайты.png" alt="">
-                                        <p>и другие</p>
-                                    </div>
+                                <div class="s2-cloud-layout">
+                                    <p class="s2-cloud-warning">Запрещено использовать сторонние облачные сервисы для хранения или передачи данных компании и её клиентов</p>
+                                    <img class="s2-cloud-figure" src="assets/images/Frame 2131330205.png" alt="Яндекс Диск, Облако Mail и другие сторонние облачные сервисы">
                                 </div>
-                                <div class="s2-alert" style="margin-top: 20px;">
+                                <div class="s2-alert s2-alert--compact">
                                     <span class="s2-alert-mark" aria-hidden="true">!</span>
                                     <p>Исключение: получено одобрение Руководителя службы безопасности, а также письменное согласие клиента (например, в договоре).</p>
                                 </div>
-                            </div>
+                            </section>
                         </section>
 
                         <section class="s2-gated is-locked" data-gated-by="quiz-flash">
@@ -955,7 +980,7 @@
                     </div>
                 </article>
 
-                <article class="s2-part s2-part--outro s2-gated is-locked" data-gated-by="quiz-converter">
+                <article class="s2-part s2-part--outro s2-gated is-locked">
                     <div class="s2-outro-inner">
                         <h2 class="s2-outro-title">Запомните:</h2>
                         <div class="s2-outro-card">
@@ -997,89 +1022,1237 @@
             </div>
 
             </section>
-            <section id="screen-section-3" class="course-screen" data-screen="section-3">
-                <div class="placeholder-screen">
-                    <p class="placeholder-label">Раздел 5</p>
-                    <h2>Работа в офисе и удалённо</h2>
-                    <p>Раздел будет добавлен на следующем шаге сборки.</p>
-                    <div class="placeholder-nav slide-nav-bar slide-nav-bar--standalone">
-                        <button type="button" class="slide-btn slide-btn--back" data-action="back" aria-label="Назад">
-                            <span class="slide-btn-arrow" aria-hidden="true">←</span>
+            <section id="screen-section-3" class="course-screen s3-screen" data-screen="section-3">
+    <div class="s3-page">
+        <article class="s3-part s3-part--hero">
+            <div class="s3-hero-inner">
+                <h1 class="s3-title">Работа в офисе и удалённо</h1>
+                <div class="s3-card">
+                    <p>При выполнении своих обязанностей сотрудники ВРК могут работать не только в офисе компании, но и на территории клиента, из дома или в общественных местах (кафе, коворкингах и др.). Для каждого места работы есть свои особенности.</p>
+                </div>
+                <div class="s3-card s3-card--hint">
+                    <div class="s3-hint-icons" aria-hidden="true">
+                        <img src="assets/images/mouse.png" alt="" width="48" height="48">
+                        <img src="assets/images/тачпад.png" alt="" width="48" height="48">
+                    </div>
+                    <p>Крутите колесико мыши или используйте тачпад</p>
+                </div>
+            </div>
+        </article>
+
+        <article class="s3-part s3-part--content">
+            <div class="s3-content-inner">
+
+                <section>
+                    <p class="s3-label">Вы узнаете:</p>
+                    <p class="s3-learn-subtitle">Правила безопасной работы</p>
+                    <div class="s3-learn-grid">
+                        <div class="s3-learn-item">
+                            <div class="s3-icon-frame">
+                                <img src="assets/images/Frame 2131333960.png" alt="">
+                            </div>
+                            <p>В офисе</p>
+                        </div>
+                        <div class="s3-learn-item">
+                            <div class="s3-icon-frame">
+                                <img src="assets/images/Frame 2131333960.png" alt="">
+                            </div>
+                            <p>Дома или в общественных местах</p>
+                        </div>
+                        <div class="s3-learn-item">
+                            <div class="s3-icon-frame">
+                                <img src="assets/images/Frame 2131333960.png" alt="">
+                            </div>
+                            <p>Во время командировки</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h2 class="s3-section-title">Работа в офисе</h2>
+                    <p class="s3-highlight">Персональный ключ к ресурсам компании — это ваш <strong>корпоративный пропуск</strong>. Он подтверждает, что вы имеете право находиться в офисе.</p>
+                    <div class="s3-two-cards">
+                        <div class="s3-info-card">
+                            <div class="s3-info-card-media">
+                                <img src="assets/images/Не допускайте входа посторонних.png" alt="">
+                            </div>
+                            <h4>Не допускайте входа посторонних</h4>
+                            <p>Если вы видите, что в офис пытается проникнуть неизвестный вам человек, спросите, к кому и с какой целью он пришёл.</p>
+                        </div>
+                        <div class="s3-info-card">
+                            <div class="s3-info-card-media">
+                                <img src="assets/images/Сопровождайте посетителей внутри офиса.png" alt="">
+                            </div>
+                            <h4>Сопровождайте посетителей внутри офиса</h4>
+                            <p>Посетители могут находиться в офисе без сопровождения только в специально отведённых зонах для встреч.</p>
+                        </div>
+                    </div>
+                    <p class="s3-lead">Находясь в офисе, будьте внимательны. Если вы идёте на обед, совещание, встречу с коллегой, особенно когда уходите домой, обязательно убирайте или блокируйте все носители с конфиденциальной информацией. Документ, в котором описаны правила информационной безопасности на рабочем месте, называется Политика «чистого стола».</p>
+                </section>
+
+                <section class="s3-marker-section">
+                    <h2 class="s3-section-title">Политика «чистого стола»</h2>
+                    <p class="s3-lead">Давайте изучим основные правила, которые помогут избежать утечки конфиденциальной информации.</p>
+                    <p class="s3-instruction">Нажимайте на маркеры, чтобы узнать, какие риски раскрытия конфиденциальной информации несут разные предметы вашего рабочего стола</p>
+                    <div class="s3-marker-scene" data-marker-scene>
+                        <img src="assets/images/фон маркеров 5 раздел.svg" alt="Рабочий стол с компьютером, папками и корзиной для бумаг">
+                        <button type="button" class="s3-marker" data-marker="1" style="--mx:46.98%;--my:16.23%" aria-label="Блокировка экрана">
+                            <img class="s3-marker-img s3-marker-img--default" src="assets/images/маркер_обычное.png" alt="">
+                            <img class="s3-marker-img s3-marker-img--active" src="assets/images/макер_нажатое.png" alt="">
+                            <img class="s3-marker-img s3-marker-img--viewed" src="assets/images/маркер_просмотрено.png" alt="">
                         </button>
-                        <button type="button" class="slide-btn slide-btn--next btn-next" data-action="next">
-                            <span>ПРОДОЛЖИТЬ</span>
-                            <span class="slide-btn-sep">|</span>
-                            <span class="slide-btn-arrow" aria-hidden="true">→</span>
+                        <button type="button" class="s3-marker" data-marker="2" style="--mx:18.49%;--my:32.47%" aria-label="Фиксация ноутбука">
+                            <img class="s3-marker-img s3-marker-img--default" src="assets/images/маркер_обычное.png" alt="">
+                            <img class="s3-marker-img s3-marker-img--active" src="assets/images/макер_нажатое.png" alt="">
+                            <img class="s3-marker-img s3-marker-img--viewed" src="assets/images/маркер_просмотрено.png" alt="">
+                        </button>
+                        <button type="button" class="s3-marker" data-marker="3" style="--mx:78.02%;--my:11.87%" aria-label="Конфиденциальные папки">
+                            <img class="s3-marker-img s3-marker-img--default" src="assets/images/маркер_обычное.png" alt="">
+                            <img class="s3-marker-img s3-marker-img--active" src="assets/images/макер_нажатое.png" alt="">
+                            <img class="s3-marker-img s3-marker-img--viewed" src="assets/images/маркер_просмотрено.png" alt="">
+                        </button>
+                        <button type="button" class="s3-marker" data-marker="4" style="--mx:64.43%;--my:39.29%" aria-label="Длительное отсутствие">
+                            <img class="s3-marker-img s3-marker-img--default" src="assets/images/маркер_обычное.png" alt="">
+                            <img class="s3-marker-img s3-marker-img--active" src="assets/images/макер_нажатое.png" alt="">
+                            <img class="s3-marker-img s3-marker-img--viewed" src="assets/images/маркер_просмотрено.png" alt="">
+                        </button>
+                        <button type="button" class="s3-marker" data-marker="5" style="--mx:82.55%;--my:41.75%" aria-label="Портативные носители">
+                            <img class="s3-marker-img s3-marker-img--default" src="assets/images/маркер_обычное.png" alt="">
+                            <img class="s3-marker-img s3-marker-img--active" src="assets/images/макер_нажатое.png" alt="">
+                            <img class="s3-marker-img s3-marker-img--viewed" src="assets/images/маркер_просмотрено.png" alt="">
+                        </button>
+                        <button type="button" class="s3-marker" data-marker="6" style="--mx:42.26%;--my:87.45%" aria-label="Уничтожение документов">
+                            <img class="s3-marker-img s3-marker-img--default" src="assets/images/маркер_обычное.png" alt="">
+                            <img class="s3-marker-img s3-marker-img--active" src="assets/images/макер_нажатое.png" alt="">
+                            <img class="s3-marker-img s3-marker-img--viewed" src="assets/images/маркер_просмотрено.png" alt="">
                         </button>
                     </div>
+                    <div class="s3-alert">
+                        <span class="s3-alert-mark" aria-hidden="true">!</span>
+                        <p>Если вы отсутствуете на рабочем месте (как в офисе, так и удалённо) в течение полудня или более, а также по окончании рабочего дня, убирайте все документы, папки, съёмные носители или портативные устройства с рабочего места в личный ящик или шкаф под замок, чтобы исключить их кражу.</p>
+                    </div>
+                </section>
+
+                <section>
+                    <h2 class="s3-section-title">Работа из дома и в общественных местах</h2>
+                    <p class="s3-lead">Если вы используете ИТ-ресурсы, то, где бы вы ни работали, необходимо соблюдать требования Руководства по безопасности при удалённой работе.</p>
+                    <h3 class="s3-label">Общие правила безопасности</h3>
+                    <div class="s3-rules-grid">
+                        <div class="s3-rule-card">
+                            <div class="s3-rule-icon">
+                                <img src="assets/images/wifi.png" alt="">
+                            </div>
+                            <div class="s3-rule-body">
+                                <p>Подключайте ноутбук к корпоративной сети через VPN (используйте «Cisco AnyConnect Secure Mobility Client») не реже 1 раза в 14 дней на 2 часа для получения необходимых обновлений приложений.</p>
+                                <p>Исключение: когда сотрудник находится в ежегодном отпуске, больничном или по иной уважительной причине.</p>
+                            </div>
+                        </div>
+                        <div class="s3-rule-card">
+                            <div class="s3-rule-icon">
+                                <img src="assets/images/noyey.png" alt="">
+                            </div>
+                            <div class="s3-rule-body">
+                                <p>При переносе корпоративного ноутбука обязательно блокируйте экран, для этого используйте сочетание клавиш Win + L.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <p class="s3-label">Правила работы из дома и в общественных местах</p>
+                    <p class="s3-instruction">Нажимайте на вкладки, чтобы изучить информацию</p>
+                    <div class="s3-accordion" data-accordion>
+                        <div class="s3-accordion-item" data-accordion-item>
+                            <button type="button" class="s3-accordion-trigger" data-accordion-trigger aria-expanded="false">
+                                <span>Работа из дома</span>
+                                <span class="s3-accordion-icon" aria-hidden="true"></span>
+                            </button>
+                            <div class="s3-accordion-panel" data-accordion-panel>
+                                <div class="s3-accordion-row">
+                                    <img class="s3-accordion-row-icon" src="assets/images/lock.png" alt="">
+                                    <p>Запрещено записывать пароли и хранить их на видном месте! Это влечёт риск несанкционированного доступа к системам компании и компрометации данных сотрудников и клиентов.</p>
+                                </div>
+                                <div class="s3-accordion-row">
+                                    <img class="s3-accordion-row-icon" src="assets/images/калонка.png" alt="">
+                                    <p>Во время важных переговоров отключайте «умные» гаджеты с функцией записи голоса.</p>
+                                </div>
+                                <div class="s3-accordion-row">
+                                    <img class="s3-accordion-row-icon" src="assets/images/видимо.png" alt="">
+                                    <p>Не оставляйте конфиденциальные документы в зоне доступа третьих лиц, в том числе родственников или друзей. Если данные на бумажном носителе больше не нужны, уничтожьте распечатки, предварительно измельчив их так, чтобы информация не была читаемой.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="s3-accordion-item" data-accordion-item>
+                            <button type="button" class="s3-accordion-trigger" data-accordion-trigger aria-expanded="false">
+                                <span>Работа в общественных местах</span>
+                                <span class="s3-accordion-icon" aria-hidden="true"></span>
+                            </button>
+                            <div class="s3-accordion-panel" data-accordion-panel>
+                                <div class="s3-accordion-row">
+                                    <img class="s3-accordion-row-icon" src="assets/images/lock.png" alt="">
+                                    <p>Не оставляйте корпоративные аппаратные ресурсы (например, ноутбук) без присмотра в общественных местах. Всегда следите за окружающей вас обстановкой.</p>
+                                </div>
+                                <div class="s3-accordion-row">
+                                    <img class="s3-accordion-row-icon" src="assets/images/мусорка.png" alt="">
+                                    <p>Не используйте внешние электронные носители информации в общественных местах. Это небезопасно.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h2 class="s3-section-title">Работа в командировке</h2>
+                    <div class="s3-trip-cards">
+                        <div class="s3-trip-card">
+                            <img src="assets/images/глаз.png" alt="">
+                            <div class="s3-trip-card-body">
+                                <h4>Сохранение имущества компании</h4>
+                                <p>Вы всегда должны знать местонахождение ноутбука и скрывать его от посторонних глаз.</p>
+                            </div>
+                        </div>
+                        <div class="s3-trip-card">
+                            <img src="assets/images/машина.png" alt="">
+                            <div class="s3-trip-card-body">
+                                <h4>Провоз в транспорте</h4>
+                                <p>Храните устройства с конфиденциальными данными запертыми и в безопасном месте. Если нет безопасного места, не оставляйте устройство без присмотра.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="s3-alert">
+                        <span class="s3-alert-mark" aria-hidden="true">!</span>
+                        <p>В командировке применяйте те же правила безопасности, что и при удалённой работе.</p>
+                    </div>
+                </section>
+
+                <section>
+                    <p class="s3-label">Практическое задание</p>
+                    <div class="s3-quiz" data-quiz data-quiz-id="quiz-trip" data-quiz-type="single" data-correct="3">
+                        <div class="s3-quiz-scenario">
+                            <p>Вы едете на поезде в командировку, и вам нужно ненадолго выйти. Ваш ноутбук стоит на столе в купе. Какое действие будет самым безопасным?</p>
+                        </div>
+                        <p class="s3-instruction">Выберите один вариант ответа</p>
+                        <div class="s3-quiz-options">
+                            <button type="button" class="s3-quiz-option" data-option="1" data-quiz-type="single">
+                                <span class="s3-quiz-check" aria-hidden="true"></span>
+                                <p>Попросить попутчика присмотреть за ноутбуком.</p>
+                            </button>
+                            <button type="button" class="s3-quiz-option" data-option="2" data-quiz-type="single">
+                                <span class="s3-quiz-check" aria-hidden="true"></span>
+                                <p>Заблокировать ноутбук и закрыть крышку, оставив его на столе.</p>
+                            </button>
+                            <button type="button" class="s3-quiz-option" data-option="3" data-quiz-type="single">
+                                <span class="s3-quiz-check" aria-hidden="true"></span>
+                                <p>Взять ноутбук с собой.</p>
+                            </button>
+                            <button type="button" class="s3-quiz-option" data-option="4" data-quiz-type="single">
+                                <span class="s3-quiz-check" aria-hidden="true"></span>
+                                <p>Сложить ноутбук в сумку и спрятать под сиденье.</p>
+                            </button>
+                        </div>
+                        <div class="s3-quiz-actions">
+                            <button type="button" class="s3-quiz-btn s3-quiz-btn--confirm" data-quiz-confirm>ОТВЕТИТЬ</button>
+                            <button type="button" class="s3-quiz-btn s3-quiz-btn--reset" data-quiz-reset>СБРОСИТЬ</button>
+                        </div>
+                        <div class="s3-quiz-feedback s3-quiz-feedback--success is-hidden" data-quiz-feedback-success>
+                            <h4>Верно!</h4>
+                            <p>Ваше решение полностью соответствует правилам безопасности. Всегда держите корпоративные устройства при себе.</p>
+                        </div>
+                        <div class="s3-quiz-feedback s3-quiz-feedback--error is-hidden" data-quiz-feedback-error>
+                            <h4>Неверно</h4>
+                            <p>Оставлять ноутбук без присмотра, даже на короткое время, очень рискованно. Подумайте, что может случиться, пока вы отсутствуете.</p>
+                            <button type="button" class="s3-quiz-btn s3-quiz-btn--confirm" data-quiz-retry>ПОПРОБОВАТЬ СНОВА</button>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </article>
+
+        <article class="s3-part s3-part--outro s3-gated is-locked">
+            <div class="s3-outro-inner">
+                <h2 class="s3-outro-title">Запомните:</h2>
+                <div class="s3-outro-card">
+                    <ol class="s3-outro-items">
+                        <li>
+                            <span class="s3-outro-num" aria-hidden="true">1</span>
+                            <span class="s3-outro-text">Используйте свой личный пропуск для входа и проходите через турникет по одному.</span>
+                        </li>
+                        <li>
+                            <span class="s3-outro-num" aria-hidden="true">2</span>
+                            <span class="s3-outro-text">Сопровождайте посетителей и убедитесь, что они находятся только в разрешённых зонах после предъявления документов.</span>
+                        </li>
+                        <li>
+                            <span class="s3-outro-num" aria-hidden="true">3</span>
+                            <span class="s3-outro-text">Никогда не оставляйте корпоративный ноутбук и другие устройства без присмотра.</span>
+                        </li>
+                        <li>
+                            <span class="s3-outro-num" aria-hidden="true">4</span>
+                            <span class="s3-outro-text">Всегда блокируйте экран, когда отходите от ноутбука. В общественных местах и транспорте используйте защитную плёнку или другие средства, чтобы скрыть экран от посторонних глаз.</span>
+                        </li>
+                        <li>
+                            <span class="s3-outro-num" aria-hidden="true">5</span>
+                            <span class="s3-outro-text">Убирайте все конфиденциальные документы и портативные устройства в запираемый шкаф или ящик, если уходите с рабочего места. Это касается как офиса, так и любого другого места работы.</span>
+                        </li>
+                        <li>
+                            <span class="s3-outro-num" aria-hidden="true">6</span>
+                            <span class="s3-outro-text">Не забывайте подключаться к корпоративной сети через VPN (Cisco AnyConnect) не реже одного раза в 14 дней для получения обновлений, если работаете удалённо.</span>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+            <div class="slide-nav-bar s3-nav-bar">
+                <button type="button" class="slide-btn slide-btn--back" data-action="back" aria-label="Предыдущий раздел">
+                    <span class="slide-btn-arrow" aria-hidden="true">←</span>
+                </button>
+                <button type="button" class="slide-btn slide-btn--next btn-next" data-action="next" aria-label="Продолжить">
+                    <span>ПРОДОЛЖИТЬ</span>
+                    <span class="slide-btn-sep">|</span>
+                    <span class="slide-btn-arrow" aria-hidden="true">→</span>
+                </button>
+            </div>
+        </article>
+    </div>
+
+    <div class="s3-modal-overlay is-hidden" data-marker-modal="1" role="dialog" aria-label="Блокировка экрана">
+        <div class="s3-modal-dialog">
+            <button type="button" class="s3-modal-close" data-modal-close aria-label="Закрыть"><img src="assets/images/x.svg" alt=""></button>
+            <div class="s3-modal-card"><p>Когда отходите от рабочего места, блокируйте экран ноутбука с помощью комбинации клавиш «Win+L».</p></div>
+        </div>
+    </div>
+    <div class="s3-modal-overlay is-hidden" data-marker-modal="2" role="dialog" aria-label="Фиксация ноутбука">
+        <div class="s3-modal-dialog">
+            <button type="button" class="s3-modal-close" data-modal-close aria-label="Закрыть"><img src="assets/images/x.svg" alt=""></button>
+            <div class="s3-modal-card"><p>Фиксируйте ноутбук к рабочему месту специальным тросиком. Если вы уходите на более чем 24 часа, то устройство необходимо выключить.</p></div>
+        </div>
+    </div>
+    <div class="s3-modal-overlay is-hidden" data-marker-modal="3" role="dialog" aria-label="Конфиденциальные папки">
+        <div class="s3-modal-dialog">
+            <button type="button" class="s3-modal-close" data-modal-close aria-label="Закрыть"><img src="assets/images/x.svg" alt=""></button>
+            <div class="s3-modal-card"><p>Обязательно запирайте в ящике папки, в которых хранится конфиденциальная информация. Не оставляйте их на видном месте.</p></div>
+        </div>
+    </div>
+    <div class="s3-modal-overlay is-hidden" data-marker-modal="4" role="dialog" aria-label="Длительное отсутствие">
+        <div class="s3-modal-dialog">
+            <button type="button" class="s3-modal-close" data-modal-close aria-label="Закрыть"><img src="assets/images/x.svg" alt=""></button>
+            <div class="s3-modal-card"><p>При длительном отсутствии на рабочем месте убирайте все документы в личный ящик или шкаф, запираемый на ключ.</p></div>
+        </div>
+    </div>
+    <div class="s3-modal-overlay is-hidden" data-marker-modal="5" role="dialog" aria-label="Портативные носители">
+        <div class="s3-modal-dialog">
+            <button type="button" class="s3-modal-close" data-modal-close aria-label="Закрыть"><img src="assets/images/x.svg" alt=""></button>
+            <div class="s3-modal-card"><p>Не оставляйте портативные носители информации (например, CD-диски, USB-накопители) без присмотра. Это может привести к разглашению конфиденциальных данных и потере корпоративного имущества, а также навредить репутации компании. Их также следует хранить в запирающемся ящике.</p></div>
+        </div>
+    </div>
+    <div class="s3-modal-overlay is-hidden" data-marker-modal="6" role="dialog" aria-label="Уничтожение документов">
+        <div class="s3-modal-dialog">
+            <button type="button" class="s3-modal-close" data-modal-close aria-label="Закрыть"><img src="assets/images/x.svg" alt=""></button>
+            <div class="s3-modal-card"><p>Не выбрасывайте конфиденциальные документы в урну. Используйте шредер или специальный контейнер для уничтожения документов.</p></div>
+        </div>
+    </div>
+</section>
+                        <section id="screen-section-4" class="course-screen s4-screen" data-screen="section-4">
+                <div class="s4-page">
+                    <article class="s4-part s4-part--hero">
+                        <div class="s4-hero-inner">
+                            <h1 class="s4-title">Работа в интернете</h1>
+                            <div class="s4-card">
+                                <p>Работа в интернете требует чётких правил и понимания принципов коммуникации, чтобы обеспечить безопасность, продуктивность и комфорт для всех сотрудников.</p>
+                            </div>
+                            <div class="s4-card s4-card--hint">
+                                <div class="s4-hint-icons" aria-hidden="true">
+                                    <img src="assets/images/mouse.png" alt="" width="48" height="48">
+                                    <img src="assets/images/тачпад.png" alt="" width="48" height="48">
+                                </div>
+                                <p>Крутите колесико мыши или используйте тачпад</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="s4-part s4-part--content">
+                        <div class="s4-content-inner">
+
+                            <section>
+                                <p class="s4-label">Вы узнаете:</p>
+                                <div class="s4-learn-grid">
+                                    <div class="s4-learn-item">
+                                        <div class="s4-icon-frame">
+                                            <img src="assets/images/Frame 2131333960.png" alt="">
+                                        </div>
+                                        <p>Какие сайты и приложения нельзя открывать с корпоративных устройств</p>
+                                    </div>
+                                    <div class="s4-learn-item">
+                                        <div class="s4-icon-frame">
+                                            <img src="assets/images/Frame 2131333960.png" alt="">
+                                        </div>
+                                        <p>Как пользоваться электронной почтой и проводить онлайн-конференции</p>
+                                    </div>
+                                    <div class="s4-learn-item">
+                                        <div class="s4-icon-frame">
+                                            <img src="assets/images/Frame 2131333960.png" alt="">
+                                        </div>
+                                        <p>Как безопасно работать с ИИ</p>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <section>
+                                <h2 class="s4-section-title">Внешние сайты</h2>
+                                <p class="s4-lead">При использовании корпоративных ИТ-ресурсов для доступа в Интернет нужно соблюдать законы и не вредить репутации компании ВРК.</p>
+                                <p class="s4-subtitle">Запрещено заходить на:</p>
+                                <div class="s4-site-grid">
+                                    <div class="s4-site-card">
+                                        <img src="assets/images/18+.png" alt="">
+                                        <p>Сайты порнографического содержания</p>
+                                    </div>
+                                    <div class="s4-site-card">
+                                        <img src="assets/images/незаконно.png" alt="">
+                                        <p>Ресурсы с незаконной информацией или призывами к незаконным действиям.</p>
+                                    </div>
+                                    <div class="s4-site-card">
+                                        <img src="assets/images/ущерб репутации.png" alt="">
+                                        <p>Любые сайты, которые могут нанести ущерб репутации компании.</p>
+                                    </div>
+                                    <div class="s4-site-card">
+                                        <img src="assets/images/другие опасные сайты.png" alt="">
+                                        <p>Другие опасные сайты. Если сайт заблокирован службой безопасности, вы увидите специальное уведомление в браузере.</p>
+                                    </div>
+                                </div>
+                                <div class="s4-alert">
+                                    <span class="s4-alert-mark" aria-hidden="true">!</span>
+                                    <p>Любое из этих действий является нарушением.</p>
+                                </div>
+                            </section>
+
+                            <section>
+                                <h2 class="s4-section-title">Загрузка данных</h2>
+                                <div class="s4-upload-block">
+                                    <p>При скачивании файлов с внешних сайтов будьте внимательны и следите за тем, чтобы на ваше устройство не попал вредоносный код.</p>
+                                    <img src="assets/images/image 1782скачивание файлов.png" alt="Пример скачивания файла">
+                                </div>
+                                <div class="s4-alert">
+                                    <span class="s4-alert-mark" aria-hidden="true">!</span>
+                                    <p>Если вы подозреваете, что на ваше устройство попал вирус, немедленно обратитесь в Службу информационной безопасности.</p>
+                                </div>
+                            </section>
+
+                            <section>
+                                <h2 class="s4-section-title">Если вы используете соцсети или мессенджеры:</h2>
+                                <div class="s4-two-cards">
+                                    <div class="s4-info-card">
+                                        <img src="assets/images/Авторство сообщения должно быть очевидным.png" alt="">
+                                        <div class="s4-info-card-body">
+                                            <h4>Авторство сообщения должно быть очевидным</h4>
+                                            <p>В процессе переписки всегда должен быть чётко указан отправитель.</p>
+                                            <p>При отправке сообщения от имени другого пользователя в тексте должно присутствовать примечание (например, «это сообщение отправлено от имени [имя автора].»)</p>
+                                        </div>
+                                    </div>
+                                    <div class="s4-info-card">
+                                        <img src="assets/images/Не создавайте публичные чаты.png" alt="">
+                                        <div class="s4-info-card-body">
+                                            <h4>Не создавайте публичные чаты</h4>
+                                            <p>Нельзя создавать чаты, каналы или группы с названием компании.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <section>
+                                <h2 class="s4-section-title">Электронная почта</h2>
+                                <p class="s4-lead">Для коммуникации в бизнес-целях используйте только те средства связи, которые утверждены в ВРК.</p>
+                                <div class="s4-mail-grid">
+                                    <div class="s4-mail-card">
+                                        <img src="assets/images/Разрешенные сервисы.png" alt="">
+                                        <h4>Разрешенные сервисы</h4>
+                                        <p>К таким сервисам относятся: Exchange/Outlook, Mail.ru.</p>
+                                    </div>
+                                    <div class="s4-mail-card">
+                                        <img src="assets/images/Безопасностьd.png" alt="">
+                                        <h4>Безопасность</h4>
+                                        <p>Будьте осторожны, когда открываете вложения или скачиваете файлы, чтобы избежать вредоносного ПО.</p>
+                                    </div>
+                                    <div class="s4-mail-card">
+                                        <img src="assets/images/Адрес и автор.png" alt="">
+                                        <h4>Адрес и автор</h4>
+                                        <p>Перед отправкой всегда проверяйте, правильно ли вы ввели адрес получателя. Всегда указывайте, кто отправитель. Если пишете от имени коллеги, укажите это в адресате.</p>
+                                    </div>
+                                    <div class="s4-mail-card">
+                                        <img src="assets/images/Конфиденциальность.png" alt="">
+                                        <h4>Конфиденциальность</h4>
+                                        <p>Не отправляйте служебную информацию тем, кому она не предназначена. Не удаляйте из писем стандартный текст об ограничении ответственности (дисклеймер).</p>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <section>
+                                <h2 class="s4-section-title">Правила кибергигиены при работе с ИИ</h2>
+                                <p class="s4-instruction">Нажимайте на вкладки, чтобы изучить информацию</p>
+                                <div class="s4-accordion" data-accordion>
+                                    <div class="s4-accordion-item" data-accordion-item>
+                                        <button type="button" class="s4-accordion-trigger" data-accordion-trigger aria-expanded="false">
+                                            <span>Не передавайте конфиденциальную информацию</span>
+                                            <span class="s4-accordion-icon" aria-hidden="true"></span>
+                                        </button>
+                                        <div class="s4-accordion-panel" data-accordion-panel>
+                                            <p>Никогда не вводите в ИИ‑сервисы: персональные данные, коммерческую тайну, внутренние документы, пароли, платёжные реквизиты, данные клиентов или партнёров.</p>
+                                        </div>
+                                    </div>
+                                    <div class="s4-accordion-item" data-accordion-item>
+                                        <button type="button" class="s4-accordion-trigger" data-accordion-trigger aria-expanded="false">
+                                            <span>Обезличивайте входные данные</span>
+                                            <span class="s4-accordion-icon" aria-hidden="true"></span>
+                                        </button>
+                                        <div class="s4-accordion-panel" data-accordion-panel>
+                                            <p>Исключайте из запросов имена, названия компаний, проекты, суммы, даты и иные идентифицирующие детали. Используйте обобщения и абстрактные примеры.</p>
+                                        </div>
+                                    </div>
+                                    <div class="s4-accordion-item" data-accordion-item>
+                                        <button type="button" class="s4-accordion-trigger" data-accordion-trigger aria-expanded="false">
+                                            <span>Изучайте политику конфиденциальности сервиса</span>
+                                            <span class="s4-accordion-icon" aria-hidden="true"></span>
+                                        </button>
+                                        <div class="s4-accordion-panel" data-accordion-panel>
+                                            <p>Уточните:</p>
+                                            <ol class="s4-accordion-list">
+                                                <li><span class="s4-accordion-list-num">1</span><span>сохраняются ли ваши запросы;</span></li>
+                                                <li><span class="s4-accordion-list-num">2</span><span>используются ли они для обучения модели;</span></li>
+                                                <li><span class="s4-accordion-list-num">3</span><span>передаются ли данные третьим лицам;</span></li>
+                                                <li><span class="s4-accordion-list-num">4</span><span>сроки хранения и возможность удаления данных.</span></li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                    <div class="s4-accordion-item" data-accordion-item>
+                                        <button type="button" class="s4-accordion-trigger" data-accordion-trigger aria-expanded="false">
+                                            <span>Избегайте рабочих учётных записей</span>
+                                            <span class="s4-accordion-icon" aria-hidden="true"></span>
+                                        </button>
+                                        <div class="s4-accordion-panel" data-accordion-panel>
+                                            <p>При работе с ИИ используйте аккаунты, не связанные с компанией. Не привязывайте корпоративную почту.</p>
+                                        </div>
+                                    </div>
+                                    <div class="s4-accordion-item" data-accordion-item>
+                                        <button type="button" class="s4-accordion-trigger" data-accordion-trigger aria-expanded="false">
+                                            <span>Перепроверяйте результаты</span>
+                                            <span class="s4-accordion-icon" aria-hidden="true"></span>
+                                        </button>
+                                        <div class="s4-accordion-panel" data-accordion-panel>
+                                            <p>ИИ может генерировать ошибочные или вымышленные данные («галлюцинации»). Всегда верифицируйте факты, цифры, ссылки и рекомендации, особенно в критически важных задачах.</p>
+                                        </div>
+                                    </div>
+                                    <div class="s4-accordion-item" data-accordion-item>
+                                        <button type="button" class="s4-accordion-trigger" data-accordion-trigger aria-expanded="false">
+                                            <span>Соблюдайте внутренние регламенты</span>
+                                            <span class="s4-accordion-icon" aria-hidden="true"></span>
+                                        </button>
+                                        <div class="s4-accordion-panel" data-accordion-panel>
+                                            <p>Используйте ИИ только в рамках Политики «Использование искусственного интеллекта».</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <section>
+                                <h2 class="s4-section-title">При работе с искусственным интеллектом запрещено:</h2>
+                                <div class="s4-ai-forbidden">
+                                    <div class="s4-num-card">
+                                        <div class="s4-num-badge" aria-hidden="true">01</div>
+                                        <div class="s4-num-card-body">
+                                            <p>Загружать любую конфиденциальную информацию во внешние нейросети без разрешения руководителя службы безопасности и лидера проекта.</p>
+                                        </div>
+                                    </div>
+                                    <div class="s4-num-card">
+                                        <div class="s4-num-badge" aria-hidden="true">02</div>
+                                        <div class="s4-num-card-body">
+                                            <p>Создавать или использовать вредоносное ПО, вирусы и дипфейки: поддельные изображения, аудио или видео.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <section>
+                                <p class="s4-label">Практическое задание</p>
+                                <div class="s4-quiz" data-quiz data-quiz-id="quiz-deepfake" data-quiz-type="single" data-correct="1">
+                                    <div class="s4-quiz-scenario">
+                                        <p>Сотрудник подготовил для важного клиента персональное поздравление с использованием видеозаписи, на которой известный актёр обращается к руководителю клиента по имени. Запись была создана с помощью технологии «дипфейк» (искусственного интеллекта для подмены лица и голоса). Ваши действия?</p>
+                                    </div>
+                                    <p class="s4-instruction">Выберите верное утверждение</p>
+                                    <div class="s4-quiz-options">
+                                        <button type="button" class="s4-quiz-option" data-option="1" data-quiz-type="single">
+                                            <span class="s4-quiz-check" aria-hidden="true"></span>
+                                            <p>Поскольку создание и распространение такого видео-поздравления потребует не только специальной маркировки, соблюдения требований законодательства, но и, возможно, разрешения самого актёра, легче поменять концепцию поздравления. Создание и использование дипфейков в Фирме запрещено.</p>
+                                        </button>
+                                        <button type="button" class="s4-quiz-option" data-option="2" data-quiz-type="single">
+                                            <span class="s4-quiz-check" aria-hidden="true"></span>
+                                            <p>Индивидуальный подход и оригинальность поздравления руководителя клиента говорит о стремлении менеджера поддерживать отношения с клиентом, которое следует поощрять. Анне точно было очень приятно. Ей не стоит знать, что её поздравлял не реальный актёр, а сгенерированный ИИ дипфейк.</p>
+                                        </button>
+                                        <button type="button" class="s4-quiz-option" data-option="3" data-quiz-type="single">
+                                            <span class="s4-quiz-check" aria-hidden="true"></span>
+                                            <p>Данное поздравление использовалось вне договорных отношений с клиентом и носило развлекательный характер, никаких обязательств у Фирмы не возникает. Политики Фирмы не применимы.</p>
+                                        </button>
+                                    </div>
+                                    <div class="s4-quiz-actions">
+                                        <button type="button" class="s4-quiz-btn s4-quiz-btn--confirm" data-quiz-confirm>ОТВЕТИТЬ</button>
+                                        <button type="button" class="s4-quiz-btn s4-quiz-btn--reset" data-quiz-reset>СБРОСИТЬ</button>
+                                    </div>
+                                    <div class="s4-quiz-feedback s4-quiz-feedback--success is-hidden" data-quiz-feedback-success>
+                                        <h4>Верно!</h4>
+                                        <p>Создание и использование дипфейков в компании запрещено. Нужно выбрать другой формат поздравления, который не нарушает политику и законодательство.</p>
+                                    </div>
+                                    <div class="s4-quiz-feedback s4-quiz-feedback--error is-hidden" data-quiz-feedback-error>
+                                        <h4>Неверно</h4>
+                                        <p>Дипфейки могут нарушить закон и репутацию компании. Перечитайте правила работы с ИИ и попробуйте снова.</p>
+                                        <button type="button" class="s4-quiz-btn s4-quiz-btn--confirm" data-quiz-retry>ПОПРОБОВАТЬ СНОВА</button>
+                                    </div>
+                                </div>
+                            </section>
+
+                        </div>
+                    </article>
+
+                    <article class="s4-part s4-part--outro s4-gated is-locked">
+                        <div class="s4-outro-inner">
+                            <h2 class="s4-outro-title">Запомните:</h2>
+                            <div class="s4-outro-card">
+                                <ol class="s4-outro-items">
+                                    <li>
+                                        <span class="s4-outro-num" aria-hidden="true">1</span>
+                                        <span class="s4-outro-text">Запрещено посещать сайты, содержащие порнографию, незаконную информацию или контент, который может навредить репутации компании.</span>
+                                    </li>
+                                    <li>
+                                        <span class="s4-outro-num" aria-hidden="true">2</span>
+                                        <span class="s4-outro-text">Никогда не загружайте конфиденциальную информацию (данные клиентов, внутренние документы) во внешние сервисы ИИ. При использовании ИИ для внутренних задач сообщайте об этом руководителю. При работе с клиентскими проектами обязательно получайте разрешение.</span>
+                                    </li>
+                                    <li>
+                                        <span class="s4-outro-num" aria-hidden="true">3</span>
+                                        <span class="s4-outro-text">Не загружайте конфиденциальные данные (включая корпоративную или клиентскую информацию) во внешние ИИ-сервисы. Использование инструментов ИИ для обработки не конфиденциальных материалов допускается после согласования с руководителем проекта и Отделом контроля качества и управления рисками.</span>
+                                    </li>
+                                    <li>
+                                        <span class="s4-outro-num" aria-hidden="true">4</span>
+                                        <span class="s4-outro-text">Если вы случайно отправили письмо не тому человеку, немедленно сообщите об этом в отдел информационной безопасности.</span>
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
+                        <div class="slide-nav-bar s4-nav-bar">
+                            <button type="button" class="slide-btn slide-btn--back" data-action="back" aria-label="Предыдущий раздел">
+                                <span class="slide-btn-arrow" aria-hidden="true">←</span>
+                            </button>
+                            <button type="button" class="slide-btn slide-btn--next btn-next" data-action="next" aria-label="Продолжить">
+                                <span>ПРОДОЛЖИТЬ</span>
+                                <span class="slide-btn-sep">|</span>
+                                <span class="slide-btn-arrow" aria-hidden="true">→</span>
+                            </button>
+                        </div>
+                    </article>
                 </div>
             </section>
-            <section id="screen-section-4" class="course-screen" data-screen="section-4">
-                <div class="placeholder-screen">
-                    <p class="placeholder-label">Раздел 6</p>
-                    <h2>Работа в интернете</h2>
-                    <p>Раздел будет добавлен на следующем шаге сборки.</p>
-                    <div class="placeholder-nav slide-nav-bar slide-nav-bar--standalone">
-                        <button type="button" class="slide-btn slide-btn--back" data-action="back" aria-label="Назад">
-                            <span class="slide-btn-arrow" aria-hidden="true">←</span>
-                        </button>
-                        <button type="button" class="slide-btn slide-btn--next btn-next" data-action="next">
-                            <span>ПРОДОЛЖИТЬ</span>
-                            <span class="slide-btn-sep">|</span>
-                            <span class="slide-btn-arrow" aria-hidden="true">→</span>
-                        </button>
-                    </div>
-                </div>
-            </section>
-            <section id="screen-section-5" class="course-screen" data-screen="section-5">
-                <div class="placeholder-screen">
-                    <p class="placeholder-label">Раздел 7</p>
-                    <h2>Работа с клиентами</h2>
-                    <p>Раздел будет добавлен на следующем шаге сборки.</p>
-                    <div class="placeholder-nav slide-nav-bar slide-nav-bar--standalone">
-                        <button type="button" class="slide-btn slide-btn--back" data-action="back" aria-label="Назад">
-                            <span class="slide-btn-arrow" aria-hidden="true">←</span>
-                        </button>
-                        <button type="button" class="slide-btn slide-btn--next btn-next" data-action="next">
-                            <span>ПРОДОЛЖИТЬ</span>
-                            <span class="slide-btn-sep">|</span>
-                            <span class="slide-btn-arrow" aria-hidden="true">→</span>
-                        </button>
-                    </div>
-                </div>
-            </section>
-            <section id="screen-section-6" class="course-screen" data-screen="section-6">
-                <div class="placeholder-screen">
-                    <p class="placeholder-label">Раздел 8</p>
-                    <h2>Ответственность сотрудников</h2>
-                    <p>Раздел будет добавлен на следующем шаге сборки.</p>
-                    <div class="placeholder-nav slide-nav-bar slide-nav-bar--standalone">
-                        <button type="button" class="slide-btn slide-btn--back" data-action="back" aria-label="Назад">
-                            <span class="slide-btn-arrow" aria-hidden="true">←</span>
-                        </button>
-                        <button type="button" class="slide-btn slide-btn--next btn-next" data-action="next">
-                            <span>ПРОДОЛЖИТЬ</span>
-                            <span class="slide-btn-sep">|</span>
-                            <span class="slide-btn-arrow" aria-hidden="true">→</span>
-                        </button>
-                    </div>
-                </div>
-            </section>
-            <section id="screen-conclusion" class="course-screen" data-screen="conclusion">
-                <div class="placeholder-screen">
-                    <p class="placeholder-label">Раздел 9</p>
-                    <h2>Заключение</h2>
-                    <p>Раздел будет добавлен на следующем шаге сборки.</p>
-                    <div class="placeholder-nav slide-nav-bar slide-nav-bar--standalone">
-                        <button type="button" class="slide-btn slide-btn--back" data-action="back" aria-label="Назад">
-                            <span class="slide-btn-arrow" aria-hidden="true">←</span>
-                        </button>
-                        <button type="button" class="slide-btn slide-btn--next btn-finish" data-action="finish">
-                            <span>ЗАВЕРШИТЬ КУРС</span>
-                            <span class="slide-btn-sep">|</span>
-                            <span class="slide-btn-arrow" aria-hidden="true">→</span>
-                        </button>
-                    </div>
+                                    <!-- Section 5 body (module 7: Работа с клиентами) — keep in sync with index.html -->
+                        <section id="screen-section-5" class="course-screen s5-screen" data-screen="section-5">
+                            <div class="s5-page">
+                                <article class="s5-part s5-part--hero">
+                                    <div class="s5-hero-inner">
+                                        <h1 class="s5-title">Работа с клиентами</h1>
+                                        <div class="s5-card">
+                                            <p>Грамотная работа с клиентами помогает сохранять доверие к компании и поддерживать высокий уровень удовлетворенности.</p>
+                                        </div>
+                                        <div class="s5-card s5-card--hint">
+                                            <div class="s5-hint-icons" aria-hidden="true">
+                                                <img src="assets/images/mouse.png" alt="" width="48" height="48">
+                                                <img src="assets/images/тачпад.png" alt="" width="48" height="48">
+                                            </div>
+                                            <p>Крутите колесико мыши или используйте тачпад</p>
+                                        </div>
+                                    </div>
+                                </article>
+
+                                <article class="s5-part s5-part--content">
+                                    <div class="s5-content-inner">
+
+                                        <section>
+                                            <p class="s5-label">Вы узнаете:</p>
+                                            <div class="s5-learn-grid">
+                                                <div class="s5-learn-item">
+                                                    <div class="s5-icon-frame">
+                                                        <img src="assets/images/Frame 2131333960.png" alt="">
+                                                    </div>
+                                                    <p>Алгоритм работы при первичном обращении</p>
+                                                </div>
+                                                <div class="s5-learn-item">
+                                                    <div class="s5-icon-frame">
+                                                        <img src="assets/images/Frame 2131333960.png" alt="">
+                                                    </div>
+                                                    <p>Виды услуг и прав доступа</p>
+                                                </div>
+                                                <div class="s5-learn-item">
+                                                    <div class="s5-icon-frame">
+                                                        <img src="assets/images/Frame 2131333960.png" alt="">
+                                                    </div>
+                                                    <p>Правила этики и поведения</p>
+                                                </div>
+                                            </div>
+                                        </section>
+
+                                        <section>
+                                            <h2 class="s5-section-title">Алгоритм работы при первичном обращении</h2>
+                                            <p class="s5-lead">При поступлении заявки на организацию похорон применяются следующие правила:</p>
+                                            <div class="s5-steps">
+                                                <div class="s5-step">
+                                                    <div class="s5-step-num" aria-hidden="true">1</div>
+                                                    <div class="s5-step-body">
+                                                        <p>Попросите заказчика изложить свои пожелания и предоставьте полную информацию о гарантированном перечне услуг по погребению на безвозмездной основе. Выясните наличие льгот и вероисповедание усопшего для соблюдения обрядовых традиций.</p>
+                                                    </div>
+                                                </div>
+                                                <div class="s5-step">
+                                                    <div class="s5-step-num" aria-hidden="true">2</div>
+                                                    <div class="s5-step-body">
+                                                        <p>Передайте запрос диспетчеру для проверки наличия мест на кладбище или времени в крематории. Согласуйте действия с администрацией морга и органами ЗАГС для получения необходимых справок.</p>
+                                                    </div>
+                                                </div>
+                                                <div class="s5-step">
+                                                    <div class="s5-step-num" aria-hidden="true">3</div>
+                                                    <div class="s5-step-body">
+                                                        <p>Специалист должен оценить риски, связанные с транспортировкой (груз 200, инфекционные заболевания), и принять решение о необходимых мерах безопасности. Все эти условия должны быть зафиксированы в договоре.</p>
+                                                    </div>
+                                                </div>
+                                                <div class="s5-step">
+                                                    <div class="s5-step-num" aria-hidden="true">4</div>
+                                                    <div class="s5-step-body">
+                                                        <p>Специалисты оформят заказ-наряд (договор), где четко прописаны услуги, цены и ответственность сторон. Без подписанного договора приступать к организации похорон запрещено.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </section>
+
+                                        <section class="s5-quiz-section">
+                                            <span class="s5-task-badge">Практическое задание 01/02</span>
+                                            <div class="s5-quiz" data-quiz data-quiz-id="quiz-client-1" data-quiz-type="single" data-correct="1">
+                                                <div class="s5-quiz-scenario">
+                                                    <p>Вы находитесь в квартире заказчика. Родственники в состоянии аффекта просят срочно забрать тело в морг «прямо сейчас», минуя вызов экстренных служб (полиции и скорой), аргументируя это тем, что «человек долго болел, все очевидно». Они предлагают доплатить за скорость наличными без квитанции.</p>
+                                                </div>
+                                                <p class="s5-instruction">Выберите одно верное утверждение</p>
+                                                <div class="s5-quiz-options">
+                                                    <button type="button" class="s5-quiz-option" data-option="1" data-quiz-type="single">
+                                                        <span class="s5-quiz-check" aria-hidden="true"></span>
+                                                        <p>Вы отказываетесь от доплаты, объясняете родственникам, что по закону необходимо вызвать полицию и скорую помощь для констатации смерти и оформления документов, после чего тело будет передано в морг в установленном порядке.</p>
+                                                    </button>
+                                                    <button type="button" class="s5-quiz-option" data-option="2" data-quiz-type="single">
+                                                        <span class="s5-quiz-check" aria-hidden="true"></span>
+                                                        <p>Вы предлагаете родственникам самостоятельно перевезти тело в морг на личном автомобиле, а за дополнительную плату обещаете оформить все документы задним числом, чтобы скрыть факт отсутствия вызова полиции и скорой.</p>
+                                                    </button>
+                                                    <button type="button" class="s5-quiz-option" data-option="3" data-quiz-type="single">
+                                                        <span class="s5-quiz-check" aria-hidden="true"></span>
+                                                        <p>Вы соглашаетесь и вызываете бригаду грузчиков, чтобы успокоить клиента и ускорить процесс.</p>
+                                                    </button>
+                                                    <button type="button" class="s5-quiz-option" data-option="4" data-quiz-type="single">
+                                                        <span class="s5-quiz-check" aria-hidden="true"></span>
+                                                        <p>Вы соглашаетесь на условия, берёте наличные без квитанции и вызываете частную бригаду грузчиков для немедленной транспортировки тела в морг, минуя вызов экстренных служб.</p>
+                                                    </button>
+                                                </div>
+                                                <div class="s5-quiz-actions">
+                                                    <button type="button" class="s5-quiz-btn s5-quiz-btn--confirm" data-quiz-confirm>ОТВЕТИТЬ</button>
+                                                    <button type="button" class="s5-quiz-btn s5-quiz-btn--reset" data-quiz-reset>СБРОСИТЬ</button>
+                                                </div>
+                                                <div class="s5-quiz-feedback s5-quiz-feedback--success is-hidden" data-quiz-feedback-success>
+                                                    <h4>Верно!</h4>
+                                                    <p>Вы вежливо, но твердо объясняете порядок действий: сначала вызов служб 102 и 103 для констатации смерти, только после этого — вывоз тела. Вы оказываете психологическую поддержку, но действуете строго по регламенту.</p>
+                                                </div>
+                                                <div class="s5-quiz-feedback s5-quiz-feedback--error is-hidden" data-quiz-feedback-error>
+                                                    <h4>Неверно</h4>
+                                                    <p>Этот вариант действий приведет к нарушению законодательства (УК РФ) и санитарных норм. Перевозка тела без констатации смерти врачом и осмотра сотрудником полиции запрещена.</p>
+                                                    <button type="button" class="s5-quiz-btn s5-quiz-btn--confirm" data-quiz-retry>ПОПОБОВАТЬ СНОВА</button>
+                                                </div>
+                                            </div>
+                                        </section>
+
+                                        <div class="s5-gated is-locked" data-gated-by="quiz-client-1">
+                                        <section>
+                                            <h2 class="s5-section-title">Виды услуг и прав доступа</h2>
+                                            <p class="s5-lead">Клиентам доступны два варианта организации похорон. Агент обязан проинформировать о обоих вариантах (ФЗ №8 «О погребении и похоронном деле»):</p>
+                                            <div class="s5-services-grid">
+                                                <div class="s5-service-card">
+                                                    <h3>Гарантированный перечень (Безвозмездно)</h3>
+                                                    <ul>
+                                                        <li><strong>Оформление документов:</strong> Бесплатно, необходимые для погребения.</li>
+                                                        <li><strong>Атрибутика:</strong> Гроб, обитый тканью, тапочки, покрывало (стандарт).</li>
+                                                        <li><strong>Транспорт:</strong> Катафалк (автобус) только в одну сторону (кладбище/крематорий).</li>
+                                                        <li><strong>Погребение:</strong> Рытье могилы или кремация с выдачей урны.</li>
+                                                        <li><strong>Оплата:</strong> Возмещается государством (пособие на погребение).</li>
+                                                    </ul>
+                                                </div>
+                                                <div class="s5-service-card">
+                                                    <h3>Коммерческий заказ (Платные услуги)</h3>
+                                                    <ul>
+                                                        <li><strong>Оформление документов:</strong> Сбор полного пакета, включая справки для наследства и транспортировки за границу.</li>
+                                                        <li><strong>Атрибутика:</strong> Широкий выбор (лакированные гробы, венки, ленты, одежда).</li>
+                                                        <li><strong>Транспорт:</strong> Маршрут любой сложности, ожидание, обратный рейс, VIP-катафалки.</li>
+                                                        <li><strong>Погребение:</strong> Подготовка могилы, драпировка, сингуматор (лифт), музыкальное сопровождение, церемониймейстер.</li>
+                                                        <li><strong>Оплата:</strong> За счет средств заказчика или родственников.</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="s5-highlight s5-highlight--after-grid">
+                                                <p>Навязывание платных услуг взамен гарантированных законом запрещено. Отказ от гарантированного перечня должен быть оформлен письменно.</p>
+                                            </div>
+                                        </section>
+                                        </div>
+
+                                        <section class="s5-quiz-section s5-quiz-gate is-locked" data-gated-by="quiz-client-1">
+                                            <div class="s5-quiz-lock" aria-hidden="true">
+                                                <img src="assets/images/заблокировано.svg" alt="">
+                                            </div>
+                                            <span class="s5-task-badge">Практическое задание 02/02</span>
+                                            <div class="s5-quiz" data-quiz data-quiz-id="quiz-client-2" data-quiz-type="multiple" data-correct="3,4">
+                                                <div class="s5-quiz-scenario">
+                                                    <p>Клиент просит организовать подзахоронение в родственную могилу на закрытом кладбище, но у него нет документов, подтверждающих родство. Он просит «договориться на месте» с копщиками, уверяя, что привезет документы позже.</p>
+                                                </div>
+                                                <p class="s5-instruction">Выберите все верные утверждения</p>
+                                                <div class="s5-quiz-options">
+                                                    <button type="button" class="s5-quiz-option" data-option="1" data-quiz-type="multiple">
+                                                        <span class="s5-quiz-check" aria-hidden="true"></span>
+                                                        <p>Вы предлагаете клиенту проехать на кладбище и попробовать решить вопрос с администрацией «неофициально», чтобы не срывать сроки похорон.</p>
+                                                    </button>
+                                                    <button type="button" class="s5-quiz-option" data-option="2" data-quiz-type="multiple">
+                                                        <span class="s5-quiz-check" aria-hidden="true"></span>
+                                                        <p>Вы соглашаетесь «договориться на месте» с копщиками и администрацией кладбища за дополнительную плату без документов, чтобы не срывать сроки похорон, и берёте с клиента наличные без квитанции за «решение вопроса».</p>
+                                                    </button>
+                                                    <button type="button" class="s5-quiz-option" data-option="3" data-quiz-type="multiple">
+                                                        <span class="s5-quiz-check" aria-hidden="true"></span>
+                                                        <p>Вы отказываетесь от неофициального решения вопроса, объясняя клиенту, что подзахоронение в родственную могилу без документов, подтверждающих родство, запрещено законом. Предлагаете помощь в оперативном получении документов через архив ЗАГС или, как альтернативу, новое место на открытом кладбище. Отказ от гарантированного перечня услуг оформляете письменно.</p>
+                                                    </button>
+                                                    <button type="button" class="s5-quiz-option" data-option="4" data-quiz-type="multiple">
+                                                        <span class="s5-quiz-check" aria-hidden="true"></span>
+                                                        <p>Вы информируете клиента, что захоронение без разрешения администрации кладбища и подтверждения родства является нарушением ФЗ «О погребении» и может привести к эксгумации. Предлагаете юридическое сопровождение для сбора документов и легального проведения процедуры.</p>
+                                                    </button>
+                                                </div>
+                                                <div class="s5-quiz-actions">
+                                                    <button type="button" class="s5-quiz-btn s5-quiz-btn--confirm" data-quiz-confirm>ОТВЕТИТЬ</button>
+                                                    <button type="button" class="s5-quiz-btn s5-quiz-btn--reset" data-quiz-reset>СБРОСИТЬ</button>
+                                                </div>
+                                                <div class="s5-quiz-feedback s5-quiz-feedback--success is-hidden" data-quiz-feedback-success>
+                                                    <h4>Верно!</h4>
+                                                    <p>Вы объясняете клиенту необходимость документального подтверждения родства. Предлагаете помощь в быстром поиске документов в архивах ЗАГС или предлагаете альтернативный вариант — новое место на открытом кладбище.</p>
+                                                </div>
+                                                <div class="s5-quiz-feedback s5-quiz-feedback--error is-hidden" data-quiz-feedback-error>
+                                                    <h4>Неверно</h4>
+                                                    <p>Нарушение ФЗ «О погребении». Захоронение без разрешения администрации кладбища и подтверждения родства является незаконным и может привести к эксгумации.</p>
+                                                    <button type="button" class="s5-quiz-btn s5-quiz-btn--confirm" data-quiz-retry>ПОПРОБОВАТЬ СНОВА</button>
+                                                </div>
+                                            </div>
+                                        </section>
+
+                                        <div class="s5-gated is-locked" data-gated-by="quiz-client-2">
+                                        <section>
+                                            <h2 class="s5-section-title">Этика и поведение</h2>
+                                            <p class="s5-lead">При работе с родственниками умершего необходимо соблюдать строгие этические нормы:</p>
+                                            <p class="s5-instruction">Нажимайте на кнопки, чтобы изучить информацию</p>
+                                            <div class="s5-flip-cards" data-flip-set="s5-ethics">
+                                                <div class="s5-flip-card" data-flip tabindex="0" role="button" aria-label="Внешний вид — подробнее">
+                                                    <div class="s5-flip-card-inner">
+                                                        <div class="s5-flip-face s5-flip-face--front">
+                                                            <img src="assets/images/free-icon-modern-15877679.png" alt="">
+                                                            <h4>Внешний вид</h4>
+                                                            <div class="s5-flip-btn" data-flip-toggle>ПОДРОБНЕЕ</div>
+                                                        </div>
+                                                        <div class="s5-flip-face s5-flip-face--back">
+                                                            <h4>Внешний вид</h4>
+                                                            <p>Агент должен соблюдать деловой дресс-код (преимущественно темные тона), иметь опрятный вид.</p>
+                                                            <div class="s5-flip-btn" data-flip-toggle>СКРЫТЬ</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="s5-flip-card" data-flip tabindex="0" role="button" aria-label="Коммуникация — подробнее">
+                                                    <div class="s5-flip-card-inner">
+                                                        <div class="s5-flip-face s5-flip-face--front">
+                                                            <img src="assets/images/free-icon-discussion-4596231.png" alt="">
+                                                            <h4>Коммуникация</h4>
+                                                            <div class="s5-flip-btn" data-flip-toggle>ПОДРОБНЕЕ</div>
+                                                        </div>
+                                                        <div class="s5-flip-face s5-flip-face--back">
+                                                            <h4>Коммуникация</h4>
+                                                            <p>Запрещено использование агрессивных методов продаж. Общение должно строиться на принципах сочувствия, вежливости и сдержанности.</p>
+                                                            <div class="s5-flip-btn" data-flip-toggle>СКРЫТЬ</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="s5-flip-card" data-flip tabindex="0" role="button" aria-label="Конфиденциальность — подробнее">
+                                                    <div class="s5-flip-card-inner">
+                                                        <div class="s5-flip-face s5-flip-face--front">
+                                                            <img src="assets/images/free-icon-secret-file-2716682.png" alt="">
+                                                            <h4>Конфиденциальность</h4>
+                                                            <div class="s5-flip-btn" data-flip-toggle>ПОДРОБНЕЕ</div>
+                                                        </div>
+                                                        <div class="s5-flip-face s5-flip-face--back">
+                                                            <h4>Конфиденциальность</h4>
+                                                            <p>Агент обязан сохранять в тайне информацию о личной жизни семьи усопшего и обстоятельствах смерти, а также не разглашать персональные данные заказчика третьим лицам без разрешения.</p>
+                                                            <div class="s5-flip-btn" data-flip-toggle>СКРЫТЬ</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </section>
+
+                                        <div class="s5-gated is-locked" data-gated-by-flip="s5-ethics">
+                                        <section>
+                                            <div class="s5-highlight">
+                                                <p>Любое действие с телом умершего (перемещение, подготовка к прощанию) начинается только после получения разрешения от родственников и оформления соответствующих документов.</p>
+                                            </div>
+                                        </section>
+
+                                        <section>
+                                            <h2 class="s5-section-title">Завершение работы</h2>
+                                            <p class="s5-instruction">Нажимайте на вкладки, чтобы изучить информацию</p>
+                                            <div class="s5-accordion" data-accordion>
+                                                <div class="s5-accordion-item" data-accordion-item>
+                                                    <button type="button" class="s5-accordion-trigger" data-accordion-trigger aria-expanded="false">
+                                                        <span>Приемка работ</span>
+                                                        <span class="s5-accordion-icon" aria-hidden="true"></span>
+                                                    </button>
+                                                    <div class="s5-accordion-panel" data-accordion-panel>
+                                                        <p>После проведения церемонии (погребения или кремации) агент обязан подписать с заказчиком Акт выполненных работ.</p>
+                                                    </div>
+                                                </div>
+                                                <div class="s5-accordion-item" data-accordion-item>
+                                                    <button type="button" class="s5-accordion-trigger" data-accordion-trigger aria-expanded="false">
+                                                        <span>Удовлетворенность</span>
+                                                        <span class="s5-accordion-icon" aria-hidden="true"></span>
+                                                    </button>
+                                                    <div class="s5-accordion-panel" data-accordion-panel>
+                                                        <p>Грамотная работа с клиентами помогает сохранять репутацию агентства и обеспечивает выполнение профессионального долга в соответствии с высшими стандартами качества.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        </div>
+                                        </div>
+
+                                    </div>
+                                </article>
+
+                                <article class="s5-part s5-part--outro s5-gated is-locked">
+                                    <div class="s5-outro-inner">
+                                        <h2 class="s5-outro-title">Запомните:</h2>
+                                        <div class="s5-outro-card">
+                                            <ol class="s5-outro-items">
+                                                <li>
+                                                    <span class="s5-outro-num" aria-hidden="true">1</span>
+                                                    <span class="s5-outro-text">Никогда не соглашайтесь на транспортировку тела без вызова экстренных служб (полиции и скорой помощи), даже если родственники настаивают и предлагают доплату наличными без квитанции. Это незаконно и грозит уголовной ответственностью.</span>
+                                                </li>
+                                                <li>
+                                                    <span class="s5-outro-num" aria-hidden="true">2</span>
+                                                    <span class="s5-outro-text">При обнаружении тела в квартире заказчика сначала зафиксируйте обстановку (фото/видео), затем вызовите полицию и скорую — только после их оформления тело передаётся в морг в установленном порядке.</span>
+                                                </li>
+                                                <li>
+                                                    <span class="s5-outro-num" aria-hidden="true">3</span>
+                                                    <span class="s5-outro-text">Не принимайте наличные «за скорость» без документального оформления — такие действия расцениваются как коррупция и нарушение внутренних регламентов компании.</span>
+                                                </li>
+                                                <li>
+                                                    <span class="s5-outro-num" aria-hidden="true">4</span>
+                                                    <span class="s5-outro-text">Если родственники агрессивно требуют немедленных действий, сохраняйте спокойствие, вежливо объясните законный порядок и при необходимости свяжитесь с руководителем или отделом контроля качества.</span>
+                                                </li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                    <div class="slide-nav-bar s5-nav-bar">
+                                        <button type="button" class="slide-btn slide-btn--back" data-action="back" aria-label="Предыдущий раздел">
+                                            <span class="slide-btn-arrow" aria-hidden="true">←</span>
+                                        </button>
+                                        <button type="button" class="slide-btn slide-btn--next btn-next" data-action="next" aria-label="Продолжить">
+                                            <span>ПРОДОЛЖИТЬ</span>
+                                            <span class="slide-btn-sep">|</span>
+                                            <span class="slide-btn-arrow" aria-hidden="true">→</span>
+                                        </button>
+                                    </div>
+                                </article>
+                            </div>
+                        </section>
+                                    <!-- Section 6 body (module 8: Ответственность сотрудников) — keep in sync with index.html -->
+                        <section id="screen-section-6" class="course-screen s6-screen" data-screen="section-6">
+                            <div class="s6-page">
+                                <article class="s6-part s6-part--hero">
+                                    <div class="s6-hero-inner">
+                                        <h1 class="s6-title">Ответственность сотрудников</h1>
+                                        <div class="s6-card">
+                                            <p>Каждый сотрудник компании несет личную ответственность за правильное и безопасное использование рабочих IT-ресурсов. Важно не только соблюдать правила, но и точно знать, как действовать, если произошел инцидент информационной безопасности.</p>
+                                        </div>
+                                        <div class="s6-card s6-card--hint">
+                                            <div class="s6-hint-icons" aria-hidden="true">
+                                                <img src="assets/images/mouse.png" alt="" width="48" height="48">
+                                                <img src="assets/images/тачпад.png" alt="" width="48" height="48">
+                                            </div>
+                                            <p>Крутите колесико мыши или используйте тачпад</p>
+                                        </div>
+                                    </div>
+                                </article>
+
+                                <article class="s6-part s6-part--content">
+                                    <div class="s6-content-inner">
+
+                                        <section>
+                                            <p class="s6-label">Вы узнаете:</p>
+                                            <div class="s6-learn-grid">
+                                                <div class="s6-learn-item">
+                                                    <div class="s6-icon-frame">
+                                                        <img src="assets/images/Frame 2131333960.png" alt="">
+                                                    </div>
+                                                    <p>Что считается инцидентом безопасности</p>
+                                                </div>
+                                                <div class="s6-learn-item">
+                                                    <div class="s6-icon-frame">
+                                                        <img src="assets/images/Frame 2131333960.png" alt="">
+                                                    </div>
+                                                    <p>Какая ответственность предусмотрена за нарушение правил</p>
+                                                </div>
+                                                <div class="s6-learn-item">
+                                                    <div class="s6-icon-frame">
+                                                        <img src="assets/images/Frame 2131333960.png" alt="">
+                                                    </div>
+                                                    <p>Что делать, если произошел инцидент безопасности</p>
+                                                </div>
+                                            </div>
+                                        </section>
+
+                                        <section>
+                                            <h2 class="s6-section-title">Инцидент информационной безопасности</h2>
+                                            <p class="s6-instruction">Нажимайте на вкладки, чтобы изучить информацию</p>
+                                            <div class="s6-incident-grid" data-flip-set="s6-incidents">
+                                                <div class="s6-flip-card" data-flip tabindex="0" role="button" aria-label="Потеря или утечка данных — подробнее">
+                                                    <div class="s6-flip-card-inner">
+                                                        <div class="s6-flip-face s6-flip-face--front">
+                                                            <div class="s6-flip-icon-wrap">
+                                                                <img src="assets/images/free-icon-data-leak-17794766 1.png" alt="">
+                                                            </div>
+                                                            <h4>Потеря или утечка данных</h4>
+                                                            <div class="s6-flip-btn" data-flip-toggle>ПОДРОБНЕЕ</div>
+                                                        </div>
+                                                        <div class="s6-flip-face s6-flip-face--back">
+                                                            <h4>Потеря или утечка данных</h4>
+                                                            <p>Вы потеряли рабочий ноутбук, телефон, флешку или даже печатные документы. Сюда же относится ситуация, когда вы подозреваете, что к этим данным мог получить доступ кто-то посторонний.</p>
+                                                            <div class="s6-flip-btn" data-flip-toggle>СКРЫТЬ</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="s6-flip-card" data-flip tabindex="0" role="button" aria-label="Компрометация пароля — подробнее">
+                                                    <div class="s6-flip-card-inner">
+                                                        <div class="s6-flip-face s6-flip-face--front">
+                                                            <div class="s6-flip-icon-wrap">
+                                                                <img src="assets/images/Компрометация пароля.png" alt="">
+                                                            </div>
+                                                            <h4>Компрометация пароля</h4>
+                                                            <div class="s6-flip-btn" data-flip-toggle>ПОДРОБНЕЕ</div>
+                                                        </div>
+                                                        <div class="s6-flip-face s6-flip-face--back">
+                                                            <h4>Компрометация пароля</h4>
+                                                            <p>Вам кажется, что ваш пароль, токен или другой ключ доступа к системе украли или могли узнать посторонние.</p>
+                                                            <div class="s6-flip-btn" data-flip-toggle>СКРЫТЬ</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="s6-flip-card" data-flip tabindex="0" role="button" aria-label="Подозрение на вирус — подробнее">
+                                                    <div class="s6-flip-card-inner">
+                                                        <div class="s6-flip-face s6-flip-face--front">
+                                                            <div class="s6-flip-icon-wrap">
+                                                                <img src="assets/images/Подозрение на вирус.png" alt="">
+                                                            </div>
+                                                            <h4>Подозрение на вирус</h4>
+                                                            <div class="s6-flip-btn" data-flip-toggle>ПОДРОБНЕЕ</div>
+                                                        </div>
+                                                        <div class="s6-flip-face s6-flip-face--back">
+                                                            <h4>Подозрение на вирус</h4>
+                                                            <p>Компьютер ведёт себя странно, вы получили подозрительное письмо или файл, который вызывает сомнения.</p>
+                                                            <div class="s6-flip-btn" data-flip-toggle>СКРЫТЬ</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="s6-flip-card" data-flip tabindex="0" role="button" aria-label="Уязвимость — подробнее">
+                                                    <div class="s6-flip-card-inner">
+                                                        <div class="s6-flip-face s6-flip-face--front">
+                                                            <div class="s6-flip-icon-wrap">
+                                                                <img src="assets/images/Уязвимость.png" alt="">
+                                                            </div>
+                                                            <h4>Уязвимость</h4>
+                                                            <div class="s6-flip-btn" data-flip-toggle>ПОДРОБНЕЕ</div>
+                                                        </div>
+                                                        <div class="s6-flip-face s6-flip-face--back">
+                                                            <h4>Уязвимость</h4>
+                                                            <p>Вы узнали, что в какой-то одной из IT-систем возникла уязвимость.</p>
+                                                            <div class="s6-flip-btn" data-flip-toggle>СКРЫТЬ</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="s6-flip-card" data-flip tabindex="0" role="button" aria-label="Проблемы на стороне клиента — подробнее">
+                                                    <div class="s6-flip-card-inner">
+                                                        <div class="s6-flip-face s6-flip-face--front">
+                                                            <div class="s6-flip-icon-wrap">
+                                                                <img src="assets/images/проблемы на стороне клиента.png" alt="">
+                                                            </div>
+                                                            <h4>Проблемы на стороне клиента</h4>
+                                                            <div class="s6-flip-btn" data-flip-toggle>ПОДРОБНЕЕ</div>
+                                                        </div>
+                                                        <div class="s6-flip-face s6-flip-face--back">
+                                                            <h4>Проблемы на стороне клиента</h4>
+                                                            <p>Вы узнали об инциденте безопасности у клиента, который может как-то затронуть IT-инфраструктуру компании ВРК.</p>
+                                                            <div class="s6-flip-btn" data-flip-toggle>СКРЫТЬ</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="s6-flip-card" data-flip tabindex="0" role="button" aria-label="Другое — подробнее">
+                                                    <div class="s6-flip-card-inner">
+                                                        <div class="s6-flip-face s6-flip-face--front">
+                                                            <div class="s6-flip-icon-wrap">
+                                                                <img src="assets/images/другое.png" alt="">
+                                                            </div>
+                                                            <h4>Другое</h4>
+                                                            <div class="s6-flip-btn" data-flip-toggle>ПОДРОБНЕЕ</div>
+                                                        </div>
+                                                        <div class="s6-flip-face s6-flip-face--back">
+                                                            <h4>Другое</h4>
+                                                            <p>Любое другое нарушение действующих правил и политик компании.</p>
+                                                            <div class="s6-flip-btn" data-flip-toggle>СКРЫТЬ</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </section>
+
+                                        <div class="s6-gated is-locked" data-gated-by-flip="s6-incidents">
+                                        <section>
+                                            <div class="s6-alert">
+                                                <span class="s6-alert-mark" aria-hidden="true">!</span>
+                                                <p>Если произошло одно из этих событий, немедленно сообщите об этом в службу информационной безопасности.</p>
+                                            </div>
+                                        </section>
+
+                                        <section>
+                                            <p class="s6-lead">Если в ходе проверки выяснится, что инцидент произошел по вине одного из сотрудников, то его могут привлечь к ответственности.</p>
+                                        </section>
+
+                                        <section class="s6-liability">
+                                            <h2 class="s6-section-title">Ответственность за нарушения</h2>
+                                            <p class="s6-lead">Нарушение правил Политики допустимого использования информационно-технологических ресурсов — это серьезный проступок. В зависимости от тяжести последствий, он может повлечь за собой:</p>
+                                            <ul class="s6-liability-list">
+                                                <li class="s6-liability-item">
+                                                    <span class="s6-liability-bullet" aria-hidden="true"></span>
+                                                    <div class="s6-liability-body">
+                                                        <strong>Административную ответственность:</strong>
+                                                        <ul>
+                                                            <li>для граждан: от 5 до 10 тысяч рублей,</li>
+                                                            <li>для должностных лиц: от 10 до 50 тысяч рублей,</li>
+                                                            <li>для юридических лиц: от 50 до 500 тысяч рублей, в зависимости от нарушения,</li>
+                                                            <li>конфискация несертифицированных средств защиты информации,</li>
+                                                            <li>срок давности привлечения к ответственности — до 1 года.</li>
+                                                        </ul>
+                                                    </div>
+                                                </li>
+                                                <li class="s6-liability-item">
+                                                    <span class="s6-liability-bullet" aria-hidden="true"></span>
+                                                    <div class="s6-liability-body">
+                                                        <strong>Уголовную ответственность:</strong>
+                                                        <ul>
+                                                            <li>лишение свободы от 2 до 8 лет за незаконный доступ, уничтожение или модификацию компьютерной информации,</li>
+                                                            <li>максимальные сроки — до 10 лет в особо тяжких случаях.</li>
+                                                        </ul>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </section>
+                                        </div>
+
+                                    </div>
+                                </article>
+
+                                <article class="s6-part s6-part--outro s6-gated is-locked">
+                                    <div class="s6-outro-inner">
+                                        <h2 class="s6-outro-title">Запомните:</h2>
+                                        <div class="s6-outro-card">
+                                            <ol class="s6-outro-items">
+                                                <li>
+                                                    <span class="s6-outro-num" aria-hidden="true">1</span>
+                                                    <span class="s6-outro-text">К инцидентам безопасности относятся: потеря или утечка данных, кража пароля, подозрение на вирус, найденная уязвимость, проблемы у клиента, любое другое нарушение правил безопасности. Вы должны немедленно сообщить в службу безопасности, если произошло любое из этих событий.</span>
+                                                </li>
+                                                <li>
+                                                    <span class="s6-outro-num" aria-hidden="true">2</span>
+                                                    <span class="s6-outro-text">Нарушение информационной безопасности может повлечь за собой дисциплинарное взыскание, а в некоторых случаях — административную и даже уголовную ответственность.</span>
+                                                </li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                    <div class="slide-nav-bar s6-nav-bar">
+                                        <button type="button" class="slide-btn slide-btn--back" data-action="back" aria-label="Предыдущий раздел">
+                                            <span class="slide-btn-arrow" aria-hidden="true">←</span>
+                                        </button>
+                                        <button type="button" class="slide-btn slide-btn--next btn-next" data-action="next" aria-label="Продолжить">
+                                            <span>ПРОДОЛЖИТЬ</span>
+                                            <span class="slide-btn-sep">|</span>
+                                            <span class="slide-btn-arrow" aria-hidden="true">→</span>
+                                        </button>
+                                    </div>
+                                </article>
+                            </div>
+                        </section>
+                        <!-- Conclusion body — keep in sync with index.html -->
+            <section id="screen-conclusion" class="course-screen c-screen" data-screen="conclusion">
+                <div class="c-page">
+                    <article class="c-part c-part--hero">
+                        <div class="c-hero-inner">
+                            <h1 class="c-title">Заключение</h1>
+                            <div class="c-card">
+                                <p>Поздравляем с успешным завершением обучения! В этом курсе вы освежили и закрепили ключевые принципы, которые помогают защитить ИТ-ресурсы компании, данные клиентов, корпоративную и личную информацию.</p>
+                            </div>
+                            <div class="c-card c-card--hint">
+                                <div class="c-hint-icons" aria-hidden="true">
+                                    <img src="assets/images/mouse.png" alt="" width="48" height="48">
+                                    <img src="assets/images/тачпад.png" alt="" width="48" height="48">
+                                </div>
+                                <p>Крутите колесико мыши или используйте тачпад</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="c-part c-part--content">
+                        <div class="c-content-inner">
+                            <h2 class="c-section-title">Главные мысли, которые важно помнить всегда:</h2>
+                            <div class="c-thoughts-grid">
+                                <div class="c-thought-card">
+                                    <span class="c-thought-icon" aria-hidden="true">!</span>
+                                    <p>Вы несете прямую ответственность за защиту всех IT-ресурсов, с которыми работаете. Основа основ — это использование надежных и уникальных паролей для каждой учетной записи.</p>
+                                </div>
+                                <div class="c-thought-card">
+                                    <span class="c-thought-icon" aria-hidden="true">!</span>
+                                    <p>Ваше рабочее место — это зона, где сосредоточена конфиденциальная информация. Поэтому всегда блокируйте экран, уходя от компьютера, убирайте документы в запираемый ящик и используйте защитные пленки на экране в общественных местах.</p>
+                                </div>
+                                <div class="c-thought-card">
+                                    <span class="c-thought-icon" aria-hidden="true">!</span>
+                                    <p>Для работы используйте только корпоративные устройства, одобренное программное обеспечение и защищенные сети. Никогда не используйте личные девайсы для хранения рабочих данных и не подключайтесь к общественному Wi-Fi для их передачи.</p>
+                                </div>
+                                <div class="c-thought-card">
+                                    <span class="c-thought-icon" aria-hidden="true">!</span>
+                                    <p>Конфиденциальная информация никогда не должна покидать периметр компании. Запрещено загружать ее во внешние сервисы (включая ИИ), пересылать через публичные мессенджеры или обсуждать в соцсетях.</p>
+                                </div>
+                                <div class="c-thought-card">
+                                    <span class="c-thought-icon" aria-hidden="true">!</span>
+                                    <p>Любое подключение к сети клиента или установка его ПО требует формального разрешения. Помните о правиле «одной сети»: запрещено одновременно подключаться к внутренней сети компании и внутренней сети клиента.</p>
+                                </div>
+                                <div class="c-thought-card">
+                                    <span class="c-thought-icon" aria-hidden="true">!</span>
+                                    <p>При малейшем подозрении на инцидент информационной безопасности, от потери ноутбука до получения странного письма, ваша главная задача — немедленно сообщить об этом в службу ИБ.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="c-part c-part--finale">
+                        <div class="c-finale-inner">
+                            <p class="c-finale-lead">И помните, что</p>
+                            <div class="c-quote-block">
+                                <p class="c-quote-main"><span class="c-quote-underline">Лучший файрвол — не программа, а сотрудник,</span></p>
+                                <p class="c-quote-sub">который руководствуется правилами информационной безопасности прежде, чем предпринять действие.</p>
+                            </div>
+                            <button type="button" class="c-finish-btn btn-finish" data-action="finish">
+                                <span>Закройте окно курса, чтобы завершить прохождение</span>
+                                <img src="assets/images/x.svg" alt="" width="24" height="24">
+                            </button>
+                        </div>
+                    </article>
                 </div>
             </section>
         </main>

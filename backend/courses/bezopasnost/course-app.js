@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const MODULE_META = {
         navigation: {
-            index: 1,
             titleLines: ['Инструкция', 'по навигации'],
             tags: [
                 { text: 'Как перемещаться по слайдам', variant: 'beige' },
@@ -15,7 +14,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             ]
         },
         intro: {
-            index: 2,
             titleLines: ['Введение'],
             tags: [
                 { text: 'Зачем учиться защищаться', variant: 'beige' },
@@ -23,7 +21,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             ]
         },
         'section-1': {
-            index: 3,
+            index: 1,
             titleLines: ['Основы', 'безопасности'],
             tags: [
                 { text: 'Виды ИТ-ресурсов', variant: 'beige' },
@@ -31,7 +29,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             ]
         },
         'section-2': {
-            index: 4,
+            index: 2,
             titleLines: ['Работа с', 'ИТ-ресурсами'],
             tags: [
                 { text: 'Правила работы с ИТ-ресурсами', variant: 'beige' },
@@ -40,7 +38,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             ]
         },
         'section-3': {
-            index: 5,
+            index: 3,
             titleLines: ['Работа в офисе', 'и удалённо'],
             tags: [
                 { text: 'Работа в офисе', variant: 'beige' },
@@ -48,7 +46,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             ]
         },
         'section-4': {
-            index: 6,
+            index: 4,
             titleLines: ['Работа', 'в интернете'],
             tags: [
                 { text: 'Интернет', variant: 'beige' },
@@ -56,26 +54,25 @@ document.addEventListener('DOMContentLoaded', async () => {
             ]
         },
         'section-5': {
-            index: 7,
+            index: 5,
             titleLines: ['Работа', 'с клиентами'],
             tags: [
-                { text: 'Конференции', variant: 'beige' },
-                { text: 'Внешние сайты', variant: 'peach' },
-                { text: 'Электронная почта', variant: 'grey' },
-                { text: 'Соцсети и мессенджеры', variant: 'olive' },
-                { text: 'Искусственный интеллект', variant: 'dark' }
+                { text: 'Первичное обращение', variant: 'beige' },
+                { text: 'Виды услуг', variant: 'peach' },
+                { text: 'Этика и поведение', variant: 'grey' },
+                { text: 'Завершение работы', variant: 'olive' }
             ]
         },
         'section-6': {
-            index: 8,
+            index: 6,
             titleLines: ['Ответственность', 'сотрудников'],
             tags: [
-                { text: 'Сообщение об инцидентах безопасности', variant: 'beige' },
-                { text: 'Нарушение политики', variant: 'olive' }
+                { text: 'Инциденты безопасности', variant: 'beige' },
+                { text: 'Ответственность за нарушения', variant: 'peach' },
+                { text: 'Сообщение в службу ИБ', variant: 'olive' }
             ]
         },
         conclusion: {
-            index: 9,
             titleLines: ['Заключение'],
             tags: [
                 { text: 'Главные мысли из курса', variant: 'beige' }
@@ -137,15 +134,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         const section = LMSBridge.getSectionByScreen(currentScreen);
         if (!section) return;
 
-        if (LMSBridge.isScorableSection(section) && !LMSBridge.isSectionCompleted(section.id)) {
+        if (!LMSBridge.isSectionCompleted(section.id)) {
             try {
                 const result = await LMSBridge.completeScreen(currentScreen);
                 if (result?.total_score != null) updateProgress(result.total_score);
             } catch (error) {
                 console.warn(error);
             }
-        } else if (!LMSBridge.isSectionCompleted(section.id)) {
-            await LMSBridge.completeSection(section.id);
         }
         renderContentsGrid();
     }
@@ -231,7 +226,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const meta = MODULE_META[section.screen] || { index: '', titleLines: [section.title || ''], tags: [] };
             const completed = LMSBridge.isSectionCompleted(section.id);
             const unlocked = LMSBridge.isSectionUnlocked(section.id);
-            const isCurrent = section.screen === currentScreen && !completed;
+            const isCurrent = section.screen === currentScreen;
             const isLocked = !unlocked && !completed;
 
             const card = document.createElement('button');
@@ -242,11 +237,14 @@ document.addEventListener('DOMContentLoaded', async () => {
             if (isCurrent) card.classList.add('is-current');
 
             const title = (meta.titleLines || [section.title]).join(' ');
+            const indexMarkup = meta.index != null && meta.index !== ''
+                ? `<div class="module-card-index">${meta.index}</div>`
+                : '';
 
             card.innerHTML = `
                 ${renderWatermark(meta.tags)}
                 <div class="module-card-body">
-                    <div class="module-card-index">${meta.index || ''}</div>
+                    ${indexMarkup}
                     <div class="module-card-title">${title}</div>
                     <div class="module-card-tags">${renderTagMarkup(meta.tags)}</div>
                 </div>

@@ -913,6 +913,18 @@ class Database:
                 None
             )
             if section_meta and not is_scorable_section(section_meta):
+                existing = self._query(
+                    "SELECT section_progress_id FROM Section_progress WHERE assignment_id=? AND section_id=?",
+                    (assignment_id, section_id),
+                    fetch_one=True
+                )
+                if not existing:
+                    self._query(
+                        """INSERT INTO Section_progress (assignment_id, section_id, score, first_attempt_failed)
+                           VALUES (?, ?, 0, 0)""",
+                        (assignment_id, section_id),
+                        commit=True
+                    )
                 total = self._recalculate_assignment_score(assignment_id)
                 return {
                     "section_id": section_id,

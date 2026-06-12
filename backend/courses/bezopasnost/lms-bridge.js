@@ -115,7 +115,9 @@ const LMSBridge = (() => {
         sectionWeight = manifest?.section_weight || 0;
 
         (data.progress?.sections || []).forEach(item => {
-            if (item.score > 0) completedSections.add(item.section_id);
+            const section = (manifest?.sections || []).find(s => s.id === item.section_id);
+            const isDone = item.score > 0 || (section && !isScorableSection(section));
+            if (isDone) completedSections.add(item.section_id);
         });
 
         emit('ready', { manifest, progress: data.progress, passThreshold });
@@ -127,11 +129,6 @@ const LMSBridge = (() => {
         if (!section || section.type === 'splash' || isSectionCompleted(sectionId)) {
             return null;
         }
-        if (!isScorableSection(section)) {
-            completedSections.add(sectionId);
-            return null;
-        }
-
         const passedFirstTry = options.passedFirstTry !== false;
         const response = await fetch(
             `${API_URL}/courses/${courseId}/sections/${sectionId}/complete`,

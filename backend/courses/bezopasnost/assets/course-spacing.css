@@ -1,0 +1,258 @@
+/* ── Единая система отступов курса ── */
+
+#course-app {
+  --ds-gap-same: 40px;
+  --ds-h2-before: 20px;
+  --ds-h2-after: 60px;
+  --ds-h3-before: 20px;
+  --ds-h3-after: 40px;
+  --ds-instruction-gap: 15px;
+  --ds-quiz-option-gap: 15px;
+  --ds-feedback-btn-before: 20px;
+  --ds-content-to-player: 150px;
+}
+
+/* Между крупными блоками контента */
+#course-app :is(
+  [class*="-content-inner"],
+  .intro-content-inner,
+  .c-content-inner
+) {
+  gap: var(--ds-gap-same);
+}
+
+/* Между однородными / однотипными элементами */
+#course-app :is(
+  [class*="-learn-grid"],
+  [class*="-flip-cards"],
+  [class*="-policy-cards"],
+  [class*="-two-cards"],
+  [class*="-services-grid"],
+  [class*="-incident-grid"],
+  [class*="-site-grid"],
+  [class*="-mail-grid"],
+  [class*="-cloud-layout"],
+  [class*="-rules-grid"],
+  [class*="-thoughts-grid"],
+  .intro-module-cards,
+  [class*="-ladder"],
+  [class*="-steps"],
+  [class*="-trip-cards"],
+  [class*="-vuln-grid"]
+) {
+  gap: var(--ds-gap-same);
+}
+
+#course-app [class*="-accordion"]:not([class*="-accordion-item"]) {
+  gap: var(--ds-gap-same);
+}
+
+#course-app [data-drag-drop] {
+  gap: var(--ds-gap-same);
+}
+
+#course-app [data-quiz] {
+  gap: 0;
+}
+
+#course-app [data-quiz] > [class*="-quiz-scenario"] {
+  margin-bottom: 20px;
+}
+
+#course-app [data-quiz] > [class*="-instruction"] {
+  margin-bottom: var(--ds-quiz-option-gap);
+}
+
+#course-app [data-quiz] > [class*="-quiz-options"] {
+  margin-bottom: 20px;
+}
+
+#course-app [class*="-quiz-options"] {
+  gap: var(--ds-quiz-option-gap);
+}
+
+/* Заголовок 2 уровня */
+#course-app :is(
+  .course-screen [class*="-section-title"],
+  .intro-screen .intro-section-title,
+  .c-section-title
+) {
+  margin-top: var(--ds-h2-before);
+  margin-bottom: var(--ds-h2-after);
+}
+
+#course-app :is(
+  .course-screen [class*="-section-title"],
+  .intro-screen .intro-section-title,
+  .c-section-title
+):first-child {
+  margin-top: 0;
+}
+
+#course-app [class*="-marker-section"] [class*="-section-title"] {
+  margin-bottom: var(--ds-h2-after);
+}
+
+/* Заголовок 3 уровня (кроме баблов) */
+#course-app .course-screen h3,
+#course-app .intro-screen h3,
+#course-app .c-screen h3 {
+  margin-top: var(--ds-h3-before);
+  margin-bottom: var(--ds-h3-after);
+}
+
+#course-app :is(.course-screen, .intro-screen, .c-screen) :is(
+  section,
+  article,
+  div
+) > h3:first-child {
+  margin-top: 0;
+}
+
+/* Внутри баблов — отступы не меняем */
+#course-app :is(
+  .s1-highlight,
+  .s1-note-box,
+  .s2-highlight,
+  .s3-highlight,
+  .s5-highlight,
+  .intro-two-col,
+  [class*="-flip-card"],
+  [class*="-policy-card"],
+  [class*="-service-card"],
+  [class*="-learn-item"]
+) h3 {
+  margin: 0;
+}
+
+/* Плашки с заголовком и пунктами */
+#course-app :is(.s2-modal-card, .s3-modal-card) h3 {
+  margin: 0 0 20px;
+}
+
+#course-app [class*="-modal-list"],
+#course-app [class*="-numbered-items"],
+#course-app [class*="-numbered-nums"] {
+  gap: 15px;
+}
+
+#course-app :is(.s2-modal-card, .s3-modal-card) p + [class*="-modal-list"],
+#course-app .s1-highlight p + [class*="-numbered-list"] {
+  margin-top: 15px;
+}
+
+/* Сетки пунктов с иконками */
+#course-app [class*="-grid-2"],
+#course-app [class*="-ai-forbidden"] {
+  gap: 15px;
+}
+
+#course-app [class*="-forbidden-block"] > [class*="-lead"] {
+  margin-bottom: 15px;
+}
+
+/* Подписи и текстовые блоки между однотипными секциями */
+#course-app .course-screen :is(
+  [class*="-label"],
+  [class*="-lead"],
+  [class*="-subtitle"],
+  [class*="-highlight"]
+) {
+  margin-top: 0;
+  margin-bottom: var(--ds-gap-same);
+}
+
+#course-app .course-screen [class*="-section-title"] + :is(
+  [class*="-lead"],
+  [class*="-subtitle"],
+  [class*="-label"],
+  [class*="-instruction"]
+) {
+  margin-top: 0;
+}
+
+/* Текст после карточек-баблов */
+#course-app .course-screen :is(
+  [class*="-two-cards"],
+  [class*="-trip-cards"]
+) + :is(
+  [class*="-lead"],
+  [class*="-subtitle"],
+  [class*="-highlight"]
+) {
+  margin-top: var(--ds-gap-same);
+}
+
+#course-app .course-screen [class*="-services-grid"] + [class*="-highlight"] {
+  margin-top: var(--ds-gap-same);
+}
+
+/* Следующий gated-блок / секция (слайдер → заголовок) */
+#course-app .course-screen section + [class*="-gated"],
+#course-app [class*="-gated"] + [class*="-gated"] {
+  margin-top: var(--ds-gap-same);
+}
+
+#course-app [class*="-gated"] section + section {
+  margin-top: var(--ds-gap-same);
+}
+
+/* Подзаголовок после alert-блока */
+#course-app .course-screen section > [class*="-alert"] + [class*="-label"] {
+  margin-top: var(--ds-gap-same);
+}
+
+/* Заголовок внутри highlight-бабла */
+#course-app .s1-highlight h3 {
+  margin-bottom: 20px;
+}
+
+/* Однотипные блоки подряд внутри секции */
+#course-app .course-screen section > :is(
+  [class*="-note-box"],
+  [class*="-alert"],
+  [class*="-highlight"]
+) + :is(
+  [class*="-note-box"],
+  [class*="-alert"],
+  [class*="-highlight"]
+) {
+  margin-top: var(--ds-gap-same);
+}
+
+/* Подсказка к интерактиву → сам интерактив */
+#course-app .course-screen [class*="-instruction"] {
+  margin-top: 0;
+  margin-bottom: var(--ds-instruction-gap);
+}
+
+/* Кнопки → блок обратной связи */
+#course-app :is(
+  [class*="-quiz-feedback"],
+  [class*="-drag-feedback"]
+):not(.is-hidden) {
+  margin-top: var(--ds-gap-same);
+}
+
+/* Кнопки в обратной связи */
+#course-app [class*="-quiz-feedback"] [data-quiz-retry],
+#course-app [class*="-drag-feedback"] [data-drag-retry] {
+  margin-top: var(--ds-feedback-btn-before);
+}
+
+/* От последнего блока контента до плеера */
+#course-app :is(
+  [class*="-nav-bar"].slide-nav-bar,
+  .intro-nav-bar.slide-nav-bar,
+  .c-nav-bar.slide-nav-bar
+) {
+  margin-top: var(--ds-content-to-player);
+}
+
+#course-app .c-finale-inner {
+  gap: var(--ds-gap-same);
+}
+
+#course-app .c-finish-btn {
+  margin-top: calc(var(--ds-content-to-player) - var(--ds-gap-same));
+}

@@ -38,8 +38,8 @@ class CourseProgressTests(unittest.TestCase):
             {"id": "ending", "type": "conclusion"},
         ]
         scorable = get_scorable_sections(sections)
-        self.assertEqual([section["id"] for section in scorable], ["navigation", "basics"])
-        self.assertEqual(100.0 / len(scorable), 50.0)
+        self.assertEqual([section["id"] for section in scorable], ["basics"])
+        self.assertEqual(100.0 / len(scorable), 100.0)
 
     def test_bezopasnost_course_manifest_scoring(self):
         manifest = load_course_manifest("bezopasnost")

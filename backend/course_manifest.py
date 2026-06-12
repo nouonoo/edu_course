@@ -10,7 +10,7 @@ PASS_THRESHOLD = 70
 
 NON_SCORABLE_TYPES = frozenset({'splash', 'intro', 'conclusion'})
 
-NON_SCORABLE_IDS = frozenset({'intro', 'conclusion'})
+NON_SCORABLE_IDS = frozenset({'navigation', 'intro', 'conclusion'})
 
 
 
