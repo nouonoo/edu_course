@@ -141,7 +141,10 @@ def upload_profile_photo():
 @app.route('/api/profile', methods=['PUT'])
 @jwt_required()
 def update_profile():
-    user_id = get_jwt_identity().get('user_id')
+    identity = get_jwt_identity()
+    if is_expert(identity.get('role')):
+        return jsonify({"message": "Редактирование профиля недоступно для эксперта"}), 403
+    user_id = identity.get('user_id')
     data = request.get_json() or {}
     if not db.update_user_profile(user_id, data):
         return jsonify({"message": "Ошибка обновления профиля"}), 500

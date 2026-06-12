@@ -10,8 +10,14 @@ document.addEventListener('DOMContentLoaded', async () => {
         window.location.replace('profile.html');
         return;
     }
+    const isExpert = role === 'expert';
     const isEdit = params.get('edit') === '1';
     const isAdmin = role === 'admin';
+
+    if (isExpert && isEdit) {
+        window.location.replace('profile.html');
+        return;
+    }
 
     let viewPhotoUpload = null;
     let editPhotoUpload = null;
@@ -21,8 +27,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         window.location.href = getDefaultPageForRole(role);
     });
 
-    if (isAdmin) {
+    if (isAdmin || isExpert) {
         document.getElementById('profile-edit')?.remove();
+    }
+
+    if (isAdmin) {
         document.getElementById('profile-photo-block')?.remove();
     } else if (isEdit) {
         document.getElementById('profile-view').style.display = 'none';
@@ -63,43 +72,45 @@ document.addEventListener('DOMContentLoaded', async () => {
             });
         }
 
-        editPhotoUpload = initPhotoUpload({
-            zoneId: 'edit-photo-field',
-            inputId: 'edit-photo',
-            previewId: 'edit-photo-preview',
-            selectBtnId: 'edit-photo-select-btn'
-        });
+        if (!isExpert) {
+            editPhotoUpload = initPhotoUpload({
+                zoneId: 'edit-photo-field',
+                inputId: 'edit-photo',
+                previewId: 'edit-photo-preview',
+                selectBtnId: 'edit-photo-select-btn'
+            });
 
-        document.getElementById('edit-form')?.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const status = document.getElementById('edit-status');
-            const editPhotoInput = editPhotoUpload.getInput();
-            const payload = {
-                surname: document.getElementById('edit-surname').value,
-                name: document.getElementById('edit-name').value,
-                patronymic: document.getElementById('edit-patronymic').value,
-                phone: document.getElementById('edit-phone').value,
-                birthday: document.getElementById('edit-birthday').value || null
-            };
-            const response = await apiFetch('/profile', { method: 'PUT', body: JSON.stringify(payload) });
-            const data = await response.json();
-            if (!response.ok) {
-                status.style.color = 'red';
-                status.textContent = data.message;
-                return;
-            }
-            if (editPhotoInput?.files[0]) {
-                try {
-                    await uploadPhoto('/profile/photo', editPhotoInput);
-                } catch (photoError) {
+            document.getElementById('edit-form')?.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const status = document.getElementById('edit-status');
+                const editPhotoInput = editPhotoUpload.getInput();
+                const payload = {
+                    surname: document.getElementById('edit-surname').value,
+                    name: document.getElementById('edit-name').value,
+                    patronymic: document.getElementById('edit-patronymic').value,
+                    phone: document.getElementById('edit-phone').value,
+                    birthday: document.getElementById('edit-birthday').value || null
+                };
+                const response = await apiFetch('/profile', { method: 'PUT', body: JSON.stringify(payload) });
+                const data = await response.json();
+                if (!response.ok) {
                     status.style.color = 'red';
-                    status.textContent = photoError.message;
+                    status.textContent = data.message;
                     return;
                 }
-            }
-            status.style.color = 'green';
-            status.textContent = data.message;
-        });
+                if (editPhotoInput?.files[0]) {
+                    try {
+                        await uploadPhoto('/profile/photo', editPhotoInput);
+                    } catch (photoError) {
+                        status.style.color = 'red';
+                        status.textContent = photoError.message;
+                        return;
+                    }
+                }
+                status.style.color = 'green';
+                status.textContent = data.message;
+            });
+        }
     }
 
     try {
@@ -111,7 +122,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             document.getElementById('profile-full-name').textContent = session.full_name;
             document.getElementById('profile-position').textContent = `Логин: ${session.email}`;
             document.getElementById('profile-birthday').textContent = '';
-            document.getElementById('profile-progress').textContent = '';
             return;
         }
 
@@ -129,8 +139,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.getElementById('profile-position').textContent = profile.position_name || '';
         document.getElementById('profile-birthday').textContent =
             `День рождения: ${formatBirthday(profile.birthday)}`;
-        document.getElementById('profile-progress').textContent =
-            `${String(profile.completed_sections).padStart(2, '0')}/${String(profile.total_sections).padStart(2, '0')} Пройдено разделов`;
 
         const managersEl = document.getElementById('profile-managers');
         if (profile.managers && profile.managers.length) {

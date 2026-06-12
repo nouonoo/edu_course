@@ -374,15 +374,65 @@ function getAccountMenuHtml(role) {
 
     }
 
+    if (role === 'expert') {
+
+        return `
+
+            <a href="profile.html" class="account-link">Личный кабинет</a>
+
+            <button type="button" class="account-link account-link-danger" id="logout-link">Выйти</button>
+
+        `;
+
+    }
+
     return `
-
-        <a href="profile.html" class="account-link">Личный кабинет</a>
-
-        <a href="profile.html?edit=1" class="account-link">Редактировать профиль</a>
 
         <button type="button" class="account-link account-link-danger" id="logout-link">Выйти</button>
 
     `;
+
+}
+
+
+
+function sanitizeAccountMenu(dropdown, role) {
+
+    if (!dropdown) return;
+
+    dropdown.querySelectorAll(
+        '#feedback-link, [href*="tab=feedback"], [href*="feedback"], [data-menu="feedback"]'
+    ).forEach((el) => el.remove());
+
+    dropdown.querySelectorAll('.account-link, .account-dropdown-actions button, .account-dropdown-actions a').forEach((el) => {
+
+        const text = (el.textContent || '').trim().toLowerCase();
+
+        if (text.includes('обратная связь') || text.includes('feedback')) {
+
+            el.remove();
+
+        }
+
+    });
+
+    if (role === 'expert') {
+
+        dropdown.querySelectorAll('[href*="edit=1"]').forEach((el) => el.remove());
+
+        dropdown.querySelectorAll('.account-link, .account-dropdown-actions a').forEach((el) => {
+
+            const text = (el.textContent || '').trim().toLowerCase();
+
+            if (text.includes('редактировать профиль')) {
+
+                el.remove();
+
+            }
+
+        });
+
+    }
 
 }
 
@@ -404,7 +454,27 @@ function initAppHeader(activePage) {
 
 
 
-    let accountBtn = header.querySelector('.account-menu-btn');
+    let accountWrap = header.querySelector('.account-menu-wrap');
+
+    if (!accountWrap) {
+
+        accountWrap = document.createElement('div');
+
+        accountWrap.className = 'account-menu-wrap';
+
+        header.appendChild(accountWrap);
+
+    }
+
+
+
+    let accountBtn = accountWrap.querySelector('.account-menu-btn');
+
+    if (!accountBtn) {
+
+        accountBtn = header.querySelector('.account-menu-btn');
+
+    }
 
     if (!accountBtn) {
 
@@ -418,7 +488,11 @@ function initAppHeader(activePage) {
 
         accountBtn.textContent = '☰';
 
-        header.appendChild(accountBtn);
+    }
+
+    if (accountBtn.parentElement !== accountWrap) {
+
+        accountWrap.appendChild(accountBtn);
 
     }
 
@@ -438,7 +512,7 @@ function initAppHeader(activePage) {
 
     dropdown.className = 'account-dropdown';
 
-    document.body.appendChild(dropdown);
+    accountWrap.appendChild(dropdown);
 
 
 
@@ -462,7 +536,7 @@ function initAppHeader(activePage) {
 
     `;
 
-    dropdown.querySelectorAll('#feedback-link, [href*="tab=feedback"]').forEach((el) => el.remove());
+    sanitizeAccountMenu(dropdown, role);
 
 
 
@@ -472,7 +546,13 @@ function initAppHeader(activePage) {
 
         dropdown.classList.toggle('open');
 
-        if (dropdown.classList.contains('open')) loadAccountPreview();
+        if (dropdown.classList.contains('open')) {
+
+            sanitizeAccountMenu(dropdown, getUserRole());
+
+            loadAccountPreview();
+
+        }
 
     };
 
@@ -484,7 +564,7 @@ function initAppHeader(activePage) {
 
     document.addEventListener('click', (event) => {
 
-        if (!dropdown.contains(event.target) && event.target !== accountBtn) {
+        if (!accountWrap.contains(event.target)) {
 
             dropdown.classList.remove('open');
 

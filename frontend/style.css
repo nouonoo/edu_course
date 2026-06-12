@@ -63,8 +63,8 @@ h2 {
 .app-header nav {
     display: flex;
     gap: 30px;
-    width: 100%;
-    justify-content: center; 
+    flex: 1;
+    justify-content: center;
 }
 
 .nav-link {
@@ -821,6 +821,12 @@ h2 {
     font-size: 0.9rem;
 }
 
+.account-menu-wrap {
+    position: relative;
+    flex-shrink: 0;
+    margin-left: 12px;
+}
+
 .account-menu-btn {
     background-color: var(--color-primary);
     border: none;
@@ -832,9 +838,9 @@ h2 {
 }
 
 .account-dropdown {
-    position: fixed;
-    top: 90px;
-    right: 5%;
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
     width: 280px;
     background: var(--color-white);
     border-radius: var(--radius-main);
