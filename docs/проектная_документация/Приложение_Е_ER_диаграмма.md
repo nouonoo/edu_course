@@ -1,127 +1,159 @@
-# Приложение Е. ER-диаграмма
+# Приложение Е. ER-диаграмма (физическая модель)
 
 **Проект:** Адаптационный курс для сотрудников ритуальной компании  
-**Версия:** 1.0  
-**Дата:** июнь 2026  
-**СУБД:** Microsoft SQL Server, база `LearningPlatformDB`
+**СУБД:** Microsoft SQL Server, база `LearningPlatformDB`  
+**Нотация:** физическая ER-модель (PK / FK)  
+**Версия:** 1.1  
+**Дата:** июнь 2026
 
 ---
 
-## Рисунок 4. ER-диаграмма
+## Рисунок 4. Физическая ER-диаграмма базы данных
+
+Диаграмма построена по стандарту физического моделирования: у каждой сущности указаны первичные (PK) и внешние (FK) ключи, типы связей 1:N и 1:1.
 
 ```mermaid
 erDiagram
-    Users ||--o{ UserRoles : "имеет"
-    Roles ||--o{ UserRoles : "назначена"
-    Position ||--o{ Users : "должность"
-    Users ||--o{ Assignments : "назначен"
-    Users ||--o{ Assignments : "назначил"
-    Courses ||--o{ Assignments : "включает"
-    Assignments ||--o{ Section_progress : "прогресс"
-    Users ||--o{ User_result : "результат"
-    Courses ||--o{ User_result : "по курсу"
-    Assignments ||--o| User_result : "по назначению"
-    Users ||--o{ Courses : "автор"
+    Position ||--o{ Users : "FK position_id"
+    Users ||--o{ UserRoles : "FK user_id"
+    Roles ||--o{ UserRoles : "FK role_id"
+    Users ||--o{ Courses : "FK author_id"
+    Users ||--o{ Assignments : "FK user_id"
+    Users ||--o{ Assignments : "FK assigned_by"
+    Courses ||--o{ Assignments : "FK course_id"
+    Assignments ||--o{ Section_progress : "FK assignment_id"
+    Assignments ||--o| User_result : "FK assignment_id"
+    Users ||--o{ User_result : "FK user_id"
+    Courses ||--o{ User_result : "FK course_id"
+    Users ||--o{ Feedback : "FK user_id"
 
-    Users {
-        int user_id PK
-        nvarchar name
-        nvarchar surname
-        nvarchar patronymic
-        int position_id FK
-        nvarchar email UK
-        nvarchar password_hash
-        nvarchar photo
-        date birthday
-        nvarchar phone
-        nvarchar status
+    Position {
+        int Position_id PK "IDENTITY"
+        nvarchar name "NOT NULL"
     }
 
     Roles {
-        int role_id PK
-        nvarchar role_name UK
+        int role_id PK "IDENTITY"
+        nvarchar role_name UK "NOT NULL"
+    }
+
+    Users {
+        int user_id PK "IDENTITY"
+        nvarchar name "NOT NULL"
+        nvarchar surname "NOT NULL"
+        nvarchar patronymic "NULL"
+        int position_id FK "NULL"
+        nvarchar email UK "NOT NULL"
+        nvarchar password_hash "NOT NULL"
+        nvarchar photo "NULL"
+        date birthday "NULL"
+        nvarchar phone "NULL"
+        nvarchar status "DEFAULT active"
     }
 
     UserRoles {
-        int UserRoles_id PK
-        int user_id FK
-        int role_id FK
-    }
-
-    Position {
-        int Position_id PK
-        nvarchar name
+        int UserRoles_id PK "IDENTITY"
+        int user_id FK "NOT NULL"
+        int role_id FK "NOT NULL"
     }
 
     Courses {
-        int course_id PK
-        nvarchar title
-        nvarchar description
-        int author_id FK
-        datetime2 date
-        nvarchar storage
+        int course_id PK "IDENTITY"
+        nvarchar title "NOT NULL"
+        nvarchar description "NULL"
+        int author_id FK "NOT NULL"
+        datetime2 date "DEFAULT getdate()"
+        nvarchar storage "NULL"
     }
 
     Assignments {
-        int assignment_id PK
-        int user_id FK
-        int course_id FK
-        int assigned_by FK
-        date date_from
-        date date_to
-        nvarchar status
-        datetime2 assigned_at
+        int assignment_id PK "IDENTITY"
+        int user_id FK "NOT NULL"
+        int course_id FK "NOT NULL"
+        int assigned_by FK "NOT NULL"
+        date date_from "NOT NULL"
+        date date_to "NOT NULL"
+        nvarchar status "DEFAULT active"
+        datetime2 assigned_at "DEFAULT getdate()"
     }
 
     Section_progress {
-        int section_progress_id PK
-        int assignment_id FK
-        nvarchar section_id
-        float score
-        bit first_attempt_failed
-        datetime2 updated_at
+        int section_progress_id PK "IDENTITY"
+        int assignment_id FK "NOT NULL"
+        nvarchar section_id "NOT NULL"
+        float score "DEFAULT 0"
+        bit first_attempt_failed "DEFAULT 0"
+        datetime2 updated_at "DEFAULT getdate()"
     }
 
     User_result {
-        int User_result_id PK
-        float result
-        int user_id FK
-        int course_id FK
-        date date
-        int assignment_id FK
+        int User_result_id PK "IDENTITY"
+        float result "NULL"
+        int user_id FK "NOT NULL"
+        int course_id FK "NOT NULL"
+        date date "NOT NULL"
+        int assignment_id FK "NULL"
+    }
+
+    Feedback {
+        int feedback_id PK "IDENTITY"
+        int user_id FK "NOT NULL"
+        nvarchar message "NOT NULL"
+        datetime2 created_at "DEFAULT getdate()"
     }
 ```
 
 ---
 
-## Описание связей
+## Таблица связей
 
-| Связь | Тип | Описание |
-|-------|-----|----------|
-| Users — UserRoles — Roles | M:N | Пользователь может иметь одну роль (через связующую таблицу) |
-| Position — Users | 1:N | Справочник должностей |
-| Users — Assignments (user_id) | 1:N | Назначения, полученные сотрудником |
-| Users — Assignments (assigned_by) | 1:N | Назначения, созданные экспертом |
-| Courses — Assignments | 1:N | Курс может быть назначен многим сотрудникам |
-| Assignments — Section_progress | 1:N | Прогресс по разделам в рамках назначения |
-| Users — User_result | 1:N | Итоговые баллы пользователя |
-| Courses — User_result | 1:N | Результаты по курсу |
-| Assignments — User_result | 1:1 | Результат привязан к конкретному назначению |
-| Users — Courses (author_id) | 1:N | Автор (создатель) записи курса в каталоге |
+| Связь | Тип | FK | ON DELETE | Описание |
+|-------|-----|-----|-----------|----------|
+| Position → Users | 1:N | Users.position_id | — | Должность сотрудника |
+| Users → UserRoles | 1:N | UserRoles.user_id | CASCADE | Роли пользователя |
+| Roles → UserRoles | 1:N | UserRoles.role_id | CASCADE | Справочник ролей |
+| Users → Courses | 1:N | Courses.author_id | — | Автор записи курса |
+| Users → Assignments (user_id) | 1:N | Assignments.user_id | CASCADE | Назначенный сотрудник |
+| Users → Assignments (assigned_by) | 1:N | Assignments.assigned_by | — | Эксперт-назначивший |
+| Courses → Assignments | 1:N | Assignments.course_id | CASCADE | Курс в назначении |
+| Assignments → Section_progress | 1:N | Section_progress.assignment_id | CASCADE | Прогресс по разделам |
+| Assignments → User_result | 1:1 | User_result.assignment_id | — | Итог по назначению |
+| Users → User_result | 1:N | User_result.user_id | CASCADE | Результаты сотрудника |
+| Courses → User_result | 1:N | User_result.course_id | CASCADE | Результаты по курсу |
+| Users → Feedback | 1:N | Feedback.user_id | CASCADE | Обратная связь |
 
 ---
 
-## Примечание о структуре курса
+## Уникальные ограничения
 
-Разделы, квизы и интерактивы **не хранятся в отдельных таблицах БД**. Структура нативного курса описана в файле `course.json` в папке `backend/courses/<storage>/`. SCORM-курсы используют `imsmanifest.xml`.
+| Таблица | Ограничение | Назначение |
+|---------|-------------|------------|
+| Users | UQ(email) | Один email — одна учётная запись |
+| Roles | UQ(role_name) | Уникальное имя роли |
+| UserRoles | UQ(user_id, role_id) | Одна роль не дублируется у пользователя |
+| Section_progress | UQ(assignment_id, section_id) | Один раздел — одна запись прогресса |
 
-Концептуальные сущности «Модуль» и «Квиз» из учебного шаблона отображаются на:
+---
 
-- **Модуль** → `section_id` в `Section_progress` и записи manifest;
-- **Квиз** → HTML-разметка с `data-quiz` в файлах курса.
+## Сущности вне БД (файловая модель)
+
+Структура разделов и квизов **не хранится в таблицах**. Она описана в:
+
+| Тип курса | Файл | Пример поля |
+|-----------|------|-------------|
+| Нативный | `course.json` | `sections[].id`, `weight`, `scorable` |
+| SCORM 2004 | `imsmanifest.xml` | organization, resources |
+
+Поле `Section_progress.section_id` ссылается на идентификатор из manifest, а не на FK в БД.
+
+---
+
+## Скрипт создания
+
+Полный SQL-скрипт — в [Приложение_К_Скрипт_базы_данных.md](Приложение_К_Скрипт_базы_данных.md) и `backend/LearningPlatformDB.sql`.
 
 ---
 
 ## Примечание для переноса в Word
 
-Экспортируйте диаграмму как «Рисунок 4. ER-диаграмма» для включения в пояснительную записку.
+Вставьте диаграмму как **«Рисунок 4. Физическая ER-диаграмма базы данных LearningPlatformDB»**. При отрисовке в ERwin / draw.io используйте обозначения PK и FK, как на учебном примере физической модели.
