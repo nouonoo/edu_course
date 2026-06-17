@@ -44,17 +44,50 @@ def is_expert(role):
     return role == 'expert'
 
 
+def _format_person_name(surname, name, patronymic=None):
+    return f"{surname} {name} {patronymic or ''}".strip()
+
+
+def _format_report_date(value):
+    if not value:
+        return None
+    return value.strftime('%Y-%m-%d')
+
+
+def _format_report_verdict(row):
+    status = getattr(row, 'assignment_status', None)
+    progress = float(getattr(row, 'progress_percent', 0) or 0)
+    if status == 'active':
+        return 'В процессе'
+    if status == 'passed' or progress >= PASS_THRESHOLD:
+        return 'Успешно'
+    if status == 'failed' or progress > 0:
+        return 'Не сдано'
+    return 'Не сдано'
+
+
 def create_excel_report(data_rows):
     if data_rows is None:
         return None
-    data = [
-        {
-            "ФИО": f"{row.surname} {row.name} {row.patronymic if row.patronymic else ''}".strip(),
-            "Статус прохождения": 'Успешно' if row.result >= PASS_THRESHOLD else 'Неуспешно',
-            "Дата прохождения": row.date.strftime('%Y-%m-%d') if row.date else None
-        }
-        for row in data_rows
-    ]
+    data = []
+    for row in data_rows:
+        assigner_name = None
+        if getattr(row, 'assigner_surname', None):
+            assigner_name = _format_person_name(
+                row.assigner_surname, row.assigner_name, row.assigner_patronymic
+            )
+        progress = round(float(getattr(row, 'progress_percent', 0) or 0))
+        data.append({
+            "ФИО": _format_person_name(row.surname, row.name, row.patronymic),
+            "Должность": getattr(row, 'position_name', None),
+            "Курс": getattr(row, 'course_title', None) or getattr(row, 'title', None),
+            "Назначил": assigner_name,
+            "Дата назначения": _format_report_date(getattr(row, 'assignment_date', None)),
+            "Дедлайн": _format_report_date(getattr(row, 'deadline_date', None)),
+            "Дата прохождения": _format_report_date(getattr(row, 'completion_date', None)),
+            "Вердикт": _format_report_verdict(row),
+            "Процент выполнения": progress,
+        })
     if not data:
         return None
     df = pd.DataFrame(data)

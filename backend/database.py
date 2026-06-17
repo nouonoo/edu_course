@@ -469,9 +469,16 @@ class Database:
         ]
 
     def get_report_data(self, user_id=None, course_id=None, date_from=None, date_to=None):
+        if self._table_exists('Assignments'):
+            return self._get_assignment_report_data(user_id, course_id, date_from, date_to)
+
         sql = """
             SELECT U.surname, U.name, U.patronymic, P.name AS position_name,
-                   C.title, UR.result, UR.date
+                   C.title AS course_title,
+                   NULL AS assigner_surname, NULL AS assigner_name, NULL AS assigner_patronymic,
+                   NULL AS assignment_date, NULL AS deadline_date,
+                   UR.date AS completion_date, NULL AS assignment_status,
+                   COALESCE(UR.result, 0) AS progress_percent
             FROM User_result UR
             JOIN Users U ON UR.user_id = U.user_id
             JOIN Courses C ON UR.course_id = C.course_id
@@ -492,6 +499,59 @@ class Database:
             sql += " AND UR.date <= ?"
             params.append(date_to)
         sql += " ORDER BY UR.date DESC"
+        return self._query(sql, tuple(params))
+
+    def _get_assignment_report_data(self, user_id=None, course_id=None, date_from=None, date_to=None):
+        section_scores_sql = ""
+        section_scores_join = ""
+        if self._table_exists('Section_progress'):
+            section_scores_sql = """
+                LEFT JOIN (
+                    SELECT assignment_id, COALESCE(SUM(score), 0) AS total_score
+                    FROM Section_progress
+                    GROUP BY assignment_id
+                ) SP ON SP.assignment_id = A.assignment_id
+            """
+            section_scores_join = "COALESCE(UR.result, SP.total_score, 0)"
+        else:
+            section_scores_join = "COALESCE(UR.result, 0)"
+
+        assigned_at_col = "A.assigned_at" if self._column_exists('Assignments', 'assigned_at') else "A.date_from"
+
+        sql = f"""
+            SELECT
+                U.surname, U.name, U.patronymic,
+                P.name AS position_name,
+                C.title AS course_title,
+                AB.surname AS assigner_surname, AB.name AS assigner_name, AB.patronymic AS assigner_patronymic,
+                {assigned_at_col} AS assignment_date,
+                A.date_to AS deadline_date,
+                CASE WHEN A.status IN ('passed', 'failed') THEN UR.date ELSE NULL END AS completion_date,
+                A.status AS assignment_status,
+                {section_scores_join} AS progress_percent
+            FROM Assignments A
+            JOIN Users U ON A.user_id = U.user_id
+            JOIN Courses C ON A.course_id = C.course_id
+            JOIN Users AB ON A.assigned_by = AB.user_id
+            LEFT JOIN Position P ON U.position_id = P.Position_id
+            LEFT JOIN User_result UR ON UR.assignment_id = A.assignment_id
+            {section_scores_sql}
+            WHERE 1=1
+        """
+        params = []
+        if user_id:
+            sql += " AND U.user_id = ?"
+            params.append(user_id)
+        if course_id:
+            sql += " AND C.course_id = ?"
+            params.append(course_id)
+        if date_from:
+            sql += " AND A.date_to >= ?"
+            params.append(date_from)
+        if date_to:
+            sql += " AND A.date_from <= ?"
+            params.append(date_to)
+        sql += f" ORDER BY {assigned_at_col} DESC, U.surname, U.name"
         return self._query(sql, tuple(params))
 
     def get_all_users(self, search=None):
