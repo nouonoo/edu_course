@@ -1052,6 +1052,33 @@ class Database:
             "total_sections": required_sections
         }, None
 
+    def upsert_scorm_section_progress(self, assignment_id, section_id, score, allow_decrease=False):
+        score = max(0, float(score))
+        existing = self._query(
+            """SELECT section_progress_id, score
+               FROM Section_progress
+               WHERE assignment_id=? AND section_id=?""",
+            (assignment_id, section_id),
+            fetch_one=True
+        )
+        if existing:
+            current_score = float(existing.score) if existing.score is not None else 0
+            if not allow_decrease and score < current_score:
+                score = current_score
+            self._query(
+                "UPDATE Section_progress SET score=? WHERE section_progress_id=?",
+                (score, existing.section_progress_id),
+                commit=True
+            )
+        else:
+            self._query(
+                """INSERT INTO Section_progress (assignment_id, section_id, score, first_attempt_failed)
+                   VALUES (?, ?, ?, 0)""",
+                (assignment_id, section_id, score),
+                commit=True
+            )
+        return self._recalculate_assignment_score(assignment_id)
+
     def _recalculate_assignment_score(self, assignment_id):
         row = self._query(
             "SELECT COALESCE(SUM(score), 0) AS total FROM Section_progress WHERE assignment_id=?",

@@ -56,16 +56,16 @@
         }
     }
 
-    async function persistState() {
+    function persistState() {
         const cid = courseId();
         const aid = assignmentId();
         if (!cid || !aid) return;
         try {
-            await fetch(`${apiUrl(`/scorm/${cid}/state`)}`, {
-                method: 'POST',
-                headers: authHeaders(),
-                body: JSON.stringify({ assignment_id: Number(aid), values: { ...cache } })
-            });
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', `${apiUrl(`/scorm/${cid}/state`)}`, false);
+            const headers = authHeaders();
+            Object.keys(headers).forEach((key) => xhr.setRequestHeader(key, headers[key]));
+            xhr.send(JSON.stringify({ assignment_id: Number(aid), values: { ...cache } }));
         } catch (error) {
             console.warn('SCORM state save failed', error);
         }
