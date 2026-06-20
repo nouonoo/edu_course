@@ -1210,3 +1210,70 @@ h2 {
     margin-left: 8px;
     vertical-align: middle;
 }
+
+.schedule-panel {
+    margin: 24px 0 32px;
+    padding: 20px 24px;
+    background: var(--color-white);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+}
+
+.schedule-panel-header h2 {
+    margin: 0 0 8px;
+    font-size: 1.35rem;
+}
+
+.schedule-reminders {
+    display: grid;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.schedule-reminder {
+    padding: 12px 14px;
+    border-radius: var(--radius-input);
+    background: #fff4e8;
+    border: 1px solid #ffd7b0;
+    color: var(--color-text-main);
+}
+
+.schedule-list {
+    display: grid;
+    gap: 12px;
+}
+
+.schedule-item {
+    width: 100%;
+    text-align: left;
+    border: 1px solid #ececec;
+    border-radius: var(--radius-input);
+    background: var(--color-bg-page);
+    padding: 14px 16px;
+    cursor: pointer;
+    transition: border-color 0.2s, transform 0.2s;
+}
+
+.schedule-item:hover {
+    border-color: var(--color-primary-dark);
+    transform: translateY(-1px);
+}
+
+.schedule-item-static {
+    cursor: default;
+}
+
+.schedule-item-static:hover {
+    transform: none;
+}
+
+.schedule-item-title {
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.schedule-item-meta,
+.schedule-item-status {
+    font-size: 0.92rem;
+    color: var(--color-text-secondary);
+}

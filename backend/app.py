@@ -19,6 +19,9 @@ from config import JWT_SECRET_KEY, COURSES_ROOT, PHOTOS_ROOT, IMG_ROOT
 from file_uploads import save_user_photo, delete_photo_file, photo_url
 from scorm_importer import import_course_archive
 from scorm_runtime import load_scorm_state, save_scorm_state, sync_scorm_progress
+from assignment_schedule import format_duration_seconds, report_status_label, get_schedule_phase
+from openpyxl.styles import Font, PatternFill, Alignment
+from openpyxl.utils import get_column_letter
 
 SCORM_STATIC_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'scorm')
 
@@ -66,34 +69,87 @@ def _format_report_verdict(row):
     return 'Не сдано'
 
 
+def _format_report_display_date(value):
+    if not value:
+        return '—'
+    if hasattr(value, 'strftime'):
+        months = ['янв.', 'февр.', 'мар.', 'апр.', 'мая', 'июн.', 'июл.', 'авг.', 'сент.', 'окт.', 'нояб.', 'дек.']
+        return f"{value.day} {months[value.month - 1]} {value.year} г."
+    return str(value)
+
+
 def create_excel_report(data_rows):
     if data_rows is None:
         return None
-    data = []
+
+    table_rows = []
+    passed_count = 0
+    failed_count = 0
+    score_values = []
+
     for row in data_rows:
-        assigner_name = None
-        if getattr(row, 'assigner_surname', None):
-            assigner_name = _format_person_name(
-                row.assigner_surname, row.assigner_name, row.assigner_patronymic
-            )
         progress = round(float(getattr(row, 'progress_percent', 0) or 0))
-        data.append({
-            "ФИО": _format_person_name(row.surname, row.name, row.patronymic),
-            "Должность": getattr(row, 'position_name', None),
-            "Курс": getattr(row, 'course_title', None) or getattr(row, 'title', None),
-            "Назначил": assigner_name,
-            "Дата назначения": _format_report_date(getattr(row, 'assignment_date', None)),
-            "Дедлайн": _format_report_date(getattr(row, 'deadline_date', None)),
-            "Дата прохождения": _format_report_date(getattr(row, 'completion_date', None)),
-            "Вердикт": _format_report_verdict(row),
-            "Процент выполнения": progress,
+        status = report_status_label(getattr(row, 'assignment_status', None), progress)
+        if status == 'Завершен':
+            passed_count += 1
+        elif status == 'Не пройден':
+            failed_count += 1
+        if progress > 0:
+            score_values.append(progress)
+
+        completion_date = getattr(row, 'completion_date', None) or getattr(row, 'assignment_date', None)
+        table_rows.append({
+            "Дата": _format_report_display_date(completion_date),
+            "Название": getattr(row, 'course_title', None) or getattr(row, 'title', None),
+            "Сотрудник": _format_person_name(row.surname, row.name, row.patronymic),
+            "Длительность": format_duration_seconds(getattr(row, 'duration_seconds', None)),
+            "Статус": status,
+            "Балл": f"{progress}%",
+            "_status": status,
+            "_score": progress,
         })
-    if not data:
+
+    if not table_rows:
         return None
-    df = pd.DataFrame(data)
+
+    average_score = round(sum(score_values) / len(score_values), 2) if score_values else 0
     output = io.BytesIO()
     with pd.ExcelWriter(output, engine='openpyxl') as writer:
-        df.to_excel(writer, index=False, sheet_name='Report')
+        sheet_name = 'Результаты'
+        workbook = writer.book
+        worksheet = workbook.create_sheet(sheet_name)
+        if 'Sheet' in workbook.sheetnames:
+            del workbook['Sheet']
+
+        worksheet['A1'] = 'Пройдено/не пройдено'
+        worksheet['B1'] = f'{passed_count}/{failed_count}'
+        worksheet['A2'] = 'Средний балл'
+        worksheet['B2'] = f'{average_score}%'
+
+        headers = ['Дата', 'Название', 'Сотрудник', 'Длительность', 'Статус', 'Балл']
+        start_row = 4
+        for col, header in enumerate(headers, start=1):
+            cell = worksheet.cell(row=start_row, column=col, value=header)
+            cell.font = Font(bold=True)
+            cell.fill = PatternFill('solid', fgColor='F4F4F4')
+            cell.alignment = Alignment(horizontal='center')
+
+        for index, item in enumerate(table_rows, start=start_row + 1):
+            worksheet.cell(row=index, column=1, value=item['Дата'])
+            worksheet.cell(row=index, column=2, value=item['Название'])
+            worksheet.cell(row=index, column=3, value=item['Сотрудник'])
+            worksheet.cell(row=index, column=4, value=item['Длительность'])
+            status_cell = worksheet.cell(row=index, column=5, value=item['Статус'])
+            score_cell = worksheet.cell(row=index, column=6, value=item['Балл'])
+            if item['_status'] == 'Завершен':
+                status_cell.font = Font(color='008000')
+            elif item['_status'] == 'Не пройден':
+                status_cell.font = Font(color='C00000')
+            score_cell.alignment = Alignment(horizontal='right')
+
+        for col in range(1, len(headers) + 1):
+            worksheet.column_dimensions[get_column_letter(col)].width = 22
+
     output.seek(0)
     return output
 
@@ -250,6 +306,24 @@ def get_my_courses():
     return jsonify(db.get_courses_for_user(user_id))
 
 
+@app.route('/api/my-schedule', methods=['GET'])
+@jwt_required()
+def get_my_schedule():
+    user_id = get_jwt_identity().get('user_id')
+    return jsonify(db.get_learning_schedule(user_id))
+
+
+@app.route('/api/assignments/overview', methods=['GET'])
+@jwt_required()
+def get_assignments_overview():
+    identity = get_jwt_identity()
+    role = identity.get('role')
+    if not has_report_access(role):
+        return jsonify({"message": "Доступ запрещён"}), 403
+    assigned_by = identity.get('user_id') if role == 'expert' else None
+    return jsonify(db.get_assignments_overview(assigned_by=assigned_by))
+
+
 @app.route('/api/courses/<int:course_id>', methods=['GET'])
 @jwt_required()
 def get_course(course_id):
@@ -267,9 +341,13 @@ def get_course(course_id):
     else:
         assignment = db.get_active_assignment(user_id, course_id)
 
-    if identity.get('role') == 'student':
-        if not assignment or assignment.status != 'active':
+    if identity.get('role') in ('student', 'expert'):
+        if not assignment:
             return jsonify({"message": "Курс не назначен или недоступен для прохождения"}), 403
+        allowed, message = db.assignment_allows_study(assignment)
+        assignment = db.get_assignment_by_id(assignment.assignment_id)
+        if not allowed and assignment.status != 'passed':
+            return jsonify({"message": message or "Курс недоступен для прохождения"}), 403
 
     storage = resolve_course_storage(course.storage, course.course_id, course.title)
     manifest = load_course_manifest(storage)
@@ -282,6 +360,15 @@ def get_course(course_id):
     if assignment:
         progress = db.get_course_progress(user_id, course_id, assignment.assignment_id)
 
+    can_start = False
+    schedule_phase = None
+    if assignment:
+        can_start, _ = db.assignment_allows_study(assignment)
+        assignment = db.get_assignment_by_id(assignment.assignment_id)
+        schedule_phase = get_schedule_phase(
+            assignment.date_from, assignment.date_to, assignment.status
+        )
+
     return jsonify({
         "course_id": course.course_id,
         "title": course.title,
@@ -291,6 +378,8 @@ def get_course(course_id):
         "assignment_id": assignment.assignment_id if assignment else None,
         "launch_url": launch_url,
         "is_available": course_has_files(storage, course.course_id, course.title) and assignment is not None,
+        "can_start": can_start,
+        "schedule_phase": schedule_phase,
         "manifest": manifest,
         "progress": progress,
         "pass_threshold": PASS_THRESHOLD
@@ -319,6 +408,10 @@ def scorm_state(course_id):
     assignment = db.get_assignment_by_id(int(assignment_id))
     if not assignment or assignment.user_id != user_id or assignment.course_id != course_id:
         return jsonify({"message": "Назначение не найдено"}), 403
+
+    allowed, message = db.assignment_allows_study(assignment)
+    if not allowed:
+        return jsonify({"message": message or "Курс недоступен для прохождения"}), 403
 
     if request.method == 'GET':
         return jsonify(load_scorm_state(int(assignment_id)))

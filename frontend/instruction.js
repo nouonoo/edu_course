@@ -15,6 +15,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     const startCourseBtn = document.getElementById('start-course-btn');
     const errorMessage = document.getElementById('course-error');
     const courseStub = document.getElementById('course-stub');
+    const schedulePanel = document.getElementById('schedule-panel');
+    const scheduleList = document.getElementById('schedule-list');
+    const scheduleReminders = document.getElementById('schedule-reminders');
 
     let courses = [];
     let selectedCourse = null;
@@ -37,12 +40,70 @@ document.addEventListener('DOMContentLoaded', async () => {
         courseBadge.className = `course-status-badge badge-${type}`;
     }
 
+    function phaseLabel(phase) {
+        const labels = {
+            scheduled: 'Скоро начнётся',
+            active: 'В процессе',
+            overdue: 'Срок истёк',
+            passed: 'Завершен',
+            failed: 'Не пройден'
+        };
+        return labels[phase] || phase;
+    }
+
+    function phaseBadgeType(phase) {
+        if (phase === 'passed') return 'success';
+        if (phase === 'active') return 'success';
+        if (phase === 'scheduled') return 'muted';
+        return 'warning';
+    }
+
+    function renderSchedule() {
+        if (!schedulePanel || !scheduleList) return;
+
+        if (!courses.length) {
+            schedulePanel.hidden = true;
+            return;
+        }
+
+        schedulePanel.hidden = false;
+        scheduleList.innerHTML = '';
+        scheduleReminders.innerHTML = '';
+
+        const reminders = courses.filter(course => course.needs_reminder);
+        if (reminders.length) {
+            reminders.forEach(course => {
+                const item = document.createElement('div');
+                item.className = 'schedule-reminder';
+                item.textContent = `Напоминание: курс «${course.title}» нужно завершить до ${formatCourseDate(course.date_to)} (осталось ${course.days_left} дн.).`;
+                scheduleReminders.appendChild(item);
+            });
+        }
+
+        courses.forEach(course => {
+            const item = document.createElement('button');
+            item.type = 'button';
+            item.className = 'schedule-item';
+            item.innerHTML = `
+                <div class="schedule-item-title">${course.title}</div>
+                <div class="schedule-item-meta">${formatCourseDate(course.date_from)} — ${formatCourseDate(course.date_to)}</div>
+                <div class="schedule-item-status">${phaseLabel(course.schedule_phase)} · ${Math.round(course.progress_percent || 0)}%</div>
+            `;
+            item.addEventListener('click', () => {
+                courseSelect.value = String(course.course_id);
+                selectCourse(course);
+            });
+            scheduleList.appendChild(item);
+        });
+    }
+
     async function loadCourses() {
         try {
             const response = await apiFetch('/my-courses');
             if (!response.ok) throw new Error('Не удалось загрузить курсы');
             courses = await response.json();
             renderCourseList();
+            renderSchedule();
         } catch (error) {
             errorMessage.textContent = 'Не удалось загрузить курсы. Убедитесь, что вам назначен курс.';
             courseTitle.textContent = 'Нет назначенных курсов';
@@ -104,16 +165,17 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
 
         const progress = Math.round(course.progress_percent || 0);
+        const phase = course.schedule_phase || 'active';
         courseTitle.textContent = course.title;
         courseDescription.textContent = course.description || 'Описание курса пока не добавлено.';
         courseDates.textContent = `${formatCourseDate(course.date_from)} — ${formatCourseDate(course.date_to)}`;
         courseFormat.textContent = formatCourseType(course.course_type);
         courseProgressFill.style.width = `${Math.min(progress, 100)}%`;
         courseProgressText.textContent = `${progress}%`;
+        setBadge(phaseLabel(phase), phaseBadgeType(phase));
 
         if (!course.has_storage) {
             courseCard.classList.add('course-card-warning');
-            setBadge('Нет файлов', 'warning');
             courseStatus.textContent = 'Файлы курса не найдены. Обратитесь к администратору.';
             if (courseStub) courseStub.style.display = '';
             return;
@@ -121,22 +183,49 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         if (!course.assignment_id) {
             courseCard.classList.add('course-card-warning');
-            setBadge('Не назначен', 'warning');
             courseStatus.textContent = 'Курс ещё не назначен экспертом. Обратитесь к руководителю.';
             if (courseStub) courseStub.style.display = 'none';
             return;
         }
 
         if (courseStub) courseStub.style.display = 'none';
-        setBadge(progress >= 70 ? 'Пройден' : 'Доступен', progress >= 70 ? 'success' : 'success');
-        courseStatus.textContent = progress >= 70
-            ? 'Курс пройден. Вы можете открыть материалы повторно.'
-            : 'Нажмите «Начать курс», чтобы открыть выбранный курс.';
-        startCourseBtn.disabled = false;
+
+        if (phase === 'scheduled') {
+            courseCard.classList.add('course-card-warning');
+            courseStatus.textContent = `Курс откроется ${formatCourseDate(course.date_from)}. До начала обучения прохождение недоступно.`;
+            return;
+        }
+
+        if (phase === 'overdue' || phase === 'failed') {
+            courseCard.classList.add('course-card-warning');
+            courseStatus.textContent = 'Срок прохождения истёк. Курс недоступен. Обратитесь к эксперту для повторного назначения.';
+            return;
+        }
+
+        if (phase === 'passed' || progress >= 70) {
+            courseStatus.textContent = 'Курс пройден. Вы можете открыть материалы повторно.';
+            startCourseBtn.disabled = false;
+            return;
+        }
+
+        if (course.needs_reminder) {
+            courseStatus.textContent = `До окончания срока осталось ${course.days_left} дн. Завершите курс до ${formatCourseDate(course.date_to)}.`;
+        } else {
+            courseStatus.textContent = 'Нажмите «Начать курс», чтобы открыть выбранный курс.';
+        }
+
+        if (course.can_start) {
+            startCourseBtn.disabled = false;
+        }
     }
 
     async function launchCourse(course) {
         if (!course || !course.assignment_id) return;
+        if (!course.can_start && course.schedule_phase !== 'passed') {
+            errorMessage.textContent = 'Курс недоступен для прохождения в выбранные сроки.';
+            return;
+        }
+
         errorMessage.textContent = '';
         startCourseBtn.disabled = true;
 

@@ -10,9 +10,56 @@ document.addEventListener('DOMContentLoaded', async () => {
     const closeAssignModal = document.getElementById('close-assign-modal');
     const assignEmployee = document.getElementById('assign-employee');
     const assignCourse = document.getElementById('assign-course');
+    const schedulePanel = document.getElementById('assignments-schedule');
+    const scheduleList = document.getElementById('assignments-schedule-list');
 
     let courses = [];
     let selectedCourseId = null;
+
+    function formatDate(value) {
+        if (!value) return '—';
+        const parts = value.split('T')[0].split('-');
+        if (parts.length !== 3) return value;
+        return `${parts[2]}.${parts[1]}.${parts[0]}`;
+    }
+
+    function phaseLabel(phase) {
+        const labels = {
+            scheduled: 'Скоро начнётся',
+            active: 'В процессе',
+            overdue: 'Срок истёк',
+            passed: 'Завершен',
+            failed: 'Не пройден'
+        };
+        return labels[phase] || phase;
+    }
+
+    async function loadSchedule() {
+        if (!schedulePanel || !scheduleList) return;
+        try {
+            const response = await apiFetch('/assignments/overview');
+            if (!response.ok) return;
+            const items = await response.json();
+            if (!items.length) {
+                schedulePanel.hidden = true;
+                return;
+            }
+            schedulePanel.hidden = false;
+            scheduleList.innerHTML = '';
+            items.forEach(item => {
+                const row = document.createElement('div');
+                row.className = 'schedule-item schedule-item-static';
+                row.innerHTML = `
+                    <div class="schedule-item-title">${item.employee_name}</div>
+                    <div class="schedule-item-meta">${item.course_title}</div>
+                    <div class="schedule-item-status">${formatDate(item.date_from)} — ${formatDate(item.date_to)} · ${phaseLabel(item.schedule_phase)} · ${item.progress_percent}%</div>
+                `;
+                scheduleList.appendChild(row);
+            });
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
     async function loadCourses() {
         try {
@@ -23,6 +70,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             courses = await response.json();
             renderCourses();
+            loadSchedule();
         } catch (error) {
             console.error(error);
             assignmentsError.textContent = 'Не удалось загрузить список курсов.';
@@ -109,6 +157,14 @@ document.addEventListener('DOMContentLoaded', async () => {
         assignForm.reset();
         assignModal.style.display = 'flex';
 
+        const today = new Date();
+        const fromInput = document.getElementById('assign-date-from');
+        const toInput = document.getElementById('assign-date-to');
+        const fromDate = today.toISOString().split('T')[0];
+        const toDate = new Date(today.getTime() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+        fromInput.value = fromDate;
+        toInput.value = toDate;
+
         try {
             await loadAssignOptions(courseId);
         } catch (error) {
@@ -160,7 +216,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             assignModal.style.display = 'none';
             assignForm.reset();
             assignmentsError.textContent = '';
-            alert('Курс успешно назначен');
+            await loadSchedule();
+            alert('Курс успешно назначен. Сроки добавлены в расписание.');
         } catch (error) {
             assignError.textContent = error.message;
         }

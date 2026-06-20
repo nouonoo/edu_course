@@ -16,7 +16,15 @@
 
     <main class="content-container">
         <h1>Назначения</h1>
-        <p class="subtitle">Управление курсами и назначениями для сотрудников</p>
+        <p class="subtitle">Назначайте курсы с датами начала и окончания — платформа составит расписание и напомнит о дедлайнах.</p>
+
+        <section id="assignments-schedule" class="schedule-panel" hidden>
+            <div class="schedule-panel-header">
+                <h2>Расписание назначений</h2>
+                <p class="subtitle">Контроль сроков прохождения по всем сотрудникам.</p>
+            </div>
+            <div id="assignments-schedule-list" class="schedule-list"></div>
+        </section>
 
         <div id="assignments-list" class="assignments-list">
             <div class="loader">Загрузка курсов...</div>
@@ -63,6 +71,6 @@
 
     <script src="common.js?v=5"></script>
     <script src="app.js"></script>
-    <script src="assignments.js"></script>
+    <script src="assignments.js?v=2"></script>
 </body>
 </html>

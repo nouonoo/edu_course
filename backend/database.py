@@ -1,9 +1,16 @@
 import pyodbc
+from datetime import date
 from config import DB_CONNECTION_STRING
 from course_manifest import is_scorable_section, load_course_manifest
 from course_progress import PASS_THRESHOLD, cap_course_score, merge_section_score
 from course_storage import course_has_files, resolve_course_storage
 from file_uploads import photo_url
+from assignment_schedule import (
+    days_until,
+    get_schedule_phase,
+    needs_reminder,
+    should_block_study,
+)
 
 class Database:
 
@@ -119,6 +126,10 @@ class Database:
         storage = resolve_course_storage(row.storage, row.course_id, row.title)
         manifest = load_course_manifest(storage)
         course_type = manifest.get('course_type', 'native') if manifest else 'native'
+        progress = float(row.result) if getattr(row, 'result', None) is not None else 0
+        schedule_phase = get_schedule_phase(date_from, date_to, assignment_status)
+        days_left = days_until(date_to) if date_to else None
+        can_start = bool(assignment_id) and not should_block_study(date_from, date_to, assignment_status)
         return {
             "course_id": row.course_id,
             "title": row.title,
@@ -130,12 +141,16 @@ class Database:
             "date_from": date_from.isoformat() if date_from else None,
             "date_to": date_to.isoformat() if date_to else None,
             "assignment_status": assignment_status,
-            "result": float(row.result) if getattr(row, 'result', None) is not None else 0,
+            "schedule_phase": schedule_phase,
+            "days_left": days_left,
+            "needs_reminder": needs_reminder(date_to, assignment_status, progress),
+            "can_start": can_start,
+            "result": progress,
             "result_date": row.result_date.isoformat() if getattr(row, 'result_date', None) else None,
             "has_storage": course_has_files(storage, row.course_id, row.title),
-            "can_continue": True,
+            "can_continue": can_start,
             "sections_completed": sections_completed,
-            "progress_percent": float(row.result) if getattr(row, 'result', None) is not None else 0
+            "progress_percent": progress
         }
 
     def _get_connection(self):
@@ -502,8 +517,10 @@ class Database:
         return self._query(sql, tuple(params))
 
     def _get_assignment_report_data(self, user_id=None, course_id=None, date_from=None, date_to=None):
+        self.expire_overdue_assignments()
         section_scores_sql = ""
         section_scores_join = ""
+        duration_sql = "NULL AS duration_seconds"
         if self._table_exists('Section_progress'):
             section_scores_sql = """
                 LEFT JOIN (
@@ -513,6 +530,14 @@ class Database:
                 ) SP ON SP.assignment_id = A.assignment_id
             """
             section_scores_join = "COALESCE(UR.result, SP.total_score, 0)"
+            duration_sql = """
+                (SELECT CASE
+                    WHEN MIN(SP2.updated_at) IS NULL OR MAX(SP2.updated_at) IS NULL THEN NULL
+                    ELSE DATEDIFF(SECOND, MIN(SP2.updated_at), MAX(SP2.updated_at))
+                 END
+                 FROM Section_progress SP2
+                 WHERE SP2.assignment_id = A.assignment_id) AS duration_seconds
+            """
         else:
             section_scores_join = "COALESCE(UR.result, 0)"
 
@@ -528,7 +553,8 @@ class Database:
                 A.date_to AS deadline_date,
                 CASE WHEN A.status IN ('passed', 'failed') THEN UR.date ELSE NULL END AS completion_date,
                 A.status AS assignment_status,
-                {section_scores_join} AS progress_percent
+                {section_scores_join} AS progress_percent,
+                {duration_sql}
             FROM Assignments A
             JOIN Users U ON A.user_id = U.user_id
             JOIN Courses C ON A.course_id = C.course_id
@@ -810,6 +836,52 @@ class Database:
             return None, 'Не удалось создать назначение'
         return assignment_id, None
 
+    def expire_overdue_assignment(self, assignment_id):
+        assignment = self.get_assignment_by_id(assignment_id)
+        if not assignment or assignment.status != 'active':
+            return assignment.status if assignment else None
+        if assignment.date_to and assignment.date_to < date.today():
+            self._query(
+                "UPDATE Assignments SET status='failed' WHERE assignment_id=? AND status='active'",
+                (assignment_id,),
+                commit=True
+            )
+            return 'failed'
+        return assignment.status
+
+    def expire_overdue_assignments(self, user_id=None):
+        sql = """
+            SELECT assignment_id FROM Assignments
+            WHERE status='active' AND date_to < CAST(GETDATE() AS date)
+        """
+        params = ()
+        if user_id is not None:
+            sql += " AND user_id=?"
+            params = (user_id,)
+        rows = self._query(sql, params)
+        if not rows:
+            return 0
+        for row in rows:
+            self.expire_overdue_assignment(row.assignment_id)
+        return len(rows)
+
+    def assignment_allows_study(self, assignment):
+        if not assignment:
+            return False, 'Курс не назначен'
+        self.expire_overdue_assignment(assignment.assignment_id)
+        assignment = self.get_assignment_by_id(assignment.assignment_id)
+        if assignment.status == 'passed':
+            return True, None
+        if should_block_study(assignment.date_from, assignment.date_to, assignment.status):
+            phase = get_schedule_phase(assignment.date_from, assignment.date_to, assignment.status)
+            if phase == 'scheduled':
+                return False, f'Курс будет доступен с {assignment.date_from.isoformat()}'
+            if phase == 'overdue' or assignment.status == 'failed':
+                return False, 'Срок прохождения курса истёк. Обратитесь к эксперту для повторного назначения.'
+        if assignment.status != 'active':
+            return False, 'Курс недоступен для прохождения'
+        return True, None
+
     def get_active_assignment(self, user_id, course_id):
         sql = """
             SELECT TOP 1 assignment_id, user_id, course_id, date_from, date_to, status
@@ -831,6 +903,7 @@ class Database:
         return assignment is not None
 
     def get_courses_for_user(self, user_id):
+        self.expire_overdue_assignments(user_id)
         if self._table_exists('Assignments'):
             sql = """
                 SELECT
@@ -840,8 +913,8 @@ class Database:
                 FROM Assignments A
                 JOIN Courses C ON A.course_id = C.course_id
                 LEFT JOIN User_result UR ON UR.assignment_id = A.assignment_id
-                WHERE A.user_id = ? AND A.status = 'active'
-                ORDER BY C.title
+                WHERE A.user_id = ? AND A.status IN ('active', 'passed', 'failed')
+                ORDER BY A.date_to, C.title
             """
             rows = self._query(sql, (user_id,))
             if rows is None:
@@ -876,6 +949,67 @@ class Database:
 
         return [self._course_payload(row) for row in rows]
 
+    def get_learning_schedule(self, user_id):
+        courses = self.get_courses_for_user(user_id)
+        schedule = []
+        for course in courses:
+            schedule.append({
+                "assignment_id": course.get("assignment_id"),
+                "course_id": course.get("course_id"),
+                "title": course.get("title"),
+                "date_from": course.get("date_from"),
+                "date_to": course.get("date_to"),
+                "assignment_status": course.get("assignment_status"),
+                "schedule_phase": course.get("schedule_phase"),
+                "days_left": course.get("days_left"),
+                "needs_reminder": course.get("needs_reminder"),
+                "can_start": course.get("can_start"),
+                "progress_percent": course.get("progress_percent"),
+            })
+        schedule.sort(key=lambda item: (item.get("date_to") or '', item.get("title") or ''))
+        return schedule
+
+    def get_assignments_overview(self, assigned_by=None):
+        self.expire_overdue_assignments()
+        sql = """
+            SELECT
+                A.assignment_id, A.user_id, A.course_id, A.date_from, A.date_to, A.status,
+                U.surname, U.name, U.patronymic,
+                C.title AS course_title,
+                COALESCE(UR.result, 0) AS progress_percent
+            FROM Assignments A
+            JOIN Users U ON A.user_id = U.user_id
+            JOIN Courses C ON A.course_id = C.course_id
+            LEFT JOIN User_result UR ON UR.assignment_id = A.assignment_id
+            WHERE A.status IN ('active', 'passed', 'failed')
+        """
+        params = []
+        if assigned_by is not None:
+            sql += " AND A.assigned_by = ?"
+            params.append(assigned_by)
+        sql += " ORDER BY A.date_to, C.title, U.surname, U.name"
+        rows = self._query(sql, tuple(params))
+        if not rows:
+            return []
+        result = []
+        for row in rows:
+            progress = float(row.progress_percent or 0)
+            result.append({
+                "assignment_id": row.assignment_id,
+                "user_id": row.user_id,
+                "course_id": row.course_id,
+                "employee_name": f"{row.surname} {row.name} {row.patronymic or ''}".strip(),
+                "course_title": row.course_title,
+                "date_from": row.date_from.isoformat() if row.date_from else None,
+                "date_to": row.date_to.isoformat() if row.date_to else None,
+                "status": row.status,
+                "schedule_phase": get_schedule_phase(row.date_from, row.date_to, row.status),
+                "days_left": days_until(row.date_to),
+                "needs_reminder": needs_reminder(row.date_to, row.status, progress),
+                "progress_percent": round(progress),
+            })
+        return result
+
     def get_assignment_sections_progress(self, assignment_id):
         rows = self._query(
             "SELECT section_id, score, first_attempt_failed FROM Section_progress WHERE assignment_id=?",
@@ -896,7 +1030,8 @@ class Database:
         assignment = self.get_assignment_by_id(assignment_id)
         if not assignment or assignment.user_id != user_id or assignment.course_id != course_id:
             return None
-        if assignment.status != 'active':
+        allowed, _ = self.assignment_allows_study(assignment)
+        if not allowed and assignment.status != 'passed':
             return None
 
         result_row = self._query(
@@ -948,6 +1083,10 @@ class Database:
         assignment = self.get_assignment_by_id(assignment_id)
         if not assignment or assignment.user_id != user_id or assignment.course_id != course_id:
             return None, 'Назначение не найдено'
+        allowed, message = self.assignment_allows_study(assignment)
+        if not allowed:
+            return None, message or 'Курс недоступен для прохождения'
+        assignment = self.get_assignment_by_id(assignment_id)
         if assignment.status != 'active':
             return None, 'Курс недоступен. Обратитесь к эксперту для переназначения.'
 
@@ -1024,6 +1163,10 @@ class Database:
         assignment = self.get_assignment_by_id(assignment_id)
         if not assignment or assignment.user_id != user_id:
             return None, 'Назначение не найдено'
+        allowed, message = self.assignment_allows_study(assignment)
+        if not allowed:
+            return None, message or 'Курс недоступен для завершения'
+        assignment = self.get_assignment_by_id(assignment_id)
         if assignment.status != 'active':
             return None, 'Курс уже завершён'
 
